@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">智丰商城</string>
+    <string name="app_name">DC商城</string>
 
     <string name="refresh_finish">刷新完成</string>
     <string name="refresh_pulling">下拉刷新</string>
