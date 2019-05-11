@@ -51,8 +51,8 @@ class MeFragment : BaseFragment(), CommendContract.View {
     override fun appSignSuccess(bean: AppSignBean) {
         signData = bean
         window = object : RegionPopupWindow(
-                activity as Activity, R.layout.pop_sign_success,
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
+            activity as Activity, R.layout.pop_sign_success,
+            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
         ) {
             @SuppressLint("SetTextI18n")
             override fun initView() {
