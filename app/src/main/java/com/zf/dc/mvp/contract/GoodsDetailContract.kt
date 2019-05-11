@@ -16,6 +16,9 @@ interface GoodsDetailContract {
         //商品评论
         fun setGoodEva(bean: List<GoodEvaList>)
 
+        //商品属性
+        fun getGoodsAttr(bean:List<AttriBute>)
+
         //获取地址列表
         fun getAddress(bean: List<AddressBean>)
 
@@ -58,5 +61,7 @@ interface GoodsDetailContract {
         fun requestPricePic(key: String, goods_id: String)
 
         fun requestSecKillDetail(id: String)
+
+        fun requestGoodsAttr(goods_id:String)
     }
 }

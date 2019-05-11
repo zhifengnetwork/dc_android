@@ -57,4 +57,9 @@ class GoodsDetailModel {
         return RetrofitManager.service.requestSpecInfo(key, goods_id)
             .compose(SchedulerUtils.ioToMain())
     }
+
+    fun getGoodsAttr(goods_id:String):Observable<BaseBean<GoodsAttrBean>>{
+        return RetrofitManager.service.getGoodsAttr(goods_id)
+            .compose(SchedulerUtils.ioToMain())
+    }
 }

@@ -7,10 +7,7 @@ import com.zf.dc.R
 import com.zf.dc.api.UriConstant
 import com.zf.dc.base.NotLazyBaseFragment
 import com.zf.dc.livedata.UserInfoLiveData
-import com.zf.dc.ui.activity.AboutActivity
-import com.zf.dc.ui.activity.AddressActivity
-import com.zf.dc.ui.activity.MainActivity
-import com.zf.dc.ui.activity.UserActivity
+import com.zf.dc.ui.activity.*
 import com.zf.dc.utils.GlideUtils
 import com.zf.dc.utils.Preference
 import kotlinx.android.synthetic.main.fragment_info.*
@@ -58,6 +55,16 @@ class InfoFragment : NotLazyBaseFragment() {
         //地址管理
         addressLayout.setOnClickListener {
             AddressActivity.actionStart(context)
+        }
+
+        //修改密码
+        changePassword.setOnClickListener {
+            ChangePasswordActivity.actionStart(context)
+        }
+
+        //修改支付密码
+        payPassword.setOnClickListener {
+            ResetPayPwdActivity.actionStart(context)
         }
 
     }
