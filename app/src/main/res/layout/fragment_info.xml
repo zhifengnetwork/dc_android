@@ -79,8 +79,79 @@
               android:layout_height="1dp"
               android:background="@color/colorLine"/>
 
-        <TextView android:layout_width="match_parent"
-                  android:text="账号与安全"
+        <!--<TextView android:layout_width="match_parent"-->
+        <!--android:text="账号与安全"-->
+        <!--android:drawableRight="@drawable/arrow"-->
+        <!--android:textSize="14sp"-->
+        <!--android:paddingTop="15dp"-->
+        <!--android:paddingBottom="15dp"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:textColor="@color/colorPrimaryText"-->
+        <!--android:layout_height="wrap_content"/>-->
+
+        <!--<View android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="@color/colorLine"/>-->
+
+        <!--<TextView android:layout_width="match_parent"-->
+        <!--android:text="支付设置"-->
+        <!--android:drawableRight="@drawable/arrow"-->
+        <!--android:textSize="14sp"-->
+        <!--android:paddingTop="15dp"-->
+        <!--android:paddingBottom="15dp"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:textColor="@color/colorPrimaryText"-->
+        <!--android:layout_height="wrap_content"/>-->
+
+        <!--<View android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="@color/colorLine"/>-->
+
+        <!--<TextView android:layout_width="match_parent"-->
+        <!--android:text="通用"-->
+        <!--android:drawableRight="@drawable/arrow"-->
+        <!--android:textSize="14sp"-->
+        <!--android:paddingTop="15dp"-->
+        <!--android:paddingBottom="15dp"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:textColor="@color/colorPrimaryText"-->
+        <!--android:layout_height="wrap_content"/>-->
+
+        <!--<View android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="@color/colorLine"/>-->
+        <!--<TextView android:layout_width="match_parent"-->
+        <!--android:text="操作流程"-->
+        <!--android:drawableRight="@drawable/arrow"-->
+        <!--android:textSize="14sp"-->
+        <!--android:paddingTop="15dp"-->
+        <!--android:paddingBottom="15dp"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:textColor="@color/colorPrimaryText"-->
+        <!--android:layout_height="wrap_content"/>-->
+
+        <!--<View android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="@color/colorLine"/>-->
+        <TextView
+                android:id="@+id/changePassword"
+                android:layout_width="match_parent"
+                android:text="修改密码"
+                android:drawableRight="@drawable/arrow"
+                android:textSize="14sp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_height="wrap_content"/>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="@color/colorLine"/>
+        <TextView
+                android:id="@+id/payPassword"
+                android:layout_width="match_parent"
+                  android:text="支付密码"
                   android:drawableRight="@drawable/arrow"
                   android:textSize="14sp"
                   android:paddingTop="15dp"
@@ -92,59 +163,17 @@
         <View android:layout_width="match_parent"
               android:layout_height="1dp"
               android:background="@color/colorLine"/>
-
-        <TextView android:layout_width="match_parent"
-                  android:text="支付设置"
-                  android:drawableRight="@drawable/arrow"
-                  android:textSize="14sp"
-                  android:paddingTop="15dp"
-                  android:paddingBottom="15dp"
-                  android:gravity="center_vertical"
-                  android:textColor="@color/colorPrimaryText"
-                  android:layout_height="wrap_content"/>
-
-        <View android:layout_width="match_parent"
-              android:layout_height="1dp"
-              android:background="@color/colorLine"/>
-
-        <TextView android:layout_width="match_parent"
-                  android:text="通用"
-                  android:drawableRight="@drawable/arrow"
-                  android:textSize="14sp"
-                  android:paddingTop="15dp"
-                  android:paddingBottom="15dp"
-                  android:gravity="center_vertical"
-                  android:textColor="@color/colorPrimaryText"
-                  android:layout_height="wrap_content"/>
-
-        <View android:layout_width="match_parent"
-              android:layout_height="1dp"
-              android:background="@color/colorLine"/>
-        <TextView android:layout_width="match_parent"
-                  android:text="操作流程"
-                  android:drawableRight="@drawable/arrow"
-                  android:textSize="14sp"
-                  android:paddingTop="15dp"
-                  android:paddingBottom="15dp"
-                  android:gravity="center_vertical"
-                  android:textColor="@color/colorPrimaryText"
-                  android:layout_height="wrap_content"/>
-
-        <View android:layout_width="match_parent"
-              android:layout_height="1dp"
-              android:background="@color/colorLine"/>
-
         <TextView
                 android:id="@+id/aboutApp"
                 android:layout_width="match_parent"
-                  android:text="关于APP"
-                  android:drawableRight="@drawable/arrow"
-                  android:textSize="14sp"
-                  android:paddingTop="15dp"
-                  android:paddingBottom="15dp"
-                  android:gravity="center_vertical"
-                  android:textColor="@color/colorPrimaryText"
-                  android:layout_height="wrap_content"/>
+                android:text="关于APP"
+                android:drawableRight="@drawable/arrow"
+                android:textSize="14sp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

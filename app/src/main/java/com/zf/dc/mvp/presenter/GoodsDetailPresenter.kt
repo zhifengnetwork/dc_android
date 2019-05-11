@@ -246,4 +246,28 @@ class GoodsDetailPresenter : BasePresenter<GoodsDetailContract.View>(), GoodsDet
         addSubscription(disposable)
     }
 
+    override fun requestGoodsAttr(goods_id: String) {
+        checkViewAttached()
+        mRootView?.showLoading()
+        val disposable = model.getGoodsAttr(goods_id)
+            .subscribe({
+                mRootView?.apply {
+                    dismissLoading()
+                    when (it.status) {
+                        0 -> {
+                            if (it.data != null) {
+                                getGoodsAttr(it.data.goods_attribute)
+                            }
+                        }
+                        else -> showError(it.msg, it.status)
+                    }
+                }
+            }, {
+                mRootView?.apply {
+                    dismissLoading()
+                    showError(ExceptionHandle.handleException(it), ExceptionHandle.errorCode)
+                }
+            })
+        addSubscription(disposable)
+    }
 }
