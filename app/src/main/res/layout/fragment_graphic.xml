@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:background="@color/whit"
+              android:layout_height="match_parent">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:gravity="center_vertical"
+                  android:orientation="horizontal">
+
+        <Space android:layout_width="0dp" android:layout_height="1dp"
+               android:layout_weight="1"/>
+
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                   android:src="@drawable/left"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textSize="13sp"
+                  android:textColor="@color/colorBlackText"
+                  android:layout_marginLeft="20dp"
+                  android:layout_marginRight="20dp"
+                  android:text="图文详情"/>
+
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                   android:src="@drawable/right"/>
+
+        <Space android:layout_width="0dp" android:layout_height="1dp"
+               android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:paddingLeft="20dp"
+                  android:paddingRight="20dp"
+                  android:layout_marginTop="20dp"
+                  android:orientation="vertical">
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textColor="@color/colorBlackText"
+                  android:textSize="13sp"
+                  android:text="产品信息"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:overScrollMode="never"
+                android:background="@drawable/shape_goods_info_bg"
+                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <TextView
+            android:id="@+id/show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:textSize="12sp"
+            android:textColor="@color/colorSecondText"
+            android:drawableRight="@drawable/selector_arrow"
+            android:drawablePadding="8dp"
+            android:paddingTop="3dp"
+            android:gravity="center"
+            android:paddingBottom="3dp"
+            android:text="展开"/>
+
+
+
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/textR"
+              android:visibility="gone"/>
+
+
+    <!--<androidx.recyclerview.widget.RecyclerView android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:id="@+id/recyclerView"/>-->
+
+    <!--<WebView-->
+    <!--android:id="@+id/webView"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"/>-->
+
+
+</LinearLayout>
