@@ -26,7 +26,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/choiceness" />
+                android:src="@drawable/icon_auction" />
 
             <TextView
 
@@ -49,7 +49,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_live" />
+                android:src="@drawable/groupbuy" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -59,6 +59,28 @@
 
         </LinearLayout>
 
+
+        <LinearLayout
+            android:id="@+id/sign2Layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/signin2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:singleLine="true"
+                android:text="签到两天免费领" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/sign_btn"
@@ -80,29 +102,6 @@
                 android:text="签到" />
 
         </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/activity" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:singleLine="true"
-                android:text="签到两天免费领" />
-
-        </LinearLayout>
-
 
     </LinearLayout>
 
@@ -127,7 +126,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_beauty" />
+                android:src="@drawable/dingdan" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -170,7 +169,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_paihang" />
+                android:src="@drawable/shoppingcart2" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -191,7 +190,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_game" />
+                android:src="@drawable/activity" />
 
             <TextView
                 android:layout_width="wrap_content"

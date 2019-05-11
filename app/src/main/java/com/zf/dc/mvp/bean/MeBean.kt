@@ -8,6 +8,7 @@ data class MeBean(
         val waitSend: String,
         val waitReceive: String,
         val pay_points: String,
+        val user_money: String,
         val coupon_num: String,
         val uncomment_count: String
 )

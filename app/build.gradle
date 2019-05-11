@@ -91,7 +91,7 @@ dependencies {
     //SmartRefreshLayout
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-4'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-andx-4'
-    // ktx是kotlin扩展程序
+    // navigation ktx是kotlin扩展程序
     implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0'
     implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0'
     //流式布局(搜索历史)

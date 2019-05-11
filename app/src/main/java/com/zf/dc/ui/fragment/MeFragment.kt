@@ -43,7 +43,7 @@ class MeFragment : BaseFragment(), CommendContract.View {
         waitSendNum.text = bean.waitSend
         waitReceiveNum.text = bean.waitReceive
         waitEvaNum.text = bean.uncomment_count
-        points.text = bean.pay_points
+        userMoney.text = bean.user_money
         discount.text = bean.coupon_num
     }
 
@@ -51,14 +51,13 @@ class MeFragment : BaseFragment(), CommendContract.View {
     override fun appSignSuccess(bean: AppSignBean) {
         signData = bean
         window = object : RegionPopupWindow(
-            activity as Activity, R.layout.pop_sign_success,
-            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
+                activity as Activity, R.layout.pop_sign_success,
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
         ) {
             @SuppressLint("SetTextI18n")
             override fun initView() {
                 contentView?.apply {
-                    //当前总积分
-                    points.text = signData?.points
+
                     //连续签到天数
                     continue_sign.text = "已经连续签到" + signData?.continue_sign + "天"
                     //签到加积分
@@ -174,10 +173,6 @@ class MeFragment : BaseFragment(), CommendContract.View {
         //十天签到领礼品
         layout_info_gift.setOnClickListener {
             SignInGiftActivity.actionStart(context)
-        }
-        //积分
-        integralLayout.setOnClickListener {
-            IntegralActivity.actionStart(context)
         }
 
         //公益
