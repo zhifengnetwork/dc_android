@@ -76,19 +76,19 @@ class CashOutActivity : BaseActivity(), CashOutContract.View {
     override fun initView() {
         presenter.attachView(this)
 
-        //定义底部标签图片大小和位置
-        val mAliPay = resources.getDrawable(R.drawable.alipay)
-        //当这个图片被绘制时，给他绑定一个矩形 ltrb规定这个矩形
-        mAliPay.setBounds(0, 0, 50, 50)
-        //设置图片在文字的哪个方向
-        aliPay.setCompoundDrawables(mAliPay, null, null, null)
-
-        //定义底部标签图片大小和位置
-        val mWeChat = resources.getDrawable(R.drawable.wechat)
-        //当这个图片被绘制时，给他绑定一个矩形 ltrb规定这个矩形
-        mWeChat.setBounds(0, 0, 50, 50)
-        //设置图片在文字的哪个方向
-        weChat.setCompoundDrawables(mWeChat, null, null, null)
+//        //定义底部标签图片大小和位置
+//        val mAliPay = resources.getDrawable(R.drawable.alipay)
+//        //当这个图片被绘制时，给他绑定一个矩形 ltrb规定这个矩形
+//        mAliPay.setBounds(0, 0, 50, 50)
+//        //设置图片在文字的哪个方向
+//        aliPay.setCompoundDrawables(mAliPay, null, null, null)
+//
+//        //定义底部标签图片大小和位置
+//        val mWeChat = resources.getDrawable(R.drawable.wechat)
+//        //当这个图片被绘制时，给他绑定一个矩形 ltrb规定这个矩形
+//        mWeChat.setBounds(0, 0, 50, 50)
+//        //设置图片在文字的哪个方向
+//        weChat.setCompoundDrawables(mWeChat, null, null, null)
 
         cash_ly.isEnabled = true
     }
@@ -100,7 +100,7 @@ class CashOutActivity : BaseActivity(), CashOutContract.View {
             when (checkedId) {
                 aliPay.id -> {
                     bank_name = "支付宝"
-                    icon_img.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.alipay))
+                    icon_img.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.alipay2))
                     if (mData?.alipay == null) {
                         //提现方式名称
                         cash_name.text = ""
@@ -117,7 +117,7 @@ class CashOutActivity : BaseActivity(), CashOutContract.View {
 
                 weChat.id -> {
                     bank_name = "微信"
-                    icon_img.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.wechat))
+                    icon_img.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.wechat2))
                     //提现方式名称
                     cash_name.text = mData?.realname
                     if (mData?.openid != null) {

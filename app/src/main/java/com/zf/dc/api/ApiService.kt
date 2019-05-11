@@ -833,4 +833,28 @@ interface ApiService {
     @POST("api/index/GetAdList")
     @FormUrlEncoded
     fun getAdList(@Field("pid") pid: String): Observable<BaseBean<AdvertBean>>
+
+    /**
+     *  获取素材分类
+     */
+    @POST("api/Material/GetMaterialCat")
+    fun getMaterialClassify(): Observable<BaseBean<MaterialClassifyBean>>
+
+    /**
+     *  获取素材列表
+     */
+    @POST("api/Material/GetMaterialList")
+    @FormUrlEncoded
+    fun getMaterialList(
+        @Field("cid") cid: String,
+        @Field("page") page: Int,
+        @Field("num") num: Int
+    ): Observable<BaseBean<MaterialListBean>>
+
+    /**
+     *  获取素材详情
+     */
+    @POST("api/Material/GetMaterialDetail")
+    @FormUrlEncoded
+    fun getMaterialDetail(@Field("id") id: String): Observable<BaseBean<MaterialDetailBean>>
 }
