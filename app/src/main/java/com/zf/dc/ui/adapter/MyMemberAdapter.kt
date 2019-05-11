@@ -28,6 +28,8 @@ class MyMemberAdapter(val context: Context, val data: List<MyMemberBean>) :
             user_id.text=data[position].user_id
             //用户名字
             user_name.text=data[position].nickname
+            //用户手机
+            user_phone.text=data[position].mobile
             //点击查看按钮
             look_btn.setOnClickListener {
                 SeeOrderActivity.actionStart(context,data[position].user_id)

@@ -4,7 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.view.KeyEvent
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.zf.dc.MyApplication
 import com.zf.dc.R
 import com.zf.dc.base.BaseActivity
 import com.zf.dc.mvp.bean.MyMemberBean
@@ -12,6 +14,7 @@ import com.zf.dc.mvp.contract.MyMemberContract
 import com.zf.dc.mvp.presenter.MyMemberPresenter
 import com.zf.dc.showToast
 import com.zf.dc.ui.adapter.MyMemberAdapter
+import com.zf.dc.view.recyclerview.RecyclerViewDivider
 import kotlinx.android.synthetic.main.activity_my_member.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
@@ -95,8 +98,8 @@ class MyMemberActivity : BaseActivity(), MyMemberContract.View {
             }
             if (userSum >= 2) {
                 userList.remove(userList[userSum - 1])
-                userName.remove(userName[userSum -1])
-                user_name.text = userName[userSum -2]+"的下级"
+                userName.remove(userName[userSum - 1])
+                user_name.text = userName[userSum - 2] + "的下级"
                 refreshLayout.resetNoMoreData()
                 presenter.requestMyMember(1, userList[userSum - 2])
             }
@@ -111,6 +114,15 @@ class MyMemberActivity : BaseActivity(), MyMemberContract.View {
     private var mData = ArrayList<MyMemberBean>()
 
     private val presenter by lazy { MyMemberPresenter() }
+    //分割线
+    private val divider by lazy {
+        RecyclerViewDivider(
+            this,
+            LinearLayoutManager.VERTICAL,
+            1,
+            ContextCompat.getColor(this, R.color.colorBackground)
+        )
+    }
 
     override fun initData() {
 
@@ -120,6 +132,7 @@ class MyMemberActivity : BaseActivity(), MyMemberContract.View {
         presenter.attachView(this)
 
         member_rl.layoutManager = LinearLayoutManager(this)
+        member_rl.addItemDecoration(divider)
         member_rl.adapter = mAdapter
     }
 
