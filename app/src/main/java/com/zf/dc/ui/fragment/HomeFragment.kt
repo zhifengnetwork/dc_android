@@ -160,9 +160,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, CommendContract.View {
             headList.add(title.title)
         }
         homeArticle.setTextList(headList)
-
     }
-
 
     override fun initView() {
         homePresenter.attachView(this)
@@ -183,10 +181,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, CommendContract.View {
         commendRecyclerView.layoutManager = GridLayoutManager(context, 2)
         commendRecyclerView.addItemDecoration(RecDecoration(DensityUtil.dp2px(15f)))
         commendRecyclerView.adapter = commendAdapter
-
-
     }
-
 
     private fun initBanner(banner: List<AdList>) {
         // 在最后需要start, start()在点击事件之后
@@ -218,8 +213,8 @@ class HomeFragment : BaseFragment(), HomeContract.View, CommendContract.View {
 
     override fun initEvent() {
 
-        actionLayout.setOnClickListener {
-            ActionActivity.actionStart(context, ActionActivity.AUCTION)
+        groupLayout.setOnClickListener {
+            ActionActivity.actionStart(context, ActionActivity.GROUP)
         }
 
         refreshLayout.setOnRefreshListener {
@@ -261,13 +256,24 @@ class HomeFragment : BaseFragment(), HomeContract.View, CommendContract.View {
         //品质生活banner
 //        qualityBanner.start()
 
-        //精选
+        //竞拍
         choice.setOnClickListener {
-            ChoiceActivity.actionStart(context)
+            //            ChoiceActivity.actionStart(context)
+            ActionActivity.actionStart(context, ActionActivity.AUCTION)
         }
         //签到
         sign_btn.setOnClickListener {
             SignInGiftActivity.actionStart(context)
+        }
+
+        //我的订单
+        myOrderLayout.setOnClickListener {
+            MyOrderActivity.actionStart(context, MyOrderActivity.all)
+        }
+
+        //购物车
+        cartLayout.setOnClickListener {
+            MainActivity.actionStart(context, 2)
         }
 
     }

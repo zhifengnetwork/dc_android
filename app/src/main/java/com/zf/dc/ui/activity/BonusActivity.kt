@@ -15,6 +15,10 @@ import com.zf.dc.utils.GlideUtils
 import kotlinx.android.synthetic.main.activity_bonus.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
+/**
+ * 提现
+ * 微分销会员
+ */
 class BonusActivity : BaseActivity(), BonusContract.View {
 
     override fun showError(msg: String, errorCode: Int) {
