@@ -84,7 +84,7 @@ class ActionActivity : BaseActivity() {
 
                 val msg = WXMediaMessage()
                 msg.mediaObject = webObj //消息对象
-                msg.title = "智丰商城" //标题
+                msg.title = "DC商城" //标题
                 msg.description = "" //描述
 
                 val req = SendMessageToWX.Req()

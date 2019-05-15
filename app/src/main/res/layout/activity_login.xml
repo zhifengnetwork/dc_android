@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="63dp"
-            android:text="智丰商城登录"
+            android:text="DC商城登录"
             android:textColor="@color/colorBlackText"
             android:textSize="24sp" />
 

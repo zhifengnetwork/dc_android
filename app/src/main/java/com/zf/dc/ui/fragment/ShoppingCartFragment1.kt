@@ -29,7 +29,6 @@ import kotlinx.android.synthetic.main.fragment_shoping_cart.*
 import okhttp3.MediaType
 import okhttp3.RequestBody
 
-
 /**
  * 购物车页面
  * 区分商家
@@ -333,9 +332,7 @@ class ShoppingCartFragment1 : BaseFragment(), CartListContract.View, CartOperate
 
             } else {
                 /**
-                 * 结算
-                 * 如果未勾选到商品，不能结算
-                 */
+                 * 结算  如果未勾选到商品，不能结算 */
                 var sum = 0
                 cartData.forEach { goods ->
                     if (goods.selected == "1") sum += 1

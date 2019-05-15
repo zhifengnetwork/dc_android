@@ -2,9 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/parentLayout"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:background="@drawable/me_head_bg">
+    android:layout_height="wrap_content">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@drawable/me_head_bg" />
 
     <RelativeLayout
         android:id="@+id/headLayout"
@@ -69,12 +72,15 @@
         android:layout_marginRight="18dp"
         android:text="10天签到领取礼品"
         android:textColor="@color/whit"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:visibility="invisible" />
 
     <LinearLayout
+        android:id="@+id/countLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/headLayout"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -161,6 +167,35 @@
                 android:textSize="15sp" />
 
         </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/myWallet"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/countLayout"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/shape_round_whit"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="余额"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/userMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="3000"
+            android:textColor="@color/colorPrice"
+            android:textSize="16sp" />
 
     </LinearLayout>
 

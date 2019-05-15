@@ -104,9 +104,10 @@ class AuctionFragment : BaseFragment(), AuctionListContract.View {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         adapter.finishCountDown()
         presenter.detachView()
+        super.onDestroyView()
+
     }
 
 }

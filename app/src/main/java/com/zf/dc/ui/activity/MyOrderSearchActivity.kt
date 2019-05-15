@@ -13,14 +13,16 @@ import kotlinx.android.synthetic.main.activity_myorder_search.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
 class MyOrderSearchActivity : BaseActivity() {
+
     override fun initToolBar() {
         StatusBarUtils.darkMode(
                 this,
                 ContextCompat.getColor(this, R.color.colorSecondText),
                 0.3f
         )
-
         titleName.text = "我的订单"
+        back.setOnClickListener { finish() }
+        rightLayout.visibility = View.INVISIBLE
     }
 
     companion object {
@@ -35,7 +37,6 @@ class MyOrderSearchActivity : BaseActivity() {
     }
 
     override fun initView() {
-        initToolBar()
     }
 
 
@@ -73,9 +74,6 @@ class MyOrderSearchActivity : BaseActivity() {
             inputText.text?.clear()
         }
 
-        back.setOnClickListener {
-            finish()
-        }
     }
 
     override fun start() {

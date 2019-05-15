@@ -29,7 +29,6 @@ import kotlinx.android.synthetic.main.fragment_me.*
 import kotlinx.android.synthetic.main.layout_benefit.*
 import kotlinx.android.synthetic.main.layout_info.*
 import kotlinx.android.synthetic.main.layout_order.*
-import kotlinx.android.synthetic.main.layout_wallet.*
 import kotlinx.android.synthetic.main.layout_zhuanlan.*
 import kotlinx.android.synthetic.main.pop_sign_success.view.*
 
@@ -44,7 +43,6 @@ class MeFragment : BaseFragment(), CommendContract.View {
         waitReceiveNum.text = bean.waitReceive
         waitEvaNum.text = bean.uncomment_count
         userMoney.text = bean.user_money
-        discount.text = bean.coupon_num
     }
 
     //签到
@@ -181,9 +179,9 @@ class MeFragment : BaseFragment(), CommendContract.View {
         }
 
         //优惠券中心
-        discountLayout.setOnClickListener {
-            DiscountActivity.actionStart(context)
-        }
+//        discountLayout.setOnClickListener {
+//            DiscountActivity.actionStart(context)
+//        }
 
         //我的钱包
         myWallet.setOnClickListener {

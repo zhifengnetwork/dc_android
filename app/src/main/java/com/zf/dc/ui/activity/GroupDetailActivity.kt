@@ -272,7 +272,7 @@ class GroupDetailActivity : BaseActivity(), GroupDetailContract.View, ActiveSpec
                     "https://mobile.zhifengwangluo.c3w.cc/shop/Groupbuy/detail?team_id=" + mGroupBean?.info?.team_id + "&goods_id=" + mGroupBean?.info?.goods_id
                 val msg = WXMediaMessage()
                 msg.mediaObject = webObj //消息对象
-                msg.title = "智丰商城" //标题
+                msg.title = "DC商城" //标题
                 msg.description = "拼团" //描述
                 val req = SendMessageToWX.Req()
                 req.transaction = buildTransaction("text")

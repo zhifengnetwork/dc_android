@@ -42,7 +42,7 @@
             <include layout="@layout/layout_order" />
 
             <!--我的钱包-->
-            <include layout="@layout/layout_wallet" />
+            <!--<include layout="@layout/layout_wallet" />-->
 
             <!-- 公益 -->
             <include

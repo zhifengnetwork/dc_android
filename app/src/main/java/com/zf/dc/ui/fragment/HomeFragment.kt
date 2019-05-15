@@ -267,7 +267,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, CommendContract.View {
     override fun initEvent() {
 
         groupLayout.setOnClickListener {
-            ActionActivity.actionStart(context, ActionActivity.GROUP)
+            GroupBuyActivity.actionStart(context)
         }
 
         refreshLayout.setOnRefreshListener {
@@ -289,6 +289,11 @@ class HomeFragment : BaseFragment(), HomeContract.View, CommendContract.View {
                     , alpha
                 )
             )
+        }
+
+        //两天签到领礼品
+        sign2Layout.setOnClickListener {
+            SearchGoodsActivity.actionStart(context, "", "DISTRIBUT")
         }
 
         //站内消息

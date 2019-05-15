@@ -12,7 +12,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="63dp"
-            android:text="智丰商城账户修改"
+            android:text="DC商城账户修改"
             android:textColor="#151515"
             android:textSize="24sp"/>
 

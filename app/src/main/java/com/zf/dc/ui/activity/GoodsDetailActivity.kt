@@ -33,7 +33,6 @@ import com.zf.dc.mvp.contract.GoodsDetailContract
 import com.zf.dc.mvp.presenter.GoodsDetailPresenter
 import com.zf.dc.showToast
 import com.zf.dc.ui.adapter.*
-import com.zf.dc.ui.fragment.graphic.GraphicFragment
 import com.zf.dc.ui.fragment.same.DetailSameFragment
 import com.zf.dc.utils.GlideUtils
 import com.zf.dc.utils.LogUtils
@@ -90,6 +89,7 @@ class GoodsDetailActivity : BaseActivity(), GoodsDetailContract.View {
         loadSecKill()
 
     }
+
     //商品属性
     override fun getGoodsAttr(bean: List<AttriBute>) {
         mAttr.clear()
@@ -397,8 +397,9 @@ class GoodsDetailActivity : BaseActivity(), GoodsDetailContract.View {
         sameTabLayout.setTabData(entitys, this, R.id.frameLayout, fgms)
 
     }
+
     /**Banner轮播图*/
-    private fun initBanner(goodsImg:List<String>) {
+    private fun initBanner(goodsImg: List<String>) {
 
         val images = ArrayList<String>()
         val imageViews = ArrayList<ImageView>()

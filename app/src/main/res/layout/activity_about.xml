@@ -19,7 +19,7 @@
               android:textColor="@color/colorPrimaryText"
               android:layout_marginTop="10dp"
               android:layout_marginBottom="10dp"
-              android:text="扫描二维码，下载智丰商城APP"/>
+              android:text="扫描二维码，下载DC商城APP"/>
 
     <LinearLayout
             android:paddingLeft="15dp"
