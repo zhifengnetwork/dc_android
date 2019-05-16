@@ -32,9 +32,9 @@ class LoginActivity : BaseActivity(), LoginContract.View {
 
     override fun initToolBar() {
         StatusBarUtils.darkMode(
-            this,
-            ContextCompat.getColor(this, R.color.colorSecondText),
-            0.3f
+                this,
+                ContextCompat.getColor(this, R.color.colorSecondText),
+                0.3f
         )
     }
 

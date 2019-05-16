@@ -17,7 +17,7 @@ import com.zf.dc.utils.TimeUtils
 import kotlinx.android.synthetic.main.item_group_buy.view.*
 
 class GroupBuyAdapter(val context: Context?, val data: List<GroupBuyList>) :
-    RecyclerView.Adapter<GroupBuyAdapter.ViewHolder>() {
+        RecyclerView.Adapter<GroupBuyAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_group_buy, parent, false)
@@ -45,14 +45,14 @@ class GroupBuyAdapter(val context: Context?, val data: List<GroupBuyList>) :
             discount.text = "${data[position].rebate}折"
             number.text = "${data[position].buy_num}人参与"
 
-
+            evaluate.text = "评价:" + data[position].comment_count
 
             //时间
             if ((data[position].start_time * 1000 > System.currentTimeMillis())) {
                 countTime.visibility = View.INVISIBLE
                 status.text = "未开始"
             } else if ((data[position].start_time * 1000 < System.currentTimeMillis())
-                && (data[position].end_time * 1000 > System.currentTimeMillis())
+                    && (data[position].end_time * 1000 > System.currentTimeMillis())
             ) {
                 holder.countDownTimer?.cancel()
                 val time: Long = (data[position].end_time * 1000) - System.currentTimeMillis()

@@ -63,7 +63,7 @@
                 android:id="@+id/me_payment_iv"
                 style="@style/me_orld_iv_style"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/ic_pending" />
+                android:src="@drawable/pendingpayment" />
 
             <TextView
                 android:id="@+id/waitPayNum"
@@ -92,7 +92,7 @@
                 android:id="@+id/me_cargo_iv"
                 style="@style/me_orld_iv_style"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/tobeevaluated2" />
+                android:src="@drawable/pendingshipment" />
 
             <TextView
                 android:id="@+id/waitSendNum"
@@ -121,7 +121,7 @@
                 android:id="@+id/me_receive_cargo_iv"
                 style="@style/me_orld_iv_style"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/ic_tobeshipped" />
+                android:src="@drawable/tobeshipped" />
 
             <TextView
                 android:id="@+id/waitReceiveNum"
@@ -150,7 +150,7 @@
                 android:id="@+id/me_evaluatet_iv"
                 style="@style/me_orld_iv_style"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/ic_pendingreceipt" />
+                android:src="@drawable/tobeevaluated" />
 
             <TextView
                 android:id="@+id/waitEvaNum"

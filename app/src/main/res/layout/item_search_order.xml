@@ -70,7 +70,8 @@
             android:drawablePadding="5dp"
             android:text="MODA专营店"
             android:textColor="@color/colorBlackText"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            android:visibility="invisible" />
 
 
         <TextView

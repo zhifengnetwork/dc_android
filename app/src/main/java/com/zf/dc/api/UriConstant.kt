@@ -18,7 +18,7 @@ object UriConstant {
 
     const val FRESH_ORDER_LIST = "freshOrderList"
 
-    const val WX_APP_ID = "wx5647ea6845751495"
+    const val WX_APP_ID = "wxfca03365fd947fa0" //微信appId
 
     const val CODE_TIME = 60 //验证码时间
 

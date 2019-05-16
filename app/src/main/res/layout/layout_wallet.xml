@@ -49,85 +49,88 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/me_line_v"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
+        <!--<Space-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:layout_weight="1" />-->
 
-        <LinearLayout
+        <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/integral" />-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="3dp"-->
+        <!--android:text="余额"-->
+        <!--android:textColor="@color/colorPrimaryText"-->
+        <!--android:textSize="12sp" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/userMoney"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="0"-->
+        <!--android:textColor="#fe2306"-->
+        <!--android:textSize="15sp" />-->
+
+        <!--</LinearLayout>-->
+
+        <!--<Space-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:layout_weight="2"-->
+        <!--android:visibility="gone" />-->
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/discountLayout"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:orientation="vertical"-->
+        <!--android:visibility="visible">-->
+
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/ic_coupon" />-->
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:text="余额"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="16sp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/integral" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="余额"
-                android:textColor="@color/colorPrimaryText"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/userMoney"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="#fe2306"
-                android:textSize="15sp" />
-
-        </LinearLayout>
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="2"
-            android:visibility="gone" />
-
-        <LinearLayout
-            android:id="@+id/discountLayout"
+        <TextView
+            android:id="@+id/userMoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:layout_gravity="center_vertical"
+            android:text="0"
+            android:textColor="#fe2306"
+            android:textSize="16sp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_coupon" />
+        <!--</LinearLayout>-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="优惠券"
-                android:textColor="@color/colorPrimaryText"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/discount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="#fe2306"
-                android:textSize="15sp" />
-
-        </LinearLayout>
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
+        <!--<Space-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:layout_weight="1" />-->
 
     </LinearLayout>
 

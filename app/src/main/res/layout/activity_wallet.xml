@@ -44,7 +44,7 @@
                 android:textColor="#ff5600"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
-                android:text="30000"/>
+                android:text="0"/>
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -65,7 +65,7 @@
                     android:layout_marginRight="20dp"
                     android:textSize="15sp"
                     android:textColor="@color/colorPrimaryText"
-                    android:text="32000分"/>
+                    android:text="0分"/>
 
             <TextView
                     android:id="@+id/coupon_num"
@@ -76,7 +76,7 @@
                     android:drawablePadding="6dp"
                     android:textSize="15sp"
                     android:textColor="@color/colorPrimaryText"
-                    android:text="3张"/>
+                    android:text="0张"/>
 
 
             <Space android:layout_width="0dp"

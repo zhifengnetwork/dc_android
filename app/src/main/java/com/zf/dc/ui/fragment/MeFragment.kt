@@ -29,6 +29,7 @@ import kotlinx.android.synthetic.main.fragment_me.*
 import kotlinx.android.synthetic.main.layout_benefit.*
 import kotlinx.android.synthetic.main.layout_info.*
 import kotlinx.android.synthetic.main.layout_order.*
+import kotlinx.android.synthetic.main.layout_wallet.*
 import kotlinx.android.synthetic.main.layout_zhuanlan.*
 import kotlinx.android.synthetic.main.pop_sign_success.view.*
 
@@ -55,7 +56,6 @@ class MeFragment : BaseFragment(), CommendContract.View {
             @SuppressLint("SetTextI18n")
             override fun initView() {
                 contentView?.apply {
-
                     //连续签到天数
                     continue_sign.text = "已经连续签到" + signData?.continue_sign + "天"
                     //签到加积分
@@ -138,7 +138,7 @@ class MeFragment : BaseFragment(), CommendContract.View {
     override fun lazyLoad() {
         refreshLayout.setEnableLoadMore(false)
         refreshLayout.setNoMoreData(false)
-        commendPresenter.requestCommend("is_recommend", 1)
+//        commendPresenter.requestCommend("is_recommend", 1)
         commendPresenter.requestMe()
     }
 
@@ -150,6 +150,7 @@ class MeFragment : BaseFragment(), CommendContract.View {
         UserInfoLiveData.observe(viewLifecycleOwner, Observer { userInfo ->
             userInfo?.apply {
                 userName.text = nickname
+                vipLevel.text = level_name
                 GlideUtils.loadUrlImage(context, head_pic, avatar)
             }
         })
@@ -158,20 +159,20 @@ class MeFragment : BaseFragment(), CommendContract.View {
             lazyLoad()
         }
 
-        refreshLayout.setOnLoadMoreListener {
-            commendPresenter.requestCommend("is_recommend", null)
-        }
+//        refreshLayout.setOnLoadMoreListener {
+//            commendPresenter.requestCommend("is_recommend", null)
+//        }
 
         //签到
-        sign.setOnClickListener {
-            //请求签到接口
-            commendPresenter.requestAppSign()
-        }
+//        sign.setOnClickListener {
+//            //请求签到接口
+//            commendPresenter.requestAppSign()
+//        }
 
         //十天签到领礼品
-        layout_info_gift.setOnClickListener {
-            SignInGiftActivity.actionStart(context)
-        }
+//        layout_info_gift.setOnClickListener {
+//            SignInGiftActivity.actionStart(context)
+//        }
 
         //公益
         benefit.setOnClickListener {
