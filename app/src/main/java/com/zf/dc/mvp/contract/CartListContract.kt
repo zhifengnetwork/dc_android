@@ -13,11 +13,11 @@ interface CartListContract {
 
         fun setLoadMoreCart(bean: CartBean)
 
-        fun setEmpty()
+        fun setCartEmpty()
 
-        fun setLoadComplete()
+        fun setCartLoadComplete()
 
-        fun showError(msg: String, errorCode: Int)
+        fun showCartError(msg: String, errorCode: Int)
 
         fun loadMoreError(msg: String, errorCode: Int)
     }

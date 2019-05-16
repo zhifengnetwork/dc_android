@@ -19,7 +19,7 @@
                 app:srlAccentColor="@color/colorSecondText"
                 app:srlDrawableProgress="@drawable/ic_progress_puzzle"
                 app:srlEnableLastTime="false"
-                app:srlPrimaryColor="@color/colorPrimary"
+                app:srlPrimaryColor="@color/colorBackground"
                 app:srlTextFailed="@string/refresh_failed"
                 app:srlTextFinish="@string/refresh_finish"
                 app:srlTextPulling="@string/refresh_pulling"

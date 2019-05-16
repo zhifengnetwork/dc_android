@@ -5,6 +5,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.scwang.smartrefresh.layout.util.DensityUtil
@@ -14,13 +15,17 @@ import com.zf.dc.base.BaseFragment
 import com.zf.dc.mvp.bean.*
 import com.zf.dc.mvp.contract.CartListContract
 import com.zf.dc.mvp.contract.CartOperateContract
+import com.zf.dc.mvp.contract.CommendContract
 import com.zf.dc.mvp.presenter.CartListPresenter
 import com.zf.dc.mvp.presenter.CartOperatePresenter
+import com.zf.dc.mvp.presenter.CommendPresenter
 import com.zf.dc.net.exception.ErrorStatus
 import com.zf.dc.showToast
 import com.zf.dc.ui.activity.ConfirmOrderActivity
 import com.zf.dc.ui.adapter.CartGoodsAdapter1
+import com.zf.dc.ui.adapter.CommendAdapter
 import com.zf.dc.utils.bus.RxBus
+import com.zf.dc.view.RecDecoration
 import com.zf.dc.view.dialog.DeleteCartDialog
 import com.zf.dc.view.dialog.InputNumDialog
 import com.zf.dc.view.popwindow.CartSpecPopupWindow
@@ -33,7 +38,42 @@ import okhttp3.RequestBody
  * 购物车页面
  * 区分商家
  */
-class ShoppingCartFragment1 : BaseFragment(), CartListContract.View, CartOperateContract.View {
+class ShoppingCartFragment1 : BaseFragment(), CartListContract.View, CartOperateContract.View, CommendContract.View {
+
+    override fun appSignSuccess(bean: AppSignBean) {
+    }
+
+    override fun setMe(bean: MeBean) {
+    }
+
+    //推荐为空
+    override fun setEmpty() {
+        refreshLayout.setEnableLoadMore(false)
+    }
+
+    //推荐没有更多数据
+    override fun setLoadComplete() {
+        refreshLayout.finishLoadMoreWithNoMoreData()
+    }
+
+    //推荐刷新失败
+    override fun showError(msg: String, errorCode: Int) {
+        showToast(msg)
+    }
+
+    //推荐刷新
+    override fun setRefreshCommend(bean: CommendBean) {
+        refreshLayout.setEnableLoadMore(true)
+        commendData.clear()
+        commendData.addAll(bean.goods_list)
+        commendAdapter.notifyDataSetChanged()
+    }
+
+    //推荐加载更多
+    override fun setLoadMoreCommend(bean: CommendBean) {
+        commendData.addAll(bean.goods_list)
+        commendAdapter.notifyDataSetChanged()
+    }
 
     //根据规格获取商品信息
     override fun setSpecInfo(bean: GoodsSpecInfo) {
@@ -59,12 +99,12 @@ class ShoppingCartFragment1 : BaseFragment(), CartListContract.View, CartOperate
             }
         }
         popWindow = object : CartSpecPopupWindow(
-                activity as Activity,
-                R.layout.pop_order_style,
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                cartData[mGoodsPos],
-                specList
+            activity as Activity,
+            R.layout.pop_order_style,
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            cartData[mGoodsPos],
+            specList
         ) {}
         popWindow?.showAtLocation(parentLayout, Gravity.BOTTOM, 0, 0)
         popWindow?.onNumberListener = {
@@ -128,21 +168,21 @@ class ShoppingCartFragment1 : BaseFragment(), CartListContract.View, CartOperate
         showToast(msg)
     }
 
-
     //购物车为空
-    override fun setEmpty() {
+    override fun setCartEmpty() {
         settleLayout.visibility = View.GONE
         mLayoutStatusView?.showEmpty()
-        refreshLayout.setEnableLoadMore(false)
+        commendPresenter.requestCommend("is_recommend", 1)
+        ifCartComplete = true
     }
 
-    //没有更多数据
-    override fun setLoadComplete() {
-        refreshLayout.setEnableLoadMore(false)
+    //购物车加载完全
+    override fun setCartLoadComplete() {
+        commendPresenter.requestCommend("is_recommend", 1)
+        ifCartComplete = true
     }
 
-    //刷新失败
-    override fun showError(msg: String, errorCode: Int) {
+    override fun showCartError(msg: String, errorCode: Int) {
         settleLayout.visibility = View.GONE
         if (errorCode == ErrorStatus.NETWORK_ERROR) {
             mLayoutStatusView?.showNoNetwork()
@@ -156,15 +196,14 @@ class ShoppingCartFragment1 : BaseFragment(), CartListContract.View, CartOperate
         showToast(msg)
     }
 
-    //刷新成功
+    //购物车刷新成功
     override fun setRefreshCart(bean: CartBean) {
+        refreshLayout.setEnableLoadMore(true)
         settleLayout.visibility = View.VISIBLE
         mLayoutStatusView?.showContent()
-        refreshLayout.setEnableLoadMore(true)
         cartData.clear()
         cartData.addAll(bean.list)
         cartAdapter.notifyDataSetChanged()
-
         price.text = "¥${bean.cart_price_info?.total_fee}"
         allChoose.isChecked = 1 == bean.selected_flag?.all_flag
     }
@@ -195,42 +234,64 @@ class ShoppingCartFragment1 : BaseFragment(), CartListContract.View, CartOperate
 
     override fun getLayoutId(): Int = R.layout.fragment_shoping_cart
 
+    private var ifCartComplete = false
+
     private var mGoodsPos = 0
 
     //购物车适配器
     private var cartData = ArrayList<CartGoodsList>()
 
+    private val commendData = ArrayList<CommendList>()
+    private val commendAdapter by lazy { CommendAdapter(context, commendData) }
+
     private val cartAdapter by lazy { CartGoodsAdapter1(context, cartData) }
     private val cartListPresenter by lazy { CartListPresenter() }
     private val cartOperatePresenter by lazy { CartOperatePresenter() }
 
+    private val commendPresenter by lazy { CommendPresenter() }
+
+    private val divider by lazy {
+        RecyclerViewDivider(
+            context,
+            LinearLayoutManager.VERTICAL,
+            DensityUtil.dp2px(5f),
+            ContextCompat.getColor(context!!, R.color.colorBackground)
+        )
+    }
+
     private fun initCart() {
         cartRecyclerView.layoutManager = LinearLayoutManager(context)
         cartRecyclerView.adapter = cartAdapter
-        cartRecyclerView.addItemDecoration(
-                RecyclerViewDivider(
-                        context,
-                        LinearLayoutManager.VERTICAL,
-                        DensityUtil.dp2px(5f),
-                        ContextCompat.getColor(context!!, R.color.colorBackground)
-                )
-        )
+        cartRecyclerView.addItemDecoration(divider)
+
+        //推荐
+        //推荐
+        recommendRecyclerView.layoutManager = GridLayoutManager(context, 2)
+        recommendRecyclerView.adapter = commendAdapter
+        recommendRecyclerView.addItemDecoration(RecDecoration(DensityUtil.dp2px(15f)))
+
     }
 
     override fun lazyLoad() {
         if (cartData.isEmpty()) {
             mLayoutStatusView?.showLoading()
         }
+        refreshLayout.setNoMoreData(false)
         refreshLayout.setEnableLoadMore(false)
         cartListPresenter.requestCartList(1)
     }
 
     override fun initView() {
+        commendPresenter.attachView(this)
         cartOperatePresenter.attachView(this)
         cartListPresenter.attachView(this)
         mLayoutStatusView = multipleStatusView
-        //购物车
+
+
+        //购物车 推荐
         initCart()
+
+
     }
 
     override fun initEvent() {
@@ -261,7 +322,7 @@ class ShoppingCartFragment1 : BaseFragment(), CartListContract.View, CartOperate
             }
             allChoose.isChecked = sum == cartData.size
             val body =
-                    RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), Gson().toJson(json))
+                RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), Gson().toJson(json))
             cartOperatePresenter.requestSelect(body)
         }
 
@@ -270,7 +331,11 @@ class ShoppingCartFragment1 : BaseFragment(), CartListContract.View, CartOperate
         }
 
         refreshLayout.setOnLoadMoreListener {
-            cartListPresenter.requestCartList(null)
+            if (ifCartComplete) {
+                commendPresenter.requestCommend("is_recommend", null)
+            } else {
+                cartListPresenter.requestCartList(null)
+            }
         }
 
         /** 更改商品数量加减*/
@@ -281,7 +346,7 @@ class ShoppingCartFragment1 : BaseFragment(), CartListContract.View, CartOperate
         /** 商品数量*/
         cartAdapter.onInputListener = { bean ->
             InputNumDialog.showDialog(childFragmentManager, bean.sum)
-                    .onNumListener = { num ->
+                .onNumListener = { num ->
                 cartOperatePresenter.requestCount(bean.id, num)
                 bean.goodsPosition?.let { goodsPos ->
                     cartData[goodsPos].let {
@@ -316,7 +381,7 @@ class ShoppingCartFragment1 : BaseFragment(), CartListContract.View, CartOperate
                     return@setOnClickListener
                 }
                 DeleteCartDialog.showDialog(childFragmentManager, 1)
-                        .onConfirmListener = {
+                    .onConfirmListener = {
                     val deleteList = ArrayList<HashMap<String, String>>()
                     cartData.forEach { goods ->
                         if (goods.selected == "1") {
@@ -326,7 +391,7 @@ class ShoppingCartFragment1 : BaseFragment(), CartListContract.View, CartOperate
                         }
                     }
                     val body =
-                            RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), Gson().toJson(deleteList))
+                        RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), Gson().toJson(deleteList))
                     cartOperatePresenter.requestDeleteCart(body)
                 }
 
@@ -364,9 +429,10 @@ class ShoppingCartFragment1 : BaseFragment(), CartListContract.View, CartOperate
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         cartListPresenter.detachView()
+        commendPresenter.detachView()
         cartOperatePresenter.detachView()
+        super.onDestroy()
     }
 
 

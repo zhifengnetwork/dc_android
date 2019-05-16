@@ -10,10 +10,11 @@ data class UserInfoBean(
         val realname: String,
         val mobile: String,
         val is_distribut: String,
+        val level_name: String,
         val is_agent: String,
         val sex: Int,
 //        val birthyear: String,
 //        val birthmonth: String,
 //        val birthday: String,
-        val date_birth:String
+        val date_birth: String
 )

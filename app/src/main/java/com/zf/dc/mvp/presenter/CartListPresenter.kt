@@ -27,24 +27,24 @@ class CartListPresenter : BasePresenter<CartListContract.View>(), CartListContra
                                 if (it.data != null && it.data.list.isNotEmpty()) {
                                     setRefreshCart(it.data)
                                 } else {
-                                    setEmpty()
+                                    setCartEmpty()
                                 }
                             } else {
                                 if (it.data != null && it.data.list.isNotEmpty()) {
                                     setLoadMoreCart(it.data)
                                 } else {
-                                    setLoadComplete()
+                                    setCartLoadComplete()
                                 }
                             }
                             if (it.data != null && it.data.list.isNotEmpty()) {
                                 if (it.data.list.size < UriConstant.PER_PAGE) {
-                                    setLoadComplete()
+                                   setCartLoadComplete()
                                 }
                             }
                             mPage += 1
                         }
                         else -> if (mPage == 1) {
-                            showError(it.msg, it.status)
+                            showCartError(it.msg, it.status)
                         } else {
                             loadMoreError(it.msg, it.status)
                         }
@@ -55,7 +55,7 @@ class CartListPresenter : BasePresenter<CartListContract.View>(), CartListContra
                 mRootView?.apply {
                     dismissLoading()
                     if (mPage == 1) {
-                        showError(ExceptionHandle.handleException(it), ExceptionHandle.errorCode)
+                        showCartError( ExceptionHandle.handleException(it), ExceptionHandle.errorCode)
                     } else {
                         loadMoreError(ExceptionHandle.handleException(it), ExceptionHandle.errorCode)
                     }

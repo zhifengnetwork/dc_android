@@ -18,6 +18,7 @@ data class GroupBuyList(
     val buy_num: String,
     val order_num: String,
     val goods_price: String,
+    val comment_count:String,
     val rebate: String,
     val virtual_num: String
 )

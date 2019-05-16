@@ -59,17 +59,18 @@
         </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/shopName2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="10dp"
-            android:drawableRight="@drawable/arrow_b"
-            android:drawablePadding="2dp"
-            android:text="MODO专营店"
-            android:textColor="@color/colorBlackText"
-            android:textSize="13sp" />
+        <!--<TextView-->
+        <!--android:id="@+id/shopName2"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="12dp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:drawableRight="@drawable/arrow_b"-->
+        <!--android:drawablePadding="2dp"-->
+        <!--android:text="MODO专营店"-->
+        <!--android:textColor="@color/colorBlackText"-->
+        <!--android:textSize="13sp"-->
+        <!--android:visibility="invisible" />-->
 
         <LinearLayout
             android:layout_width="wrap_content"

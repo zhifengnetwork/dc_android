@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentTransaction
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
@@ -21,6 +22,7 @@ import com.zf.dc.ui.fragment.HomeFragment
 import com.zf.dc.ui.fragment.MeFragment
 import com.zf.dc.ui.fragment.ShoppingCartFragment1
 import com.zf.dc.utils.Preference
+import com.zf.dc.utils.StatusBarUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(), UserInfoContract.View {
@@ -84,6 +86,11 @@ class MainActivity : BaseActivity(), UserInfoContract.View {
     }
 
     override fun initToolBar() {
+        StatusBarUtils.darkMode(
+            this,
+            ContextCompat.getColor(this, R.color.colorSecondText),
+            0.3f
+        )
     }
 
     override fun initEvent() {
@@ -92,17 +99,17 @@ class MainActivity : BaseActivity(), UserInfoContract.View {
     private val mTitles = listOf("首页", "分类", "购物车", "我的")
 
     private val mIconUnSelectIds = listOf(
-            R.drawable.ic_sy,
-            R.drawable.ic_fl,
-            R.drawable.ic_gwc,
-            R.drawable.ic_wo
+        R.drawable.ic_sy,
+        R.drawable.ic_fl,
+        R.drawable.ic_gwc,
+        R.drawable.ic_wo
     )
 
     private val mIconSelectIds = listOf(
-            R.drawable.ic_sy_se,
-            R.drawable.ic_fl_se,
-            R.drawable.ic_gwc_se,
-            R.drawable.ic_wo_se
+        R.drawable.ic_sy_se,
+        R.drawable.ic_fl_se,
+        R.drawable.ic_gwc_se,
+        R.drawable.ic_wo_se
     )
 
     private val mTabEntities = ArrayList<CustomTabEntity>()
@@ -130,27 +137,27 @@ class MainActivity : BaseActivity(), UserInfoContract.View {
         hideFragments(transaction)
         when (index) {
             0 -> mHomeFragment?.let { transaction.show(it) }
-                    ?: HomeFragment.getInstance().let {
-                        mHomeFragment = it
-                        transaction.add(R.id.fl_container, it, "home")
-                    }
+                ?: HomeFragment.getInstance().let {
+                    mHomeFragment = it
+                    transaction.add(R.id.fl_container, it, "home")
+                }
             1 -> mDiscoveryFragment?.let { transaction.show(it) }
-                    ?: ClassifyFragment.getInstance().let {
-                        mDiscoveryFragment = it
-                        transaction.add(R.id.fl_container, it, "discovery")
-                    }
+                ?: ClassifyFragment.getInstance().let {
+                    mDiscoveryFragment = it
+                    transaction.add(R.id.fl_container, it, "discovery")
+                }
             2 -> mHotFragment?.let { transaction.show(it) }
-                    ?: ShoppingCartFragment1.getInstance().let {
-                        mHotFragment = it
-                        transaction.add(R.id.fl_container, it, "hot")
-                    }
+                ?: ShoppingCartFragment1.getInstance().let {
+                    mHotFragment = it
+                    transaction.add(R.id.fl_container, it, "hot")
+                }
             3 -> mMineFragment?.let {
                 transaction.show(it)
             }
-                    ?: MeFragment.getInstance().let {
-                        mMineFragment = it
-                        transaction.add(R.id.fl_container, it, "mine")
-                    }
+                ?: MeFragment.getInstance().let {
+                    mMineFragment = it
+                    transaction.add(R.id.fl_container, it, "mine")
+                }
             else -> {
             }
         }

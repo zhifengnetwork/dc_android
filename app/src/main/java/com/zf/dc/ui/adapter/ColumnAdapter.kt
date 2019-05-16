@@ -6,10 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.zf.dc.R
-import com.zf.dc.ui.activity.AccountDetailsActivity
-import com.zf.dc.ui.activity.ActionActivity
-import com.zf.dc.ui.activity.BonusActivity
-import com.zf.dc.ui.activity.TeamActivity
+import com.zf.dc.ui.activity.*
 import kotlinx.android.synthetic.main.me_specail_item.view.*
 
 class ColumnAdapter(val context: Context?) : RecyclerView.Adapter<ColumnAdapter.ViewHolder>() {
@@ -20,7 +17,10 @@ class ColumnAdapter(val context: Context?) : RecyclerView.Adapter<ColumnAdapter.
             R.drawable.auction,
             R.drawable.ic_assemble,
             R.drawable.ic_team,
-            R.drawable.myshare
+            R.drawable.myshare,
+            R.drawable.ic_signin2,
+            R.drawable.ic_information2,
+            R.drawable.distribution
     )
     private val titleList =
             arrayOf(
@@ -29,7 +29,10 @@ class ColumnAdapter(val context: Context?) : RecyclerView.Adapter<ColumnAdapter.
                     "拍卖",
                     "拼团",
                     "我的团队",
-                    "我的分享"
+                    "我的分享",
+                    "签到次数",
+                    "我的信息",
+                    "我的分销"
             )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -49,6 +52,9 @@ class ColumnAdapter(val context: Context?) : RecyclerView.Adapter<ColumnAdapter.
                 2 -> ActionActivity.actionStart(context, ActionActivity.AUCTION)
                 3 -> ActionActivity.actionStart(context, ActionActivity.GROUP)
                 4 -> TeamActivity.actionStart(context)
+                6 -> SignInGiftActivity.actionStart(context)
+                7 -> MessageActivity.actionStart(context)
+                8 -> DistributeActivity.actionStart(context)
             }
         }
     }

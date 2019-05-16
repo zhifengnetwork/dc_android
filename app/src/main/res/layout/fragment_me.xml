@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     app:srlEnableAutoLoadMore="true"
-    app:srlEnableFooterFollowWhenLoadFinished="true">
+    app:srlEnableFooterFollowWhenLoadFinished="true"
+    app:srlEnableLoadMore="false">
 
     <com.scwang.smartrefresh.layout.header.ClassicsHeader
         android:layout_width="match_parent"
@@ -14,7 +15,7 @@
         app:srlAccentColor="@color/colorSecondText"
         app:srlDrawableProgress="@drawable/ic_progress_puzzle"
         app:srlEnableLastTime="false"
-        app:srlPrimaryColor="@color/colorPrimary"
+        app:srlPrimaryColor="@color/colorBackground"
         app:srlTextFailed="@string/refresh_failed"
         app:srlTextFinish="@string/refresh_finish"
         app:srlTextPulling="@string/refresh_pulling"
@@ -38,11 +39,11 @@
             <!--个人信息-->
             <include layout="@layout/layout_info" />
 
+            <!--我的钱包-->
+            <include layout="@layout/layout_wallet" />
+
             <!--我的订单-->
             <include layout="@layout/layout_order" />
-
-            <!--我的钱包-->
-            <!--<include layout="@layout/layout_wallet" />-->
 
             <!-- 公益 -->
             <include
@@ -53,7 +54,9 @@
             <include layout="@layout/layout_zhuanlan" />
 
             <!-- 为你推荐-->
-            <include layout="@layout/layout_wntj" />
+            <include
+                layout="@layout/layout_wntj"
+                android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recommendRecyclerView"
@@ -61,7 +64,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:nestedScrollingEnabled="false"
-                android:overScrollMode="never" />
+                android:overScrollMode="never"
+                android:visibility="gone" />
 
         </LinearLayout>
 

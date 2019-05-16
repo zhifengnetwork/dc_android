@@ -54,7 +54,7 @@ class SearchOrderAdapter(val context: Context, val data: List<SearchList>) :
                 sellNum.text = "销量: ${data[position].sales_sum}"
                 evaluate.text = "${data[position].comment_count}条好评"
                 havePay.text = data[position].sale_total ?: "0.00"
-                shopName.text = data[position].seller_name
+//                shopName.text = data[position].seller_name
 
             } else {
                 goodsName2.text = data[position].goods_name
@@ -65,7 +65,7 @@ class SearchOrderAdapter(val context: Context, val data: List<SearchList>) :
                 sellNum2.text = "销量: ${data[position].sales_sum}"
                 evaluate2.text = "${data[position].comment_count}条好评"
                 havePay2.text = data[position].sale_total ?: "0.00"
-                shopName2.text = data[position].seller_name
+//                shopName2.text = data[position].seller_name
             }
 
             setOnClickListener {

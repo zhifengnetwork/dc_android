@@ -47,10 +47,26 @@ class ResetPwdActivity : BaseActivity(), ForgetPwdContract.View {
 
     //第一步通过
     override fun setContract() {
-        InputPwdActivity.actionStart(this, phone.text.toString(),InputPwdActivity.SELL)
+//        InputPwdActivity.actionStart(this, phone.text.toString(),InputPwdActivity.SELL)
+        when {
+            pwd.text.isEmpty() || pwd.text.length < 6 -> pwdError.visibility = View.VISIBLE
+            pwd.text.toString() != pwdEn.text.toString() -> {
+                pwdError.visibility = View.GONE
+                pwdEnError.visibility = View.VISIBLE
+            }
+            else -> {
+                pwdError.visibility = View.GONE
+                pwdEnError.visibility = View.GONE
+                //第二部提交手机，和密码
+                presenter.requestChangePwd(phone.text.toString(), pwd.text.toString(), pwdEn.text.toString(), 2)
+
+            }
+        }
     }
 
+    //修改成功
     override fun setChangePwd() {
+        showToast("密码修改成功")
     }
 
     override fun showLoading() {
@@ -96,6 +112,7 @@ class ResetPwdActivity : BaseActivity(), ForgetPwdContract.View {
                 else -> {
                     phoneError.visibility = View.GONE
                     codeHint.visibility = View.GONE
+                    //第一步验证手机号和验证码
                     presenter.requestContract(phone.text.toString(), code.text.toString())
                 }
             }
