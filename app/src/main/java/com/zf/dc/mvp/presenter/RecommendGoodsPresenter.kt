@@ -7,10 +7,11 @@ import com.zf.dc.mvp.model.RecommendGoodsModel
 import com.zf.dc.net.exception.ExceptionHandle
 
 class RecommendGoodsPresenter : BasePresenter<RecommendGoodsContract.View>(), RecommendGoodsContract.Presenter {
-    override fun requestRecommendGoods(id: String, sort_asc: String, page: Int) {
+
+    override fun requestRecommendGoods(id: String) {
         checkViewAttached()
         mRootView?.showLoading()
-        val disposable = model.getRecommendGoods(id, sort_asc, page, PER_PAGE)
+        val disposable = model.getRecommendGoods(id, PER_PAGE)
             .subscribe({
                 mRootView?.apply {
                     dismissLoading()

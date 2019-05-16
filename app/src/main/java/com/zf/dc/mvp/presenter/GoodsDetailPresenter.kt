@@ -1,5 +1,6 @@
 package com.zf.dc.mvp.presenter
 
+import com.zf.dc.api.UriConstant
 import com.zf.dc.base.BasePresenter
 import com.zf.dc.mvp.contract.GoodsDetailContract
 import com.zf.dc.mvp.model.GoodsDetailModel
@@ -257,6 +258,31 @@ class GoodsDetailPresenter : BasePresenter<GoodsDetailContract.View>(), GoodsDet
                         0 -> {
                             if (it.data != null) {
                                 getGoodsAttr(it.data.goods_attribute)
+                            }
+                        }
+                        else -> showError(it.msg, it.status)
+                    }
+                }
+            }, {
+                mRootView?.apply {
+                    dismissLoading()
+                    showError(ExceptionHandle.handleException(it), ExceptionHandle.errorCode)
+                }
+            })
+        addSubscription(disposable)
+    }
+
+    override fun requestRecommendGoods(id: String) {
+        checkViewAttached()
+        mRootView?.showLoading()
+        val disposable = model.getRecommendGoods(id, UriConstant.PER_PAGE)
+            .subscribe({
+                mRootView?.apply {
+                    dismissLoading()
+                    when (it.status) {
+                        0 -> {
+                            if (it.data != null) {
+                                getRecommendGoods(it.data.goods_list)
                             }
                         }
                         else -> showError(it.msg, it.status)

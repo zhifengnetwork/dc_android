@@ -10,7 +10,7 @@ import com.zf.dc.base.BaseFragment
 import com.zf.dc.mvp.bean.CommendList
 import com.zf.dc.mvp.contract.RecommendGoodsContract
 import com.zf.dc.mvp.presenter.RecommendGoodsPresenter
-import com.zf.dc.ui.activity.GoodsDetailActivity
+import com.zf.dc.ui.activity.GoodsDetail2Activity
 import com.zf.dc.ui.adapter.LoveShopGoodsAdapter
 import com.zf.dc.view.recyclerview.HorizontalPageLayoutManager
 import com.zf.dc.view.recyclerview.PagingScrollHelper
@@ -85,7 +85,7 @@ class DetailSameFragment : BaseFragment(), RecommendGoodsContract.View {
 
     }
 
-    private val adapter by lazy { LoveShopGoodsAdapter(context, mData) }
+    private val adapter by lazy { LoveShopGoodsAdapter(context,mData) }
 
 
     private val scrollHelper = PagingScrollHelper()
@@ -124,9 +124,9 @@ class DetailSameFragment : BaseFragment(), RecommendGoodsContract.View {
 
     override fun lazyLoad() {
         if (mType == BUY) {
-            presenter.requestRecommendGoods(mId.toString(), "", 1)
+            presenter.requestRecommendGoods(mId.toString())
         } else {
-            presenter.requestRecommendGoods(mId.toString(), "asc", 1)
+            presenter.requestRecommendGoods(mId.toString())
         }
 
 
@@ -136,7 +136,7 @@ class DetailSameFragment : BaseFragment(), RecommendGoodsContract.View {
 
         adapter.mClickListener = {
             //RxBus.getDefault().post(it,GoodsDetailActivity.FRESH_ORDER)
-            GoodsDetailActivity.actionStart(context, it)
+            GoodsDetail2Activity.actionStart(context, it)
         }
     }
 }

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.zf.dc.R
 import com.zf.dc.mvp.bean.CommendList
-import com.zf.dc.ui.activity.GoodsDetailActivity
+import com.zf.dc.ui.activity.GoodsDetail2Activity
 import com.zf.dc.utils.GlideUtils
 import kotlinx.android.synthetic.main.item_focus_love_goods.view.*
 
@@ -38,7 +38,7 @@ class FocusLoveGoodsAdapter(val context: Context?, val data: List<CommendList>) 
             home_recommend_price.text = "￥" + data[position].shop_price
         }
         holder.itemView.setOnClickListener {
-            GoodsDetailActivity.actionStart(context, data[position].goods_id)
+            GoodsDetail2Activity.actionStart(context, data[position].goods_id)
         }
     }
 

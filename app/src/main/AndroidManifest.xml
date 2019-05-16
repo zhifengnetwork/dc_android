@@ -119,11 +119,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name="com.zf.dc.ui.activity.GoodsDetailActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
             android:name="com.zf.dc.ui.activity.RegisterActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
@@ -416,6 +411,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+                android:name="com.zf.dc.ui.activity.GoodsDetail2Activity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

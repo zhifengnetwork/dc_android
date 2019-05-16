@@ -18,7 +18,7 @@ import com.zf.dc.net.exception.ErrorStatus
 import com.zf.dc.showToast
 import com.zf.dc.ui.adapter.EvaluationAdapter
 import com.zf.dc.view.recyclerview.RecyclerViewDivider
-import kotlinx.android.synthetic.main.fragment_evaluation.*
+import kotlinx.android.synthetic.main.fragment_evaluation_detail.*
 
 /**
  * 评价fragment
@@ -102,7 +102,7 @@ class GroupEvaluationFragment : BaseFragment(), GoodEvaContract.View {
         }
     }
 
-    override fun getLayoutId(): Int = R.layout.fragment_evaluation
+    override fun getLayoutId(): Int = R.layout.fragment_evaluation_detail
 
     private val adapter by lazy { EvaluationAdapter(context, data) }
 

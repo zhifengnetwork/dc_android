@@ -397,8 +397,6 @@ interface ApiService {
     @GET("api/Goods/goodsList")
     fun getRecommendGoods(
         @Query("id") id: String,
-        @Query("sort_asc") sort_asc: String,
-        @Query("page") page: Int,
         @Query("num") num: Int
     ): Observable<BaseBean<CommendBean>>
 

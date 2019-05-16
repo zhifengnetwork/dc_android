@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zf.dc.R
 import com.zf.dc.api.UriConstant
 import com.zf.dc.mvp.bean.SecKillList
-import com.zf.dc.ui.activity.GoodsDetailActivity
+import com.zf.dc.ui.activity.GoodsDetail2Activity
 import com.zf.dc.utils.GlideUtils
 import kotlinx.android.synthetic.main.item_seckill.view.*
 
@@ -43,7 +43,7 @@ class SecKillAdapter(val context: Context?, val data: List<SecKillList>) :
             loadingView.setPercentage((data[position].order_num / data[position].goods_num).toFloat())
 
             buy.setOnClickListener {
-                GoodsDetailActivity.actionStart(context, data[position].goods_id,data[position].id)
+                GoodsDetail2Activity.actionStart(context, data[position].goods_id,data[position].id)
             }
         }
 

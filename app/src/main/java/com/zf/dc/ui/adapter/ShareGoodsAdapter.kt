@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.zf.dc.R
 import com.zf.dc.mvp.bean.CommendList
-import com.zf.dc.ui.activity.GoodsDetailActivity
+import com.zf.dc.ui.activity.GoodsDetail2Activity
 import com.zf.dc.utils.GlideUtils
 import kotlinx.android.synthetic.main.item_share_goods.view.*
 
@@ -33,7 +33,7 @@ class ShareGoodsAdapter(val context: Context?,val data:List<CommendList>) : Recy
                 commission_num.text=data[position].commission_num
             }
         holder.itemView.setOnClickListener {
-            GoodsDetailActivity.actionStart(context,data[position].goods_id)
+            GoodsDetail2Activity.actionStart(context,data[position].goods_id)
         }
     }
 

@@ -39,6 +39,9 @@ interface GoodsDetailContract {
 
         //根据规格key获取图片，库存
         fun getPricePic(bean: GoodsSpecInfo)
+
+        //为您推荐
+        fun getRecommendGoods(bean: List<CommendList>)
     }
 
     interface Presenter : IPresenter<View> {
@@ -63,5 +66,7 @@ interface GoodsDetailContract {
         fun requestSecKillDetail(id: String)
 
         fun requestGoodsAttr(goods_id:String)
+
+        fun requestRecommendGoods(id: String)
     }
 }

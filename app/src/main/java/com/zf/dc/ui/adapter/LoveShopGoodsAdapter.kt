@@ -11,7 +11,7 @@ import com.zf.dc.mvp.bean.CommendList
 import com.zf.dc.utils.GlideUtils
 import kotlinx.android.synthetic.main.item_same_love_goods.view.*
 
-class LoveShopGoodsAdapter(val context: Context?, val data: List<CommendList>) :
+class LoveShopGoodsAdapter(val context: Context?,val data:List<CommendList>) :
     RecyclerView.Adapter<LoveShopGoodsAdapter.ViewHolder>() {
 
     var mClickListener: ((String) -> Unit)? = null
@@ -35,7 +35,7 @@ class LoveShopGoodsAdapter(val context: Context?, val data: List<CommendList>) :
         }
 
         holder.itemView.setOnClickListener {
-            mClickListener?.invoke(data[position].goods_id)
+//            mClickListener?.invoke(data[position].goods_id)
         }
 
 

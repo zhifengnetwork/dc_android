@@ -94,43 +94,43 @@ class HomeFragment : BaseFragment(), HomeContract.View, CommendContract.View {
         GlideUtils.loadUrlImage(context, bean.ad_top.ad_code, imgBig)
 
         GlideUtils.loadUrlImage(context, bean.ad_left1.ad_code, imgBig1)
-        imgBig1.setOnClickListener { GoodsDetailActivity.actionStart(context, bean.ad_left1.goods_id) }
+        imgBig1.setOnClickListener { GoodsDetail2Activity.actionStart(context, bean.ad_left1.goods_id) }
         GlideUtils.loadUrlImage(context, bean.ad_left2.ad_code, imgBig2)
-        imgBig2.setOnClickListener { GoodsDetailActivity.actionStart(context, bean.ad_left2.goods_id) }
+        imgBig2.setOnClickListener { GoodsDetail2Activity.actionStart(context, bean.ad_left2.goods_id) }
         GlideUtils.loadUrlImage(context, bean.ad_right.ad_code, imgBig3)
-        imgBig3.setOnClickListener { GoodsDetailActivity.actionStart(context, bean.ad_right.goods_id) }
+        imgBig3.setOnClickListener { GoodsDetail2Activity.actionStart(context, bean.ad_right.goods_id) }
         GlideUtils.loadUrlImage(context, bean.new_left.ad_code, imgNew1)
-        imgNew1.setOnClickListener { GoodsDetailActivity.actionStart(context, bean.new_left.goods_id) }
+        imgNew1.setOnClickListener { GoodsDetail2Activity.actionStart(context, bean.new_left.goods_id) }
         if (bean.new_right != null && bean.new_right.isNotEmpty()) {
             GlideUtils.loadUrlImage(context, bean.new_right[0].ad_code, imgNew2)
-            imgNew2.setOnClickListener { GoodsDetailActivity.actionStart(context, bean.new_right[0].goods_id) }
+            imgNew2.setOnClickListener { GoodsDetail2Activity.actionStart(context, bean.new_right[0].goods_id) }
         }
         if (bean.new_right != null && bean.new_right.size > 1) {
             GlideUtils.loadUrlImage(context, bean.new_right[1].ad_code, imgNew3)
-            imgNew3.setOnClickListener { GoodsDetailActivity.actionStart(context, bean.new_right[1].goods_id) }
+            imgNew3.setOnClickListener { GoodsDetail2Activity.actionStart(context, bean.new_right[1].goods_id) }
         }
 
         //热销上面两个
         GlideUtils.loadUrlImage(context, bean.re_left.ad_code, imgRe1)
-        imgRe1.setOnClickListener { GoodsDetailActivity.actionStart(context, bean.re_left.goods_id) }
+        imgRe1.setOnClickListener { GoodsDetail2Activity.actionStart(context, bean.re_left.goods_id) }
         GlideUtils.loadUrlImage(context, bean.re_right.ad_code, imgRe2)
-        imgRe2.setOnClickListener { GoodsDetailActivity.actionStart(context, bean.re_right.goods_id) }
+        imgRe2.setOnClickListener { GoodsDetail2Activity.actionStart(context, bean.re_right.goods_id) }
         //热销下面四个
         if (bean.re_bottom != null && bean.re_bottom.isNotEmpty()) {
             GlideUtils.loadUrlImage(context, bean.re_bottom[0].ad_code, imgRe3)
-            imgRe3.setOnClickListener { GoodsDetailActivity.actionStart(context, bean.re_bottom[0].goods_id) }
+            imgRe3.setOnClickListener { GoodsDetail2Activity.actionStart(context, bean.re_bottom[0].goods_id) }
         }
         if (bean.re_bottom != null && bean.re_bottom.size > 1) {
             GlideUtils.loadUrlImage(context, bean.re_bottom[1].ad_code, imgRe4)
-            imgRe4.setOnClickListener { GoodsDetailActivity.actionStart(context, bean.re_bottom[1].goods_id) }
+            imgRe4.setOnClickListener { GoodsDetail2Activity.actionStart(context, bean.re_bottom[1].goods_id) }
         }
         if (bean.re_bottom != null && bean.re_bottom.size > 2) {
             GlideUtils.loadUrlImage(context, bean.re_bottom[2].ad_code, imgRe5)
-            imgRe5.setOnClickListener { GoodsDetailActivity.actionStart(context, bean.re_bottom[2].goods_id) }
+            imgRe5.setOnClickListener { GoodsDetail2Activity.actionStart(context, bean.re_bottom[2].goods_id) }
         }
         if (bean.re_bottom != null && bean.re_bottom.size > 3) {
             GlideUtils.loadUrlImage(context, bean.re_bottom[3].ad_code, imgRe6)
-            imgRe6.setOnClickListener { GoodsDetailActivity.actionStart(context, bean.re_bottom[3].goods_id) }
+            imgRe6.setOnClickListener { GoodsDetail2Activity.actionStart(context, bean.re_bottom[3].goods_id) }
         }
 
     }
@@ -248,7 +248,7 @@ class HomeFragment : BaseFragment(), HomeContract.View, CommendContract.View {
 
         topBanner.setOnBannerListener {
             if ((banner[it].goods_id ?: "").isNotEmpty()) {
-                GoodsDetailActivity.actionStart(context, banner[it].goods_id ?: "")
+                GoodsDetail2Activity.actionStart(context, banner[it].goods_id ?: "")
             }
         }
     }

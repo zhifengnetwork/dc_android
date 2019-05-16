@@ -62,7 +62,9 @@ data class Shop(
     val store_name:String,
     val avatar:String,
     val num:String,
-    val goods:List<GoodsList>
+    val goods:List<GoodsList>,
+    val province_name:String,
+    val city_name:String
 )
 data class Comment(
     val img_sum:String,

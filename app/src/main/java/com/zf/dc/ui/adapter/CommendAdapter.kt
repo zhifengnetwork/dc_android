@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zf.dc.R
 import com.zf.dc.api.UriConstant
 import com.zf.dc.mvp.bean.CommendList
-import com.zf.dc.ui.activity.GoodsDetailActivity
+import com.zf.dc.ui.activity.GoodsDetail2Activity
 import com.zf.dc.utils.GlideUtils
 import kotlinx.android.synthetic.main.item_home_recommend.view.*
 
@@ -36,7 +36,7 @@ class CommendAdapter(val context: Context?, val data: List<CommendList>) :
 
             setOnClickListener {
                 //传递商品ID
-                GoodsDetailActivity.actionStart(context, data[position].goods_id)
+                GoodsDetail2Activity.actionStart(context, data[position].goods_id)
             }
         }
     }

@@ -7,8 +7,8 @@ import com.zf.dc.scheduler.SchedulerUtils
 import io.reactivex.Observable
 
 class RecommendGoodsModel {
-    fun getRecommendGoods(id: String, sort_asc: String, page: Int, num: Int): Observable<BaseBean<CommendBean>> {
-        return RetrofitManager.service.getRecommendGoods(id, sort_asc, page, num)
+    fun getRecommendGoods(id: String, num: Int): Observable<BaseBean<CommendBean>> {
+        return RetrofitManager.service.getRecommendGoods(id, num)
             .compose(SchedulerUtils.ioToMain())
     }
 }

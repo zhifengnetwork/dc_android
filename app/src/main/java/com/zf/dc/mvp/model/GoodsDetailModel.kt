@@ -62,4 +62,9 @@ class GoodsDetailModel {
         return RetrofitManager.service.getGoodsAttr(goods_id)
             .compose(SchedulerUtils.ioToMain())
     }
+
+    fun getRecommendGoods(id: String, num: Int): Observable<BaseBean<CommendBean>> {
+        return RetrofitManager.service.getRecommendGoods(id, num)
+            .compose(SchedulerUtils.ioToMain())
+    }
 }

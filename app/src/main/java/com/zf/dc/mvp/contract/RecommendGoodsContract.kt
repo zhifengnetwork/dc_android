@@ -12,7 +12,7 @@ interface RecommendGoodsContract {
     }
 
     interface Presenter : IPresenter<View> {
-        fun requestRecommendGoods(id: String, sort_asc: String, page: Int)
+        fun requestRecommendGoods(id: String)
     }
 
 }

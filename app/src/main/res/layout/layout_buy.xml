@@ -7,32 +7,18 @@
               android:background="@color/whit"
               android:orientation="horizontal">
 
-    <CheckBox
-            android:id="@+id/collect"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:button="@null"
-            android:gravity="center"
-            android:textSize="11sp"
+    <TextView
+            android:textSize="12sp"
             android:paddingBottom="2dp"
             android:textColor="#666666"
             android:paddingTop="6dp"
             android:text="收藏"
-            android:drawableTop="@drawable/selector_collection"/>
+            android:drawableTop="@drawable/service"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
 
-    <!--<TextView android:id="@+id/cart"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="1"-->
-    <!--android:button="@null"-->
-    <!--android:gravity="center"-->
-    <!--android:textSize="11sp"-->
-    <!--android:textColor="#666666"-->
-    <!--android:paddingTop="6dp"-->
-    <!--android:paddingBottom="2dp"-->
-    <!--android:text="购物车"-->
-    <!--android:drawableTop="@drawable/selector_car"/>-->
     <CheckBox
             android:id="@+id/cart"
             android:layout_width="0dp"
@@ -40,15 +26,13 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:textSize="11sp"
+            android:textSize="12sp"
             android:textColor="#666666"
             android:paddingTop="6dp"
             android:paddingBottom="2dp"
             android:text="购物车"
             android:drawableTop="@drawable/selector_car"/>
 
-    <!--<Space android:layout_width="0dp" android:layout_height="1dp"-->
-    <!--android:layout_weight="1"/>-->
 
     <TextView
             android:id="@+id/shop_cat"

@@ -9,7 +9,7 @@ import com.zf.dc.mvp.bean.AdvertList
 import com.zf.dc.mvp.bean.ClassifyProductBean
 import com.zf.dc.mvp.contract.ClassifyProductContract
 import com.zf.dc.mvp.presenter.ClassifyProductPresenter
-import com.zf.dc.ui.activity.GoodsDetailActivity
+import com.zf.dc.ui.activity.GoodsDetail2Activity
 import com.zf.dc.ui.activity.SearchGoodsActivity
 import com.zf.dc.ui.adapter.ClassifyRightAdapter
 import com.zf.dc.utils.GlideUtils
@@ -33,7 +33,7 @@ class ClassifyRightFragment : BaseFragment(), ClassifyProductContract.View {
             GlideUtils.loadUrlImage(context, BASE_URL + bean[0].ad_code, classify_ad_img)
             classify_ad_img.setOnClickListener {
                 if (bean[0].goods_id.isNotEmpty()) {
-                    GoodsDetailActivity.actionStart(context, bean[0].goods_id)
+                    GoodsDetail2Activity.actionStart(context, bean[0].goods_id)
                 }
             }
         }

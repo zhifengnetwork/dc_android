@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zf.dc.R
 import com.zf.dc.api.UriConstant.BASE_URL
 import com.zf.dc.mvp.bean.ShopGoodsList
-import com.zf.dc.ui.activity.GoodsDetailActivity
+import com.zf.dc.ui.activity.GoodsDetail2Activity
 import com.zf.dc.utils.GlideUtils
 import kotlinx.android.synthetic.main.item_focus_shop_goods.view.*
 
@@ -27,7 +27,7 @@ class FocusShopLoveAdapter(val context: Context?, val data: List<ShopGoodsList>)
             GlideUtils.loadUrlImage(context, BASE_URL+data[position].original_img, goodsIcon)
         }
         holder.itemView.setOnClickListener {
-            GoodsDetailActivity.actionStart(context,data[position].goods_id)
+            GoodsDetail2Activity.actionStart(context,data[position].goods_id)
         }
     }
 

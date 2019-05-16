@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.zf.dc.R
 import com.zf.dc.mvp.bean.CommendList
-import com.zf.dc.ui.activity.GoodsDetailActivity
+import com.zf.dc.ui.activity.GoodsDetail2Activity
 import com.zf.dc.utils.GlideUtils
 import kotlinx.android.synthetic.main.item_same_goods.view.*
 
@@ -37,7 +37,7 @@ class SameGoodsAdapter(val context: Context, val mData: List<CommendList>) :
             home_recommend_price.text = "￥" + mData[position].shop_price
         }
         holder.itemView.setOnClickListener {
-            GoodsDetailActivity.actionStart(context, mData[position].goods_id)
+            GoodsDetail2Activity.actionStart(context, mData[position].goods_id)
         }
     }
 

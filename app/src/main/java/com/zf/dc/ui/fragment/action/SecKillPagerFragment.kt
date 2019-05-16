@@ -10,7 +10,7 @@ import com.zf.dc.mvp.contract.SecKillListContract
 import com.zf.dc.mvp.presenter.SecKillListPresenter
 import com.zf.dc.net.exception.ErrorStatus
 import com.zf.dc.showToast
-import com.zf.dc.ui.activity.GoodsDetailActivity
+import com.zf.dc.ui.activity.GoodsDetail2Activity
 import com.zf.dc.ui.adapter.SecKillAdapter
 import com.zf.dc.utils.GlideImageLoader
 import kotlinx.android.synthetic.main.fragment_seckill_page.*
@@ -131,7 +131,7 @@ class SecKillPagerFragment : NotLazyBaseFragment(), SecKillListContract.View {
         banner.start()
         banner.setOnBannerListener {
             if (bean[it].goods_id.isNotEmpty()) {
-                GoodsDetailActivity.actionStart(context, bean[it].goods_id)
+                GoodsDetail2Activity.actionStart(context, bean[it].goods_id)
             }
         }
     }

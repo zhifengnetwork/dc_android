@@ -130,6 +130,13 @@ class CashOutActivity : BaseActivity(), CashOutContract.View {
                 }
             }
         }
+
+        aliPay_tv.setOnClickListener {
+            aliPay.isChecked = true
+        }
+        weChat_tv.setOnClickListener {
+            weChat.isChecked = true
+        }
         //绑定支付宝
         cash_ly.setOnClickListener {
             BindZfbActivity.actionStart(this, mData?.alipay, mData?.realname)

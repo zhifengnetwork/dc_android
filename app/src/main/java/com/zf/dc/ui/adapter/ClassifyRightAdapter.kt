@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.zf.dc.R
 import com.zf.dc.mvp.bean.ClassifyProductBean
-import com.zf.dc.ui.activity.GoodsDetailActivity
+import com.zf.dc.ui.activity.GoodsDetail2Activity
 import com.zf.dc.utils.GlideUtils
 import kotlinx.android.synthetic.main.item_classify_right_shop.view.*
 
@@ -32,7 +32,7 @@ class ClassifyRightAdapter(val context: Context?, val mData: ArrayList<ClassifyP
             goods_name.text = data[position].goods_name
         }
         holder.itemView.setOnClickListener {
-            GoodsDetailActivity.actionStart(context, data[position].goods_id)
+            GoodsDetail2Activity.actionStart(context, data[position].goods_id)
         }
 
     }

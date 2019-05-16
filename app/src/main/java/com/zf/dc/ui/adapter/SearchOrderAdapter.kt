@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.zf.dc.R
 import com.zf.dc.api.UriConstant
 import com.zf.dc.mvp.bean.SearchList
-import com.zf.dc.ui.activity.GoodsDetailActivity
+import com.zf.dc.ui.activity.GoodsDetail2Activity
 import com.zf.dc.utils.GlideUtils
 import kotlinx.android.synthetic.main.item_order_two.view.*
 import kotlinx.android.synthetic.main.item_search_order.view.*
@@ -70,7 +70,7 @@ class SearchOrderAdapter(val context: Context, val data: List<SearchList>) :
 
             setOnClickListener {
 
-                GoodsDetailActivity.actionStart(context, data[position].goods_id)
+                GoodsDetail2Activity.actionStart(context, data[position].goods_id)
             }
 
         }
