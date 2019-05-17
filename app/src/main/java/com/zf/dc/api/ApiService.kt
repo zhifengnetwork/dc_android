@@ -883,5 +883,24 @@ interface ApiService {
     @GET("api/user/distribut")
     fun requestDistribute(): Observable<BaseBean<DistributeBean>>
 
+    /**
+     *  明细记录
+     */
+    @POST("api/user/commision")
+    @FormUrlEncoded
+    fun getDetailRecord(
+        @Field("page") page: Int,
+        @Field("num") num: Int
+    ): Observable<BaseBean<DetailRecordBean>>
+
+    /**
+     *  分销订单
+     */
+    @POST("api/user/distribut_order\n")
+    @FormUrlEncoded
+    fun getDistributeOrder(
+        @Field("page") page: Int,
+        @Field("num") num: Int
+    ): Observable<BaseBean<DistributeOrderBean>>
 
 }
