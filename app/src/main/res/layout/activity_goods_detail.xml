@@ -19,15 +19,15 @@
             <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/fanhui" />
+                    android:src="@drawable/fanhui"/>
 
         </LinearLayout>
         <!--<ImageView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="20dp"-->
-                <!--android:layout_centerVertical="true"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:src="@drawable/ic_left"/>-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="20dp"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:src="@drawable/ic_left"/>-->
         <com.google.android.material.tabs.TabLayout
                 android:id="@+id/goods_tab"
                 android:layout_centerInParent="true"
@@ -36,6 +36,7 @@
                 app:tabIndicatorColor="#da2a20"
                 app:tabSelectedTextColor="#1a1a1a"/>
     </RelativeLayout>
+
     <com.zf.dc.view.NoScrollViewPager
             android:id="@+id/goods_vp"
             android:layout_width="match_parent"

@@ -6,7 +6,6 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.zf.dc.R
 import com.zf.dc.base.BaseActivity
-import com.zf.dc.livedata.UserInfoLiveData
 import com.zf.dc.mvp.bean.DistributeBean
 import com.zf.dc.mvp.contract.DistributeContract
 import com.zf.dc.mvp.presenter.DistributePresenter
@@ -63,7 +62,6 @@ class DistributeActivity : BaseActivity(), DistributeContract.View {
     }
 
     override fun initView() {
-
         presenter.attachView(this)
     }
 
@@ -73,6 +71,23 @@ class DistributeActivity : BaseActivity(), DistributeContract.View {
     }
 
     override fun initEvent() {
+
+        teamDetail.setOnClickListener {
+            TeamActivity.actionStart(this)
+        }
+
+        teamList.setOnClickListener {
+            MyMemberActivity.actionStart(this)
+        }
+
+        distributeOrder.setOnClickListener {
+            DistributeOrderActivity.actionStart(this)
+        }
+
+        detailRecord.setOnClickListener {
+            DetailRecordActivity.actionStart(this)
+        }
+
         refresh.setOnClickListener {
             start()
         }
