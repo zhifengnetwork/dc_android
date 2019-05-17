@@ -1,5 +1,6 @@
 package com.zf.dc.ui.fragment.goodsdetail
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.graphics.Color
@@ -25,7 +26,6 @@ import com.zf.dc.MyApplication
 import com.zf.dc.R
 import com.zf.dc.api.UriConstant
 import com.zf.dc.base.BaseFragment
-import com.zf.dc.base.BaseFragmentAdapter
 import com.zf.dc.mvp.bean.*
 import com.zf.dc.mvp.contract.GoodsDetailContract
 import com.zf.dc.mvp.presenter.GoodsDetailPresenter
@@ -40,7 +40,6 @@ import com.zf.dc.ui.adapter.GuideAdapter
 import com.zf.dc.ui.adapter.LoveShopGoodsAdapter
 import com.zf.dc.ui.fragment.graphic.GraphicFragment
 import com.zf.dc.ui.fragment.graphic.OrderAnswerFragment
-import com.zf.dc.ui.fragment.same.DetailSameFragment
 import com.zf.dc.utils.GlideUtils
 import com.zf.dc.utils.LogUtils
 import com.zf.dc.utils.TimeUtils
@@ -51,7 +50,6 @@ import com.zf.dc.view.recyclerview.PagingScrollHelper
 import kotlinx.android.synthetic.main.fragment_goods_detail2.*
 import kotlinx.android.synthetic.main.layout_buy.*
 import kotlinx.android.synthetic.main.layout_detail_goods.*
-import kotlinx.android.synthetic.main.layout_detail_same.*
 import kotlinx.android.synthetic.main.layout_graphic.*
 import kotlinx.android.synthetic.main.pop_detail_address.view.*
 import kotlinx.android.synthetic.main.pop_detail_specs.view.*
@@ -73,6 +71,8 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
         Graphic(bean.goods_content)
         //获得为您推荐商品列表
         presenter.requestRecommendGoods(bean.goods.cat_id)
+        //请求规格
+        presenter.requestGoodsSpec(mGoodsId)
     }
 
     //秒杀商品详情
@@ -123,6 +123,20 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
         mSpec.clear()
         mSpec.addAll(bean)
         specsAdapter.notifyDataSetChanged()
+        //重组ID
+        for (i in 0 until mSpec.size) {
+            itemId = if (i == 0) {
+                mSpec[i][0].id
+            } else {
+                itemId + "_" + mSpec[i][0].id
+            }
+            //名字
+            itemName = itemName + mSpec[i][0].item + " "
+        }
+        if (itemId != "") {
+            specs.text = itemName
+            presenter.requestPricePic(itemId, mGoodsId)
+        }
     }
 
     //关注商品
@@ -145,8 +159,11 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
 
     //根据规格key获取图片，库存
     override fun getPricePic(bean: GoodsSpecInfo) {
+        shop_price.text = bean.price
         mPrice = bean
-        specsPopWindow.updata()
+        if (!no_off) {
+            specsPopWindow.updata()
+        }
     }
 
     //为您推荐
@@ -210,6 +227,8 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
     private val specsAdapter by lazy { GoodsSpecsAdapter(MyApplication.context, mSpec) }
     //第一次打开pop商品规格默认请求
     private var no_off = true
+    //点击规格弹出弹窗 显示加入购物车按钮
+    private var mWhether = true
     //为你推荐
     private var mCommend = ArrayList<CommendList>()
 
@@ -252,8 +271,7 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
 
         //请求地址列表
         presenter.requestAddress()
-        //请求规格
-        presenter.requestGoodsSpec(mGoodsId)
+
     }
 
     override fun initEvent() {
@@ -315,20 +333,25 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
 //            addressPopWindow.updata()
             addressPopWindow.showAtLocation(parentLayout, Gravity.BOTTOM, 0, 0)
         }
-
+        /**选择规格*/
+        specs_ly.setOnClickListener {
+            mWhether = true
+            popWindow()
+        }
         /**加入购物车*/
         shop_cat.setOnClickListener {
+            mWhether = false
             isChoice = true
             popWindow()
         }
         /**立即购买*/
         shop_buy.setOnClickListener {
+            mWhether = false
             isChoice = false
             popWindow()
         }
         /**购物车复选框*/
         cart.setOnClickListener {
-            //选中亮图标 未选中在购物车删除该商品
             cart.isChecked = !cart.isChecked
             MainActivity.actionStart(context, 2)
         }
@@ -392,7 +415,7 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
 
     /**普通商品详情*/
     private fun loadData(data: GoodsDetailBean) {
-        //判断 团购商品
+        /**团购商品*/
         if (data.goods.prom_type == 2) {
             //商品抢购价格
             label_money.visibility = View.VISIBLE
@@ -427,16 +450,32 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
                 label_ly.visibility = View.GONE
 //                start()
             }
-        }else{
+        } else {
             //商品价格
             shop_price.text = data.goods.shop_price
             //市场价格
             market_price.text = "￥" + data.goods.market_price
         }
+        /**签到免费领*/
+        if (data.goods.sign_free_receive == 1) {
+            //隐藏加入购物车按钮
+            shop_cat.visibility = View.GONE
+            //改变立即购买 文字 背景
+            shop_buy.text = "免费领取"
+            shop_buy.setBackgroundColor(Color.rgb(218, 42, 32))
+        }
         //商品名字
         goods_name.text = data.goods.goods_name
         //销量
         virtual_sales_sum.text = "销量：" + data.goods.virtual_collect_sum
+        //是否收藏
+        if (data.goods.is_collect == 1) {
+            collect.isChecked = true
+        }
+        //是否在购物车
+        if (data.goods.is_cart == 1) {
+            cart.isChecked = true
+        }
         //好评率
         comment_fr.text = data.goods.comment_fr.high_rate
         //总评数
@@ -518,24 +557,14 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         ) {
+            @SuppressLint("SetTextI18n")
             override fun initView() {
 
                 var sum = contentView?.card_number?.text.toString().toInt()
                 //第一次打开默认请求第一个
                 if (no_off) {
-                    //重组ID
-                    for (i in 0 until mSpec.size) {
-                        itemId = if (i == 0) {
-                            mSpec[i][0].id
-                        } else {
-                            itemId + "_" + mSpec[i][0].id
-                        }
-                        //名字
-                        itemName += mSpec[i][0].item
-                    }
                     no_off = if (itemId != "") {
                         itemName = "已选择:$itemName"
-                        presenter.requestPricePic(itemId, mData?.goods?.goods_id.toString())
                         false
                     } else {
                         true
@@ -544,9 +573,17 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
                 contentView?.apply {
                     specs_rl.layoutManager = LinearLayoutManager(context)
                     specs_rl.adapter = specsAdapter
-
                     del_btn.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.reduce))
 
+                    card_number.setText(specs_sum.text.split("件")[0])
+                    /**显示/隐藏确认键*/
+                    if (mWhether) {
+                        specs_ly.visibility = View.VISIBLE
+                        specs_btn.visibility = View.GONE
+                    } else {
+                        specs_ly.visibility = View.GONE
+                        specs_btn.visibility = View.VISIBLE
+                    }
                     //没有规格的商品 根据no_off判断
                     if (no_off) {
                         //图片
@@ -571,8 +608,13 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
                         goods_price.text = mPrice?.price
                         //规格
                         goods_stock.text = itemName
-
                         pop_view.visibility = View.VISIBLE
+
+                        /**选择后详情页数据随之改变*/
+                        //详情页价格
+                        shop_price.text = mPrice?.price
+                        //详情页规格
+                        specs.text = itemName.split(":")[1]
                     }
                     //输入文本框
                     card_number.addTextChangedListener {
@@ -590,7 +632,7 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
                         if (sum > 1) {
                             del_btn.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.reduce_b))
                         }
-
+                        specs_sum.text = sum.toString() + "件"
                     }
                     //点击减少数量
                     del_btn.setOnClickListener {
@@ -615,7 +657,7 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
                         card_number.setText(sum.toString())
                         del_btn.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.reduce_b))
                     }
-                    /**确认按钮 加入购物车 立即购买*/
+                    /**确认按钮 加入购物车/立即购买*/
                     specs_btn.setOnClickListener {
                         if (isChoice) {
                             //商品ID 数量（默认1） 规格ID
@@ -650,6 +692,42 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
                         }
 
                     }
+                    /**加入购物车*/
+                    shop_cat.setOnClickListener {
+                        //商品ID 数量（默认1） 规格ID
+                        presenter.requestAddCart(mData?.goods?.goods_id.toString(), sum, itemId)
+                        specsPopWindow.onDismiss()
+                    }
+                    /**立即购买*/
+                    shop_buy.setOnClickListener {
+                        /**判断用户是否已选配送地址*/
+                        if (addressId == "") {
+                            val builder = AlertDialog.Builder(context)
+                            builder.setTitle("你还没有选择收货地址")
+                            builder.setMessage("是否去添加收货地址")
+                            builder.setPositiveButton("是") { dialog, which ->
+                                AddressEditActivity.actionStart(context, null)
+                                dialog.dismiss()
+                            }
+                            builder.setNegativeButton("否") { dialog, which ->
+                                dialog.dismiss()
+                            }
+                            builder.show()
+                        } else {
+                            ConfirmOrderActivity.actionStart(
+                                context,
+                                0,
+                                "1",
+                                mData?.goods?.goods_id.toString(),
+                                sum.toString(),
+                                itemId,
+                                "",
+                                addressId = addressId
+                            )
+                        }
+                        specsPopWindow.onDismiss()
+                    }
+
                     //关闭弹窗
                     close_btn.setOnClickListener {
                         specsPopWindow.onDismiss()

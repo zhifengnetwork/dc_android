@@ -22,7 +22,6 @@
                     android:src="@drawable/fanhui"/>
 
         </LinearLayout>
-<!--<<<<<<< HEAD-->
 
         <com.flyco.tablayout.CommonTabLayout
                 android:id="@+id/goods_tab"
@@ -37,23 +36,25 @@
                 app:tl_indicator_color="#da2a20"
                 app:tl_indicator_width="45dp"
                 app:tl_textsize="16sp"/>
-        <!--<com.google.android.material.tabs.TabLayout-->
-                <!--android:id="@+id/goods_tab"-->
-                <!--android:layout_centerInParent="true"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--app:tabIndicatorColor="#da2a20"-->
-                <!--app:tabSelectedTextColor="#1a1a1a"/>-->
+        <LinearLayout
+                android:id="@+id/shareLayout"
+                android:layout_width="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/share" />
+
+        </LinearLayout>
     </RelativeLayout>
-<!--<<<<<<< HEAD-->
     <FrameLayout
             android:id="@+id/goods_fl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-    <!--<com.zf.dc.view.NoScrollViewPager-->
-            <!--android:id="@+id/goods_vp"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"/>-->
 </LinearLayout>
 
 

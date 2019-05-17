@@ -49,6 +49,8 @@ class SignInGiftActivity : BaseActivity(), AppSignDayContract.View {
         }
         window.updata()
         window.showAtLocation(parentLayout, Gravity.CENTER, 0, 0)
+        //重新刷新页面
+        onResume()
     }
 
     //签到列表
@@ -202,6 +204,10 @@ class SignInGiftActivity : BaseActivity(), AppSignDayContract.View {
         presenter.detachView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.requestAppSignDay()
+    }
     override fun start() {
         presenter.requestAppSignDay()
     }
