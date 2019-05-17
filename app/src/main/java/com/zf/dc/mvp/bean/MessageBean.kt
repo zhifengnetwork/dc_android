@@ -12,5 +12,6 @@ data class MessageList(
     val is_see: String,
     val deleted: String,
     val message_title: String,
+    val message_content:String,
     val send_time: Long
 )

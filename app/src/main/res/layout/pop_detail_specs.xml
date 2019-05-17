@@ -96,12 +96,39 @@
                         <!--android:text="+"/>-->
             </LinearLayout>
         </RelativeLayout>
+        <LinearLayout
+                android:id="@+id/specs_ly"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+            <TextView
+                    android:id="@+id/shop_cat"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:textColor="@color/whit"
+                    android:background="#f3b53f"
+                    android:textSize="15dp"
+                    android:layout_height="match_parent"
+                    android:text="加入购物车"/>
 
+            <TextView
+                    android:id="@+id/shop_buy"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/whit"
+                    android:textSize="15dp"
+                    android:background="#ff5722"
+                    android:gravity="center"
+                    android:text="立即购买"/>
+        </LinearLayout>
         <TextView
                 android:id="@+id/specs_btn"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:background="#F36161"
+                android:background="#da2a20"
                 android:gravity="center"
                 android:textColor="@color/whit"
                 android:textSize="18sp"

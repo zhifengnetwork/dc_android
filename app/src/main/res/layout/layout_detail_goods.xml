@@ -21,21 +21,21 @@
                 android:paddingBottom="3dp">
 
             <!--<TextView-->
-                    <!--android:id="@+id/label"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:layout_marginLeft="10dp"-->
-                    <!--android:background="@drawable/shape_round_red"-->
-                    <!--android:gravity="center_vertical"-->
-                    <!--android:layout_marginTop="3dp"-->
-                    <!--android:paddingLeft="3dp"-->
-                    <!--android:paddingTop="1dp"-->
-                    <!--android:paddingRight="3dp"-->
-                    <!--android:paddingBottom="1dp"-->
-                    <!--android:text="自营"-->
-                    <!--android:textColor="@color/colorPrice"-->
-                    <!--android:textSize="11sp"/>-->
+            <!--android:id="@+id/label"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:background="@drawable/shape_round_red"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:layout_marginTop="3dp"-->
+            <!--android:paddingLeft="3dp"-->
+            <!--android:paddingTop="1dp"-->
+            <!--android:paddingRight="3dp"-->
+            <!--android:paddingBottom="1dp"-->
+            <!--android:text="自营"-->
+            <!--android:textColor="@color/colorPrice"-->
+            <!--android:textSize="11sp"/>-->
 
             <TextView
                     android:id="@+id/goods_name"
@@ -162,16 +162,16 @@
                 android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-               <TextView
-                       android:id="@+id/activity_name"
-                       android:paddingLeft="5dp"
-                       android:paddingRight="5dp"
-                       android:text="限时抢购"
-                       android:textColor="@color/whit"
-                       android:textSize="14sp"
-                       android:background="@drawable/shape_sale_red"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"/>
+            <TextView
+                    android:id="@+id/activity_name"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="限时抢购"
+                    android:textColor="@color/whit"
+                    android:textSize="14sp"
+                    android:background="@drawable/shape_sale_red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
             <TextView
                     android:id="@+id/label_time"
                     android:paddingLeft="5dp"
@@ -230,6 +230,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         <LinearLayout
+                android:id="@+id/specs_ly"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:gravity="center_vertical"
@@ -242,11 +243,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <TextView
+                    android:id="@+id/specs"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="15sp"
-                    android:text="一件"
-                    android:drawableRight="@drawable/back2"
                     android:layout_marginLeft="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <TextView
+                    android:id="@+id/specs_sum"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="15sp"
+                    android:text="1件"
+                    android:drawableRight="@drawable/back2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
         </LinearLayout>

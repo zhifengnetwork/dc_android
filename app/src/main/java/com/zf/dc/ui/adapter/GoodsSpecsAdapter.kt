@@ -98,14 +98,14 @@ class GoodsSpecsAdapter(val context: Context, val mData: List<List<GoodsSpecBean
                         } else {
                             itemId = itemId + "_" + index
                         }
-
-                        itemName += signName[i]
+                        itemName = itemName + signName[i] + " "
+//                        itemName += signName[i]
                     }
                     //监听回调
-                    mClickListener?.invoke(itemId,itemName)
+                    mClickListener?.invoke(itemId, itemName)
 
                     itemId = ""
-                    itemName=""
+                    itemName = ""
                 }
 
             }

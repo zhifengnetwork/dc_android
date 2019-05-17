@@ -33,26 +33,34 @@
             android:text="购物车"
             android:drawableTop="@drawable/selector_car"/>
 
+    <LinearLayout
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+        <TextView
+                android:id="@+id/shop_cat"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:textColor="@color/whit"
+                android:background="#f3b53f"
+                android:textSize="15dp"
+                android:layout_height="match_parent"
+                android:text="加入购物车"/>
 
-    <TextView
-            android:id="@+id/shop_cat"
-            android:layout_width="140dp"
-            android:gravity="center"
-            android:textColor="@color/whit"
-            android:background="#f3b53f"
-            android:textSize="15dp"
-            android:layout_height="match_parent"
-            android:text="加入购物车"/>
+        <TextView
+                android:id="@+id/shop_buy"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:textColor="@color/whit"
+                android:textSize="15dp"
+                android:background="#ff5722"
+                android:gravity="center"
+                android:text="立即购买"/>
+    </LinearLayout>
 
-    <TextView
-            android:id="@+id/shop_buy"
-            android:layout_width="140dp"
-            android:layout_height="match_parent"
-            android:textColor="@color/whit"
-            android:textSize="15dp"
-            android:background="#ff5722"
-            android:gravity="center"
-            android:text="立即购买"/>
 
 
 </LinearLayout>

@@ -27,6 +27,8 @@ class MessageAdapter(val context: Context?, val data: List<MessageList>) :
             message_title.text = data[position].message_title
             //时间戳转时间
             message_time.text = TimeUtils.myOrderTime(data[position].send_time)
+            //简介
+            message_content.text = data[position].message_content
         }
         holder.itemView.setOnClickListener {
             MessageInfoActivity.actionStart(context, data[position].rec_id)

@@ -41,7 +41,7 @@ class RegistrationAdapter(
                 //判断截取数据并在日历设置签到样式
                 if (yy == year && mm == (month + 1) && dd == dayNumber!![tab]) {
                     viewHolder?.day?.setBackgroundResource(R.drawable.rili)
-                    viewHolder?.sqly?.setPadding(20, 20, 20, 20)
+                    viewHolder?.sqly?.setPadding(30, 30, 30, 30)
                     viewHolder?.day?.text = ""
                     viewHolder?.back?.setBackgroundResource(R.drawable.shape_calendar_bg)
                 }

@@ -1,5 +1,6 @@
 package com.zf.dc.ui.fragment.graphic
 
+import android.util.Log
 import com.zf.dc.R
 import com.zf.dc.base.BaseFragment
 import com.zzhoujay.richtext.RichText
@@ -24,7 +25,7 @@ class GraphicFragment : BaseFragment() {
 
     override fun initView() {
         RichText.initCacheDir(context)
-
+        Log.e("检测",">>"+htmlText)
         RichText.from(htmlText).bind(activity).into(textHtml)
     }
 
