@@ -22,153 +22,36 @@
                     android:src="@drawable/fanhui" />
 
         </LinearLayout>
-        <!--<ImageView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="20dp"-->
-                <!--android:layout_centerVertical="true"-->
-                <!--android:layout_marginLeft="10dp"-->
-                <!--android:src="@drawable/ic_left"/>-->
-        <com.google.android.material.tabs.TabLayout
+
+        <com.flyco.tablayout.CommonTabLayout
                 android:id="@+id/goods_tab"
+                android:layout_width="190dp"
+                android:layout_height="44dp"
+                android:background="#ffffff"
                 android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:tabIndicatorColor="#da2a20"
-                app:tabSelectedTextColor="#1a1a1a"/>
+                app:tl_textSelectColor="#1a1a1a"
+                app:tl_textUnselectColor="@color/colorSecondText"
+                app:tl_iconVisible="false"
+                app:tl_textBold="SELECT"
+                app:tl_indicator_color="#da2a20"
+                app:tl_indicator_width="45dp"
+                app:tl_textsize="16sp"/>
+        <!--<com.google.android.material.tabs.TabLayout-->
+                <!--android:id="@+id/goods_tab"-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:tabIndicatorColor="#da2a20"-->
+                <!--app:tabSelectedTextColor="#1a1a1a"/>-->
     </RelativeLayout>
-    <com.zf.dc.view.NoScrollViewPager
-            android:id="@+id/goods_vp"
+    <FrameLayout
+            android:id="@+id/goods_fl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+    <!--<com.zf.dc.view.NoScrollViewPager-->
+            <!--android:id="@+id/goods_vp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"/>-->
 </LinearLayout>
-        <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:background="@color/colorBackground"-->
-        <!--android:orientation="vertical">-->
 
-        <!--&lt;!&ndash; 图文详情标题栏固定的布局 &ndash;&gt;-->
-
-        <!--&lt;!&ndash; 收缩布局 &ndash;&gt;-->
-        <!--<androidx.coordinatorlayout.widget.CoordinatorLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_above="@+id/bottomLayout"-->
-        <!--android:background="@color/whit">-->
-
-        <!--<com.google.android.material.appbar.AppBarLayout-->
-        <!--android:id="@+id/appBarLayout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@color/whit">-->
-
-        <!--<com.google.android.material.appbar.CollapsingToolbarLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:layout_scrollFlags="exitUntilCollapsed|scroll">-->
-
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="vertical">-->
-
-        <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="380dp">-->
-
-        <!--<androidx.viewpager.widget.ViewPager-->
-        <!--android:id="@+id/bannerViewPager"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent" />-->
-
-        <!--<TextView-->
-        <!--android:id="@+id/bannerNum"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_marginRight="12dp"-->
-        <!--android:layout_marginBottom="7dp"-->
-        <!--android:background="@drawable/shape_detail_num"-->
-        <!--android:paddingLeft="10dp"-->
-        <!--android:paddingTop="3dp"-->
-        <!--android:paddingRight="10dp"-->
-        <!--android:paddingBottom="3dp"-->
-        <!--android:text="1/2"-->
-        <!--android:textColor="@color/whit"-->
-        <!--android:textSize="12sp" />-->
-
-        <!--</RelativeLayout>-->
-
-        <!--&lt;!&ndash; 商品简介 &ndash;&gt;-->
-        <!--<include layout="@layout/layout_detail_goods" />-->
-
-        <!--&lt;!&ndash; 评价 &ndash;&gt;-->
-        <!--<include layout="@layout/layout_detail_eva" />-->
-
-        <!--&lt;!&ndash; 店铺品牌 &ndash;&gt;-->
-        <!--<include layout="@layout/layout_detail_brand" />-->
-
-        <!--&lt;!&ndash; 相似推荐 同类热销排行 &ndash;&gt;-->
-        <!--<include layout="@layout/layout_detail_same" />-->
-
-        <!--&lt;!&ndash; 图文详情 &ndash;&gt;-->
-        <!--&lt;!&ndash;<include layout="@layout/layout_order_graphic"/>&ndash;&gt;-->
-
-        <!--&lt;!&ndash;<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_gravity="center_horizontal"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_marginTop="50dp"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:layout_marginBottom="50dp"&ndash;&gt;-->
-        <!--&lt;!&ndash;android:text="这是底部"/>&ndash;&gt;-->
-
-
-        <!--</LinearLayout>-->
-
-        <!--&lt;!&ndash; 滑到图文详情会被顶上去，固定在上边，将状态栏改为白色？ &ndash;&gt;-->
-        <!--<include-->
-        <!--layout="@layout/layout_detail_head"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="44dp"-->
-        <!--app:layout_collapseMode="pin" />-->
-
-        <!--</com.google.android.material.appbar.CollapsingToolbarLayout>-->
-
-        <!--<com.flyco.tablayout.SegmentTabLayout-->
-        <!--android:id="@+id/segmentTabLayout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="32dp"-->
-        <!--android:layout_gravity="center_horizontal"-->
-        <!--android:layout_marginLeft="20dp"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:layout_marginRight="20dp"-->
-        <!--app:tl_bar_color="#ffffff"-->
-        <!--app:tl_indicator_color="#151514"-->
-        <!--app:tl_indicator_corner_radius="5dp"-->
-        <!--app:tl_tab_padding="20dp" />-->
-
-        <!--</com.google.android.material.appbar.AppBarLayout>-->
-
-        <!--<androidx.core.widget.NestedScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-
-        <!--<FrameLayout-->
-        <!--android:id="@+id/graphicFragment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:background="@color/whit" />-->
-
-        <!--</androidx.core.widget.NestedScrollView>-->
-
-        <!--</androidx.coordinatorlayout.widget.CoordinatorLayout>-->
-
-        <!--<include-->
-        <!--android:id="@+id/bottomLayout"-->
-        <!--layout="@layout/layout_buy"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true" />-->
-
-        <!--</RelativeLayout>-->
 

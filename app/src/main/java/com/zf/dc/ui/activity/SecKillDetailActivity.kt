@@ -47,7 +47,7 @@ class SecKillDetailActivity : BaseActivity(), SecKillDetailContract.View {
         //销量
         sellNum.text = bean.info.sales_sum
         //图文详情
-        RichText.fromHtml(UnicodeUtil.translation(bean.info.goods_content)).into(detail)
+        RichText.fromHtml(UnicodeUtil.translation(bean.goods_content)).into(detail)
         //banner
         initBanner(bean.info.goods_images)
         //倒计时

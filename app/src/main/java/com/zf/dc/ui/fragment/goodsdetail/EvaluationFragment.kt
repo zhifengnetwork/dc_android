@@ -1,5 +1,6 @@
 package com.zf.dc.ui.fragment.goodsdetail
 
+import android.util.Log
 import androidx.fragment.app.Fragment
 import com.zf.dc.R
 import com.zf.dc.base.BaseFragment
@@ -9,13 +10,13 @@ import kotlinx.android.synthetic.main.fragment_evaluation.*
 
 class EvaluationFragment : BaseFragment() {
 
-    private var mGoodId: String = ""
+    private var mGoodId = ""
 
     companion object {
-        fun newInstance(goodId: String): EvaluationFragment {
+        fun newInstance(id: String): EvaluationFragment {
             val fragment = EvaluationFragment()
-            fragment.mGoodId = goodId
-            return EvaluationFragment()
+            fragment.mGoodId = id
+            return fragment
         }
     }
 

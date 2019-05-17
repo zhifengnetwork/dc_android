@@ -1,20 +1,20 @@
 package com.zf.dc.mvp.presenter
 
+import com.zf.dc.api.UriConstant
 import com.zf.dc.api.UriConstant.PER_PAGE
 import com.zf.dc.base.BasePresenter
-import com.zf.dc.mvp.contract.CashOutRecordContract
-import com.zf.dc.mvp.model.CashOutRecordModel
+import com.zf.dc.mvp.contract.RechargeContract
+import com.zf.dc.mvp.model.RechargeModel
 import com.zf.dc.net.exception.ExceptionHandle
 
-class CashOutRecordPresenter : BasePresenter<CashOutRecordContract.View>(), CashOutRecordContract.Presenter {
+class RechargePresenter : BasePresenter<RechargeContract.View>(), RechargeContract.Presenter {
+    private val model by lazy { RechargeModel() }
     private var mPage = 1
-    override fun requestCashOutList(page: Int?) {
+    override fun requestRechargeList(page: Int?) {
         checkViewAttached()
-
         mPage = page ?: mPage
-
         mRootView?.showLoading()
-        val disposable = model.getCashOutRecordList(mPage, PER_PAGE)
+        val disposable = model.getRechargeRecordList(mPage, PER_PAGE)
             .subscribe({
                 mRootView?.apply {
                     when (it.status) {
@@ -22,7 +22,7 @@ class CashOutRecordPresenter : BasePresenter<CashOutRecordContract.View>(), Cash
                             if (it.data != null) {
                                 if (mPage == 1) {
                                     if (it.data.list.isNotEmpty()) {
-                                        getCashOutList(it.data.list)
+                                        getRechargeList(it.data.list)
                                     } else {
                                         freshEmpty()
                                     }
@@ -51,5 +51,4 @@ class CashOutRecordPresenter : BasePresenter<CashOutRecordContract.View>(), Cash
         addSubscription(disposable)
     }
 
-    private val model by lazy { CashOutRecordModel() }
 }

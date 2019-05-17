@@ -2,6 +2,7 @@ package com.zf.dc.ui.activity
 
 import android.content.Context
 import android.content.Intent
+import android.view.View
 import androidx.core.content.ContextCompat
 import com.zf.dc.R
 import com.zf.dc.base.BaseActivity
@@ -22,6 +23,11 @@ class FocusActivity : BaseActivity() {
         )
 
         titleName.text = "我的关注"
+        rightLayout.visibility = View.INVISIBLE
+
+        back.setOnClickListener {
+            finish()
+        }
     }
 
     companion object {
@@ -61,9 +67,7 @@ class FocusActivity : BaseActivity() {
     }
 
     override fun initEvent() {
-        back.setOnClickListener {
-            finish()
-        }
+
     }
 
     override fun start() {

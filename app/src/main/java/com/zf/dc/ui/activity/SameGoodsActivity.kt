@@ -103,8 +103,8 @@ class SameGoodsActivity : BaseActivity(), EquallyGoodsContract.View {
         goodsPrice.text = data?.shop_price
         //市场价格
         oldPrice.text = data?.market_price
-        //商品尺寸
-        goodsSize
+
+
 
 
         oldPrice.paint.flags = Paint.STRIKE_THRU_TEXT_FLAG
@@ -119,12 +119,16 @@ class SameGoodsActivity : BaseActivity(), EquallyGoodsContract.View {
         refreshLayout.setOnLoadMoreListener {
             presenter.requestEquallyGoods(data?.cat_id.toString(), null, 6)
         }
+        same.setOnClickListener {
+            GoodsDetail2Activity.actionStart(this, data?.goods_id ?: "")
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         presenter.detachView()
     }
+
     override fun start() {
         presenter.requestEquallyGoods(data?.cat_id.toString(), 1, 6)
     }

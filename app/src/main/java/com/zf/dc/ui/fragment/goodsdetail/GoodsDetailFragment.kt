@@ -3,6 +3,9 @@ package com.zf.dc.ui.fragment.goodsdetail
 import android.app.Activity
 import android.app.AlertDialog
 import android.graphics.Color
+import android.graphics.Paint
+import android.os.CountDownTimer
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
@@ -29,6 +32,7 @@ import com.zf.dc.mvp.presenter.GoodsDetailPresenter
 import com.zf.dc.showToast
 import com.zf.dc.ui.activity.AddressEditActivity
 import com.zf.dc.ui.activity.ConfirmOrderActivity
+import com.zf.dc.ui.activity.GoodsDetail2Activity
 import com.zf.dc.ui.activity.MainActivity
 import com.zf.dc.ui.adapter.GoodsDetailAdapter
 import com.zf.dc.ui.adapter.GoodsSpecsAdapter
@@ -39,6 +43,7 @@ import com.zf.dc.ui.fragment.graphic.OrderAnswerFragment
 import com.zf.dc.ui.fragment.same.DetailSameFragment
 import com.zf.dc.utils.GlideUtils
 import com.zf.dc.utils.LogUtils
+import com.zf.dc.utils.TimeUtils
 import com.zf.dc.utils.bus.RxBus
 import com.zf.dc.view.popwindow.RegionPopupWindow
 import com.zf.dc.view.recyclerview.HorizontalPageLayoutManager
@@ -65,18 +70,28 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
         //加载界面数据
         loadData(bean)
         //图文详情
-        Graphic()
+        Graphic(bean.goods_content)
         //获得为您推荐商品列表
         presenter.requestRecommendGoods(bean.goods.cat_id)
     }
+
     //秒杀商品详情
     override fun setSecKillDetail(bean: SecKillDetailBean) {
-
+        //加载轮播图
+        initBanner(bean.info.goods_images)
+        //界面赋值
+        loadSecKill(bean)
+        //图文详情
+        Graphic(bean.goods_content)
+        //获得为您推荐商品列表
+        presenter.requestRecommendGoods(bean.info.cat_id)
     }
+
     //获得商品评论（默认15条 全部 第一页）
     override fun setGoodEva(bean: List<GoodEvaList>) {
 
     }
+
     //商品属性
     override fun getGoodsAttr(bean: List<AttriBute>) {
 
@@ -139,10 +154,10 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
         mCommend.clear()
         mCommend.addAll(bean)
         adapter.notifyDataSetChanged()
-        val sum = if (mCommend.size % 6 != 0) {
-            mCommend.size / 6 + 1
+        val sum = if (mCommend.size % 8 != 0) {
+            mCommend.size / 8 + 1
         } else {
-            mCommend.size / 6
+            mCommend.size / 8
         }
         //滑动指示器
         //先写四页，后面再改
@@ -166,6 +181,8 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
 
     //传递过来的id
     private var mGoodsId = ""
+    //传递过来的类型
+    private var mType: String = ""
     //记录用户选择的地址ID
     private var addressId = ""
     //传递过来的规格ID
@@ -199,9 +216,11 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
     private val adapter by lazy { LoveShopGoodsAdapter(context, mCommend) }
 
     companion object {
-        fun newInstance(id: String): GoodsDetailFragment {
+
+        fun newInstance(id: String, type: String): GoodsDetailFragment {
             val fragment = GoodsDetailFragment()
             fragment.mGoodsId = id
+            fragment.mType = type
             return fragment
         }
     }
@@ -211,17 +230,26 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
     override fun initView() {
         presenter.attachView(this)
 
+        /** 给价格添加中划线 */
+        market_price.paint.flags = Paint.STRIKE_THRU_TEXT_FLAG
+
         floatingButton.hide()
         //图文详情
-        Graphic()
+        Graphic("")
         //为您推荐
         initSame()
 
     }
 
     override fun lazyLoad() {
-        //请求商品详情
-        presenter.requestGoodsDetail(mGoodsId)
+        //判断是 秒杀 团购 普通
+        if (mType == "") {
+            //请求商品详情
+            presenter.requestGoodsDetail(mGoodsId)
+        } else {
+            presenter.requestSecKillDetail(mType)
+        }
+
         //请求地址列表
         presenter.requestAddress()
         //请求规格
@@ -304,11 +332,22 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
             cart.isChecked = !cart.isChecked
             MainActivity.actionStart(context, 2)
         }
+        //评价
+        evaluate.setOnClickListener {
+            GoodsDetail2Activity.actionStart(context, mGoodsId, index = 1)
+        }
+        //为您推荐监听回调
+        adapter.mClickListener = {
+            //RxBus.getDefault().post(it,GoodsDetailActivity.FRESH_ORDER)
+            GoodsDetail2Activity.actionStart(context, it)
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         presenter.detachView()
+        countDownTimer?.cancel()
+        countDownTimer = null
     }
 
     /**Banner轮播图*/
@@ -348,14 +387,54 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
         })
     }
 
-    /**将网络请求到的数据赋值到页面上*/
+    //定时器
+    private var countDownTimer: CountDownTimer? = null
+
+    /**普通商品详情*/
     private fun loadData(data: GoodsDetailBean) {
+        //判断 团购商品
+        if (data.goods.prom_type == 2) {
+            //商品抢购价格
+            label_money.visibility = View.VISIBLE
+            label_money.text = "团购价"
+            shop_price.text = data.goods.prom_price
+            //本店原价
+            price.text = "原价"
+            market_price.text = "￥" + data.goods.shop_price
+            //计时器
+            label_ly.visibility = View.VISIBLE
+            activity_name.text = "限时团购"
+            //当前时间戳
+            val currentTime = System.currentTimeMillis()
+            if (currentTime < data.goods.end_time * 1000) {
+                val tickTime = (data.goods.end_time * 1000) - currentTime
+                countDownTimer?.cancel()
+                countDownTimer = null
+                countDownTimer = object : CountDownTimer(tickTime, 1000) {
+                    override fun onFinish() {
+
+                    }
+
+                    override fun onTick(millisUntilFinished: Long) {
+                        label_time.text = TimeUtils.getCountTime2(millisUntilFinished)
+                    }
+
+                }
+                countDownTimer?.start()
+            } else {
+                //过时，秒杀已到
+                //倒计时
+                label_ly.visibility = View.GONE
+//                start()
+            }
+        }else{
+            //商品价格
+            shop_price.text = data.goods.shop_price
+            //市场价格
+            market_price.text = "￥" + data.goods.market_price
+        }
         //商品名字
         goods_name.text = data.goods.goods_name
-        //商品价格
-        shop_price.text = data.goods.shop_price
-        //市场价格
-        market_price.text = "￥" + data.goods.market_price
         //销量
         virtual_sales_sum.text = "销量：" + data.goods.virtual_collect_sum
         //好评率
@@ -363,7 +442,52 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
         //总评数
         total_sum.text = data.goods.comment_fr.total_sum
         //地址
-        adress.text=data.goods.seller_info.province_name+data.goods.seller_info.city_name
+        adress.text = data.goods.seller_info.province_name + data.goods.seller_info.city_name
+    }
+
+    /**秒杀商品详情*/
+    private fun loadSecKill(data: SecKillDetailBean) {
+
+        //商品名字
+        goods_name.text = data.info.goods_name
+        //商品抢购价格
+        label_money.visibility = View.VISIBLE
+        label_money.text = "抢购价"
+        shop_price.text = data.info.price
+        //地址
+        adress.text = data.seller_info.province_name + data.seller_info.city_name
+        //本店原价
+        price.text = "原价"
+        market_price.text = "￥" + data.info.shop_price
+        //销量
+        virtual_sales_sum.text = "销量：" + data.info.sales_sum
+        //计时器
+        label_ly.visibility = View.VISIBLE
+        activity_name.text = "限时抢购"
+        //当前时间戳
+        val currentTime = System.currentTimeMillis()
+        if (currentTime < data.info.end_time * 1000) {
+            val tickTime = (data.info.end_time * 1000) - currentTime
+            countDownTimer?.cancel()
+            countDownTimer = null
+            countDownTimer = object : CountDownTimer(tickTime, 1000) {
+                override fun onFinish() {
+
+                }
+
+                override fun onTick(millisUntilFinished: Long) {
+                    label_time.text = TimeUtils.getCountTime2(millisUntilFinished)
+                }
+
+            }
+            countDownTimer?.start()
+        } else {
+            //过时，秒杀已到
+            //倒计时
+            label_ly.visibility = View.GONE
+//                start()
+        }
+
     }
 
     /**
@@ -371,7 +495,7 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
      * pageRecyclerView
      */
     private fun initSame() {
-        val manager = HorizontalPageLayoutManager(2, 3)
+        val manager = HorizontalPageLayoutManager(2, 4)
         recyclerView.layoutManager = manager
         recyclerView.adapter = adapter
         scrollHelper.setUpRecycleView(recyclerView)
@@ -545,12 +669,17 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
         specsPopWindow.showAtLocation(parentLayout, Gravity.BOTTOM, 0, 0)
     }
 
-    /**商品详情*/
-    private fun Graphic() {
-        val titles = arrayListOf("商品详情", "规格参数")
-        val fmgs = listOf(GraphicFragment.newInstance(mData?.goods_content ?: ""), OrderAnswerFragment.newInstance())
-        val adapter = BaseFragmentAdapter(childFragmentManager, fmgs, titles)
-        graphic_vp.adapter = adapter
-        graphic_tab.setupWithViewPager(graphic_vp)
+    /**图文详情*/
+    private fun Graphic(text: String) {
+        val fmgs = arrayListOf(
+            GraphicFragment.newInstance(text) as Fragment,
+            OrderAnswerFragment.newInstance(mGoodsId) as Fragment
+        )
+
+        val entitys = ArrayList<CustomTabEntity>()
+        entitys.add(TabEntity("商品详情", 0, 0))
+        entitys.add(TabEntity("规格参数", 0, 0))
+        graphic_tab.setTabData(entitys, activity, R.id.graphic_fl, fmgs)
     }
+
 }

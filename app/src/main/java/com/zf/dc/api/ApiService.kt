@@ -538,6 +538,16 @@ interface ApiService {
     ): Observable<BaseBean<CashOutBean>>
 
     /**
+     * 充值记录
+     */
+    @FormUrlEncoded
+    @POST("api/user/recharge_list")
+    fun getRechargeList(
+        @Field("page") page: Int,
+        @Field("num") num: Int
+    ): Observable<BaseBean<RechargeRecordBean>>
+
+    /**
      * 购物车选中状态
      */
     @Headers("Content-type:application/json")

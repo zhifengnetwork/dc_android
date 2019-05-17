@@ -5,25 +5,43 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <include layout="@layout/layout_toolbar"/>
-    <!--<View android:layout_width="match_parent"-->
-          <!--android:layout_height="1dp"-->
-          <!--android:background="@color/colorLine"/>-->
-    <!--<com.google.android.material.tabs.TabLayout-->
-            <!--android:id="@+id/material_tab"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="35dp"-->
-            <!--android:background="@color/whit"-->
-            <!--app:tabTextColor="#666666"-->
-            <!--app:tabSelectedTextColor="#224eaf"-->
-            <!--app:tabIndicatorColor="#224eaf"/>-->
-    <!--app:tabTextAppearance="@style/TabLayoutTextStyle"字体大小-->
-    <View android:layout_width="match_parent"
-          android:layout_height="1dp"
-          android:background="@color/colorLine"/>
-    <!--<androidx.viewpager.widget.ViewPager-->
-            <!--android:id="@+id/material_vp"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"/>-->
+    <View
+            android:background="#E6E6E6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+                android:text="支付方式"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+        <TextView
+                android:text="日期"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+        <TextView
+                android:text="金额"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+        <TextView
+                android:text="状态"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <View
+            android:background="#E6E6E6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
@@ -45,9 +63,9 @@
                 android:layout_height="wrap_content"/>
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/recharge_rl"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"/>
 
         <com.scwang.smartrefresh.layout.footer.ClassicsFooter
                 android:layout_width="match_parent"
@@ -62,5 +80,4 @@
                 app:srlTextRelease="@string/load_release"/>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
 </LinearLayout>

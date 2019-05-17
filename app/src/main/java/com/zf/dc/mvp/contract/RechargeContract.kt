@@ -2,17 +2,17 @@ package com.zf.dc.mvp.contract
 
 import com.zf.dc.base.IBaseView
 import com.zf.dc.base.IPresenter
-import com.zf.dc.mvp.bean.CashOutList
+import com.zf.dc.mvp.bean.RechargeRecordList
 
-interface CashOutRecordContract {
+interface RechargeContract{
     interface View : IBaseView {
         fun showError(msg: String, errorCode: Int)
 
-        fun getCashOutList(bean: List<CashOutList>)
+        fun getRechargeList(bean: List<RechargeRecordList>)
 
         fun freshEmpty()
 
-        fun setLoadMore(bean: List<CashOutList>)
+        fun setLoadMore(bean: List<RechargeRecordList>)
 
         fun setLoadComplete()
 
@@ -20,6 +20,6 @@ interface CashOutRecordContract {
     }
 
     interface Presenter : IPresenter<View> {
-        fun requestCashOutList(page: Int?)
+        fun requestRechargeList(page: Int?)
     }
 }

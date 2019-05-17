@@ -12,7 +12,7 @@
             android:paddingBottom="2dp"
             android:textColor="#666666"
             android:paddingTop="6dp"
-            android:text="收藏"
+            android:text="客服"
             android:drawableTop="@drawable/service"
             android:gravity="center"
             android:layout_weight="1"

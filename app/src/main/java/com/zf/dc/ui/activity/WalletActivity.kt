@@ -2,7 +2,6 @@ package com.zf.dc.ui.activity
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.zf.dc.R
@@ -78,14 +77,17 @@ class WalletActivity : BaseActivity(), MyWalletContract.View {
         accountState.setOnClickListener {
             AccountDetailsActivity.actionStart(this)
         }
-        //提现明细
-        cash_out.setOnClickListener {
+        //提现记录
+        cash_detail.setOnClickListener {
             CashOutRecordActivity.actionStart(this)
         }
-
-        //支付宝绑定
-        aliPay.setOnClickListener {
-            BindZfbActivity.actionStart(this, mData?.alipay, mData?.realname)
+        //申请提现
+        cash_out.setOnClickListener {
+            CashOutActivity.actionStart(this)
+        }
+        //充值记录
+        recharge.setOnClickListener {
+            RechargeRecordActivity.actionStart(this)
         }
     }
 
@@ -106,19 +108,8 @@ class WalletActivity : BaseActivity(), MyWalletContract.View {
     //界面赋值
     private fun setLayout() {
         //账户余额
-        user_money.text = mData?.user_money
-        //用户积分
-        pay_points.text = mData?.pay_points
-        //优惠卷数
-        coupon_num.text = mData?.coupon_num
-        //是否绑定支付宝
-        if (mData?.alipay != null) {
-            zfb_label.text = "已添加"
-            zfb_label.setTextColor(Color.rgb(38, 108, 232))
-        } else {
-            zfb_label.text = "未添加"
-            zfb_label.setTextColor(Color.rgb(250, 20, 20))
-        }
+        user_money.text = "￥" + mData?.user_money
+
 
     }
 }

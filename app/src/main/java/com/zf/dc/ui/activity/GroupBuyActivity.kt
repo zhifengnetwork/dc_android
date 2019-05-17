@@ -101,7 +101,7 @@ class GroupBuyActivity : BaseActivity(), GroupBuyContract.View {
     override fun initEvent() {
 
         adapter.itemClickListener = {
-            GoodsDetail2Activity.actionStart(this, it.goods_id, it.id)
+            GoodsDetail2Activity.actionStart(this, it.goods_id)
         }
 
         radioGroup.setOnCheckedChangeListener { group, checkedId ->
