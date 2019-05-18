@@ -34,14 +34,12 @@ class AccountDetailFragment : BaseFragment(), AccountDetailContract.View {
 
     //当第一页数据为空时
     override fun freshEmpty() {
-        Log.e("检测","第一页数据为空")
         mLayoutStatusView?.showEmpty()
         refreshLayout.setEnableLoadMore(false)
     }
 
     //不是第一页获得数据
     override fun setLoadMore(bean: List<AccountDetailList>) {
-        Log.e("检测","第2页数据 ")
         mData.addAll(bean)
         mAdapter.notifyDataSetChanged()
     }
@@ -100,13 +98,13 @@ class AccountDetailFragment : BaseFragment(), AccountDetailContract.View {
 
     override fun lazyLoad() {
         refreshLayout.setEnableLoadMore(false)
-        presenter.requestAccountDetail(mType, 1, 6)
+        presenter.requestAccountDetail(mType, 1)
     }
 
     override fun initEvent() {
         /**上拉加载*/
         refreshLayout.setOnLoadMoreListener {
-            presenter.requestAccountDetail(mType, null, 6)
+            presenter.requestAccountDetail(mType, null)
         }
         /**下拉刷新*/
         refreshLayout.setOnRefreshListener {

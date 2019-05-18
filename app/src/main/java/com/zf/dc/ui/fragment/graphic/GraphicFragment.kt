@@ -1,10 +1,10 @@
 package com.zf.dc.ui.fragment.graphic
 
-import android.util.Log
 import com.zf.dc.R
 import com.zf.dc.base.BaseFragment
 import com.zzhoujay.richtext.RichText
 import kotlinx.android.synthetic.main.fragment_graphic.*
+
 
 class GraphicFragment : BaseFragment() {
 
@@ -22,13 +22,11 @@ class GraphicFragment : BaseFragment() {
     //接收传递过来的H5
     private var htmlText: String? = ""
 
-
     override fun initView() {
         RichText.initCacheDir(context)
-        Log.e("检测",">>"+htmlText)
         RichText.from(htmlText).bind(activity).into(textHtml)
-    }
 
+    }
 
     override fun lazyLoad() {
     }
@@ -36,5 +34,6 @@ class GraphicFragment : BaseFragment() {
     override fun initEvent() {
 
     }
+
 
 }

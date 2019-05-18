@@ -1,5 +1,6 @@
 package com.zf.dc.mvp.presenter
 
+import com.zf.dc.api.UriConstant.PER_PAGE
 import com.zf.dc.base.BasePresenter
 import com.zf.dc.mvp.contract.AccountDetailContract
 import com.zf.dc.mvp.model.AccountDetailModel
@@ -11,11 +12,11 @@ class AccountDetailPresenter : BasePresenter<AccountDetailContract.View>(), Acco
 
     private var mPage = 1
 
-    override fun requestAccountDetail(type: String, page: Int?, num: Int) {
+    override fun requestAccountDetail(type: String, page: Int?) {
         checkViewAttached()
         mPage = page ?: mPage
         mRootView?.showLoading()
-        val disposable = model.getAccountDetail(type, mPage, num)
+        val disposable = model.getAccountDetail(type, mPage, PER_PAGE)
             .subscribe({
                 mRootView?.apply {
                     dismissLoading()
@@ -31,7 +32,7 @@ class AccountDetailPresenter : BasePresenter<AccountDetailContract.View>(), Acco
                                 } else {
                                     setLoadMore(it.data.list)
                                 }
-                                if (it.data.list.size < num) {
+                                if (it.data.list.size < PER_PAGE) {
                                     setLoadComplete()
                                 }
                                 mPage += 1
