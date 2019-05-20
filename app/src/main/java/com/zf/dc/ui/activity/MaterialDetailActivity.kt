@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_material_detail.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
 class MaterialDetailActivity : BaseActivity(), MaterialDetailContract.View {
+
     override fun showError(msg: String, errorCode: Int) {
         showToast(msg)
     }
@@ -76,6 +77,7 @@ class MaterialDetailActivity : BaseActivity(), MaterialDetailContract.View {
         presenter.requestMaterialDetail(mId)
     }
 
+
     @SuppressLint("SetTextI18n")
     fun loadData(data: MaterialDetailBean) {
 
@@ -87,4 +89,6 @@ class MaterialDetailActivity : BaseActivity(), MaterialDetailContract.View {
 
         RichText.from(data.content).into(content)
     }
+
+
 }

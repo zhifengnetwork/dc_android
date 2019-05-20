@@ -11,11 +11,13 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uuzuche.lib_zxing.activity.CodeUtils
 import com.uuzuche.lib_zxing.activity.ZXingLibrary
+import com.zf.dc.MyApplication
 import com.zf.dc.base.BaseFragment
 import com.zf.dc.mvp.bean.ClassifyBean
 import com.zf.dc.mvp.contract.ClassifyContract
 import com.zf.dc.mvp.presenter.ClassifyPresenter
 import com.zf.dc.ui.activity.MessageActivity
+import com.zf.dc.ui.activity.ScanActivity
 import com.zf.dc.ui.activity.SearchActivity
 import com.zf.dc.ui.adapter.ClassifyPagerAdapter
 import com.zf.dc.ui.adapter.ClassifyTitleAdapter
@@ -224,8 +226,9 @@ class ClassifyFragment : BaseFragment(), EasyPermissions.PermissionCallbacks, Cl
         val data = ArrayList<String>()//存储未申请的权限
 
         for (permission in permissions.iterator()) {
-            val checkSelfPermission = ContextCompat.checkSelfPermission(context!!, permission)
-            if (checkSelfPermission == PackageManager.PERMISSION_DENIED) {//未申请
+            val checkSelfPermission = ContextCompat.checkSelfPermission(context ?: MyApplication.context, permission)
+            if (checkSelfPermission == PackageManager.PERMISSION_DENIED) {
+                //未申请
                 data.add(permission)
             }
         }

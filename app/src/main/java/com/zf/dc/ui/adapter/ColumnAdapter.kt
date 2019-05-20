@@ -48,7 +48,9 @@ class ColumnAdapter(val context: Context?) : RecyclerView.Adapter<ColumnAdapter.
         holder.itemView.setOnClickListener {
             when (position) {
                 0 -> AccountDetailsActivity.actionStart(context)
-                1 -> BonusActivity.actionStart(context)
+                1 -> CashOutActivity.actionStart(context)
+                //旧页面
+//                1 -> BonusActivity.actionStart(context)
                 2 -> ActionActivity.actionStart(context, ActionActivity.AUCTION)
                 3 -> ActionActivity.actionStart(context, ActionActivity.GROUP)
                 4 -> TeamActivity.actionStart(context)

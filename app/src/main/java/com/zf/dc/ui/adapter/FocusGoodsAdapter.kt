@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.zf.dc.R
 import com.zf.dc.mvp.bean.MyFollowList
+import com.zf.dc.ui.activity.GoodsDetail2Activity
 import com.zf.dc.ui.activity.SameGoodsActivity
 import com.zf.dc.utils.GlideUtils
 import kotlinx.android.synthetic.main.item_focus_goods.view.*
@@ -41,7 +42,7 @@ class FocusGoodsAdapter(val context: Context?, val data: List<MyFollowList>) :
                 goodsIcon
             )
             //商品的市场价格
-            oldPrice.text=mData[position].market_price
+            oldPrice.text = mData[position].market_price
             same.setOnClickListener {
                 SameGoodsActivity.actionStart(context, mData[position])
             }
@@ -50,8 +51,12 @@ class FocusGoodsAdapter(val context: Context?, val data: List<MyFollowList>) :
                 //监听回调
                 mClickListener?.invoke(mData[position].goods_id)
             }
+            focus_ly.setOnClickListener {
+                GoodsDetail2Activity.actionStart(context, mData[position].goods_id)
+            }
 
         }
+
     }
 
 

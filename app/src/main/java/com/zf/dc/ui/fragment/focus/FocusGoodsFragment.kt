@@ -12,6 +12,7 @@ import com.zf.dc.mvp.bean.MyFollowList
 import com.zf.dc.mvp.contract.MyFollowContract
 import com.zf.dc.mvp.presenter.MyFollowPresenter
 import com.zf.dc.showToast
+import com.zf.dc.ui.activity.GoodsDetail2Activity
 import com.zf.dc.ui.adapter.FocusGoodsAdapter
 import com.zf.dc.ui.adapter.FocusLoveGoodsAdapter
 import com.zf.dc.view.RecDecoration
@@ -184,7 +185,7 @@ class FocusGoodsFragment : BaseFragment(), MyFollowContract.View {
 
             if (switch) {
                 presenter.requestMyFollow(null)
-            }else{
+            } else {
                 presenter.requsetLoveGoods("is_recommend", null)
             }
 
@@ -194,6 +195,7 @@ class FocusGoodsFragment : BaseFragment(), MyFollowContract.View {
             switch = true
             lazyLoad()
         }
+
     }
 
     override fun onDestroy() {
