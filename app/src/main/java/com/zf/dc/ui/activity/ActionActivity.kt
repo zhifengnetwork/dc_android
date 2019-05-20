@@ -23,9 +23,9 @@ class ActionActivity : BaseActivity() {
 
     override fun initToolBar() {
         StatusBarUtils.darkMode(
-                this,
-                ContextCompat.getColor(this, R.color.colorSecondText),
-                0.3f
+            this,
+            ContextCompat.getColor(this, R.color.colorSecondText),
+            0.3f
         )
     }
 
@@ -52,9 +52,9 @@ class ActionActivity : BaseActivity() {
     override fun initView() {
         val titles = arrayListOf("竞拍", "拼团", "秒杀")
         val fragments = arrayListOf<Fragment>(
-                AuctionFragment.newInstance(),
-                GroupFragment.newInstance(),
-                SecKillFragment.newInstance()
+            AuctionFragment.newInstance(),
+            GroupFragment.newInstance(),
+            SecKillFragment.newInstance()
         )
         val adapter = BaseFragmentAdapter(supportFragmentManager, fragments, titles)
         viewPager.adapter = adapter
@@ -80,7 +80,7 @@ class ActionActivity : BaseActivity() {
             } else {
                 /** 发送文字类型 */
                 val webObj = WXWebpageObject()
-                webObj.webpageUrl = "https://mobile.zhifengwangluo.c3w.cc/index.php/shop/Activity/auction_list.html"
+                webObj.webpageUrl = UriConstant.BASE_URL + "index.php/shop/Activity/auction_list.html"
 
                 val msg = WXMediaMessage()
                 msg.mediaObject = webObj //消息对象

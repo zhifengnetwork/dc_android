@@ -40,7 +40,7 @@
               android:layout_above="@+id/hasPay"
               android:layout_alignLeft="@+id/goodsName"
               android:id="@+id/rmb"
-              android:layout_marginBottom="10dp"
+              android:layout_marginBottom="2dp"
               android:textSize="11sp"
               android:textColor="#e51c23"
               android:text="￥"/>
@@ -48,13 +48,13 @@
     <TextView
             android:id="@+id/shop_price"
             android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_above="@+id/hasPay"
-              android:layout_toRightOf="@+id/rmb"
-              android:textSize="18sp"
-              android:textColor="#e51c23"
-              android:layout_marginBottom="10dp"
-              android:text="389"/>
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/hasPay"
+            android:layout_toRightOf="@+id/rmb"
+            android:textSize="18sp"
+            android:textColor="#e51c23"
+
+            android:text="389"/>
 
 
     <TextView android:layout_width="wrap_content"

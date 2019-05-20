@@ -266,7 +266,6 @@ class AddressEditActivity : BaseActivity(), AddressEditContract.View {
         /**点击确认 添加地址或修改地址*/
         confirm.setOnClickListener {
 
-
             /**添加地址*/
             if (data == null) {
 

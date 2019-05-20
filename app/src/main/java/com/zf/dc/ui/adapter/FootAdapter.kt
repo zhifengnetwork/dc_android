@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.zf.dc.R
+import com.zf.dc.api.UriConstant
 import com.zf.dc.mvp.bean.MyFootBean
 import com.zf.dc.ui.activity.GoodsDetail2Activity
 import com.zf.dc.utils.GlideUtils
@@ -85,11 +86,8 @@ class FootAdapter(val context: Context, val data: ArrayList<MyFootBean>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.apply {
 
-            GlideUtils.loadUrlImage(
-                context,
-                "https://mobile.zhifengwangluo.c3w.cc" + data[position].original_img,
-                goodsIcon
-            )
+            GlideUtils.loadUrlImage(context, UriConstant.BASE_URL + data[position].original_img, goodsIcon)
+
 
             goodsName.text = data[position].goods_name
 

@@ -39,11 +39,13 @@
             <!--个人信息-->
             <include layout="@layout/layout_info" />
 
-            <!--我的钱包-->
-            <include layout="@layout/layout_wallet" />
+
 
             <!--我的订单-->
             <include layout="@layout/layout_order" />
+
+            <!--我的钱包-->
+            <include layout="@layout/layout_wallet" />
 
             <!-- 公益 -->
             <include

@@ -145,6 +145,7 @@ class ShoppingCartFragment1 : BaseFragment(), CartListContract.View, CartOperate
         if (cartData.isEmpty()) {
             mLayoutStatusView?.showEmpty()
             settleLayout.visibility = View.GONE
+            management.visibility = View.GONE
         }
     }
 
@@ -171,6 +172,7 @@ class ShoppingCartFragment1 : BaseFragment(), CartListContract.View, CartOperate
     //购物车为空
     override fun setCartEmpty() {
         settleLayout.visibility = View.GONE
+        management.visibility = View.GONE
         mLayoutStatusView?.showEmpty()
         commendPresenter.requestCommend("is_recommend", 1)
         ifCartComplete = true
@@ -184,6 +186,7 @@ class ShoppingCartFragment1 : BaseFragment(), CartListContract.View, CartOperate
 
     override fun showCartError(msg: String, errorCode: Int) {
         settleLayout.visibility = View.GONE
+        management.visibility = View.GONE
         if (errorCode == ErrorStatus.NETWORK_ERROR) {
             mLayoutStatusView?.showNoNetwork()
         } else {
@@ -200,6 +203,7 @@ class ShoppingCartFragment1 : BaseFragment(), CartListContract.View, CartOperate
     override fun setRefreshCart(bean: CartBean) {
         refreshLayout.setEnableLoadMore(true)
         settleLayout.visibility = View.VISIBLE
+        management.visibility = View.VISIBLE
         mLayoutStatusView?.showContent()
         cartData.clear()
         cartData.addAll(bean.list)

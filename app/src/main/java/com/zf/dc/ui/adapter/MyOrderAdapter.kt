@@ -40,7 +40,7 @@ class MyOrderAdapter(val context: Context?, val data: List<OrderListBean>) :
             }
 
             addTime.text = TimeUtils.myOrderTime(data[position].add_time)
-            shopName.text = data[position].store_name
+//            shopName.text = data[position].store_name
             shouldPay.text = "¥${data[position].order_amount}"
             totalNum.text = "共${data[position].num}件"
 

@@ -1,12 +1,16 @@
 package com.zf.dc.ui.activity
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.view.Gravity
 import android.view.View
+import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.scwang.smartrefresh.layout.util.DensityUtil
 import com.tencent.mm.opensdk.modelpay.PayReq
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import com.zf.dc.R
@@ -26,6 +30,7 @@ import com.zf.dc.ui.adapter.OrderGoodsAdapter
 import com.zf.dc.utils.StatusBarUtils
 import com.zf.dc.utils.TimeUtils
 import com.zf.dc.utils.bus.RxBus
+import com.zf.dc.view.popwindow.OrderPayPopupWindow
 import kotlinx.android.synthetic.main.activity_order_detail.*
 import kotlinx.android.synthetic.main.layout_detail_price.*
 import kotlinx.android.synthetic.main.layout_en_order_address.*
@@ -150,19 +155,33 @@ class OrderDetailActivity : BaseActivity(), OrderDetailContract.View, OrderOpera
 
         //立即付款
         payNow.setOnClickListener {
-            wxPayPresenter.requestWXPay(mOrderBean?.order_sn ?: "")
+            RxBus.getDefault().post(UriConstant.FRESH_CART, UriConstant.FRESH_CART)
+            val window = object : OrderPayPopupWindow(
+                this, R.layout.pop_order_pay,
+                LinearLayout.LayoutParams.MATCH_PARENT, DensityUtil.dp2px(320f), mOrderBean?.order_amount ?: "0"
+            ) {}
+            window.showAtLocation(parentLayout, Gravity.BOTTOM, 0, 0)
+            //取消支付
+            window.onDismissListener = {
+                start()
+            }
+            //确认支付
+            window.onConfirmPayListener = {
+                wxPayPresenter.requestWXPay(mOrderBean?.order_sn ?: "")
+            }
+
         }
 
         //确认收货
         confirmReceive.setOnClickListener {
             AlertDialog.Builder(this)
-                    .setTitle("提示")
-                    .setMessage("确认收货")
-                    .setNegativeButton("取消", null)
-                    .setPositiveButton("确定") { _, _ ->
-                        orderOperatePresenter.requestConfirmReceipt(mOrderId)
-                    }
-                    .show()
+                .setTitle("提示")
+                .setMessage("确认收货")
+                .setNegativeButton("取消", null)
+                .setPositiveButton("确定") { _, _ ->
+                    orderOperatePresenter.requestConfirmReceipt(mOrderId)
+                }
+                .show()
         }
 
         //物流
@@ -173,14 +192,14 @@ class OrderDetailActivity : BaseActivity(), OrderDetailContract.View, OrderOpera
         //取消订单
         cancelOrder.setOnClickListener {
             AlertDialog.Builder(this)
-                    .setTitle("提示")
-                    .setMessage("取消该订单")
-                    .setNegativeButton("取消", null)
-                    .setPositiveButton("确定") { _, _ ->
+                .setTitle("提示")
+                .setMessage("取消该订单")
+                .setNegativeButton("取消", null)
+                .setPositiveButton("确定") { _, _ ->
 
-                        orderOperatePresenter.requestCancelOrder(mOrderId)
-                    }
-                    .show()
+                    orderOperatePresenter.requestCancelOrder(mOrderId)
+                }
+                .show()
         }
 
         //去评价

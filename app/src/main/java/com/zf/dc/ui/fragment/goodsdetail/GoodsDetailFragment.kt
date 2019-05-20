@@ -208,8 +208,7 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
     private var itemName = ""
     //判断是点击加入购物车还是立即购买
     private var isChoice = true
-    //商品详情
-    private var mData: GoodsDetailBean? = null
+
     //接收地址列表
     private var mAddress = ArrayList<AddressBean>()
     //详细商品规格信息
@@ -233,6 +232,8 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
     private var mCommend = ArrayList<CommendList>()
 
     private val adapter by lazy { LoveShopGoodsAdapter(context, mCommend) }
+    //商品详情
+    var mData: GoodsDetailBean? = null
 
     companion object {
 
@@ -589,7 +590,7 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
                         //图片
                         GlideUtils.loadUrlImage(
                             context,
-                            "https://mobile.zhifengwangluo.c3w.cc" + mData?.goods?.original_img,
+                            UriConstant.BASE_URL + mData?.goods?.original_img,
                             goods_img
                         )
                         //名称

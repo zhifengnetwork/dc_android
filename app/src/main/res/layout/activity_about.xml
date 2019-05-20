@@ -77,6 +77,6 @@
             android:layout_marginBottom="40dp"
             android:textSize="14sp"
             android:textColor="@color/colorSecondText"
-            android:text="广州智丰网络科技有限公司"/>
+            android:text="广州滴蕊生物科技有限公司"/>
 
 </LinearLayout>

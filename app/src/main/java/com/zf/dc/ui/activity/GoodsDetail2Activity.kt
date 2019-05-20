@@ -2,7 +2,7 @@ package com.zf.dc.ui.activity
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
+import android.graphics.BitmapFactory
 import android.view.Gravity
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
@@ -18,6 +18,7 @@ import com.zf.dc.mvp.bean.TabEntity
 import com.zf.dc.showToast
 import com.zf.dc.ui.fragment.goodsdetail.EvaluationFragment
 import com.zf.dc.ui.fragment.goodsdetail.GoodsDetailFragment
+import com.zf.dc.utils.WXBmpUtil
 import com.zf.dc.view.popwindow.ServicePopupWindow
 import kotlinx.android.synthetic.main.activity_goods_detail.*
 import kotlinx.android.synthetic.main.pop_detail_share.view.*
@@ -47,22 +48,21 @@ class GoodsDetail2Activity : BaseActivity() {
 
     override fun layoutId(): Int = R.layout.activity_goods_detail
 
-    private var id = ""
+    private var mId = ""
 
     private var mActionId = ""
 
     override fun initData() {
-        id = intent.getStringExtra("id")
+        mId = intent.getStringExtra("id")
         mActionId = intent.getStringExtra("actionId")
         mIndex = intent?.getIntExtra("index", mIndex) ?: mIndex
     }
 
+    private val detailFragment by lazy { GoodsDetailFragment.newInstance(mId, mActionId) }
+    private val evaluateFragment by lazy { EvaluationFragment.newInstance(mId) as Fragment }
+
     override fun initView() {
-        val fmgs =
-            arrayListOf(
-                GoodsDetailFragment.newInstance(id, mActionId) as Fragment,
-                EvaluationFragment.newInstance(id) as Fragment
-            )
+        val fmgs = arrayListOf(detailFragment, evaluateFragment)
         val entitys = ArrayList<CustomTabEntity>()
         entitys.add(TabEntity("商品", 0, 0))
         entitys.add(TabEntity("评论", 0, 0))
@@ -93,12 +93,16 @@ class GoodsDetail2Activity : BaseActivity() {
                                 /** 发送文字类型 */
                                 val webObj = WXWebpageObject()
                                 webObj.webpageUrl =
-                                    "https://mobile.zhifengwangluo.c3w.cc/Mobile/Goods/goodsInfo/id/$id.html"
+                                    UriConstant.BASE_URL + "Mobile/Goods/goodsInfo/id/$mId.html"
 
                                 val msg = WXMediaMessage()
                                 msg.mediaObject = webObj //消息对象
-                                msg.title = "智丰商城" //标题
-                                msg.description = "" //描述
+                                msg.title = resources.getString(R.string.app_name) //标题
+                                msg.description = detailFragment.mData?.goods?.goods_name //描述
+
+                                val bitmap = BitmapFactory.decodeResource(resources, R.drawable.icon_dc_logo2)
+                                msg.thumbData = WXBmpUtil.getBitmapBytes(bitmap, true)
+
 
                                 val req = SendMessageToWX.Req()
                                 req.transaction = buildTransaction("text")

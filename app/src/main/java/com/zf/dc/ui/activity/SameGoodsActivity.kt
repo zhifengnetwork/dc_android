@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.scwang.smartrefresh.layout.util.DensityUtil
 import com.zf.dc.R
+import com.zf.dc.api.UriConstant
 import com.zf.dc.base.BaseActivity
 import com.zf.dc.mvp.bean.CommendList
 import com.zf.dc.mvp.bean.MyFollowList
@@ -96,7 +97,7 @@ class SameGoodsActivity : BaseActivity(), EquallyGoodsContract.View {
     override fun initView() {
         presenter.attachView(this)
         //商品图片
-        GlideUtils.loadUrlImage(this, "https://mobile.zhifengwangluo.c3w.cc" + data?.original_img, goodsIcon)
+        GlideUtils.loadUrlImage(this, UriConstant.BASE_URL + data?.original_img, goodsIcon)
         //商品名字
         goodsName.text = data?.goods_name
         //商品价格
