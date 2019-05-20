@@ -2,6 +2,7 @@ package com.zf.dc
 
 import android.app.Application
 import android.content.Context
+import com.alivc.player.AliVcMediaPlayer
 import com.yanzhenjie.album.Album
 import com.yanzhenjie.album.AlbumConfig
 import com.zf.dc.utils.MediaLoader
@@ -23,7 +24,8 @@ class MyApplication : Application() {
         //初始化album图像选择
         Album.initialize(AlbumConfig.newBuilder((this)).setAlbumLoader(MediaLoader()).build())
 
+        //初始化阿里播放器，无关直播
+        AliVcMediaPlayer.init(this)
     }
-
 
 }

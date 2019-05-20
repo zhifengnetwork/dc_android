@@ -1,9 +1,14 @@
 package com.zf.dc.ui.fragment
 
+import android.app.Activity
+import android.view.Gravity
+import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.scwang.smartrefresh.layout.util.DensityUtil
 import com.tencent.mm.opensdk.modelpay.PayReq
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
+import com.zf.dc.MyApplication
 import com.zf.dc.R
 import com.zf.dc.api.UriConstant
 import com.zf.dc.base.NotLazyBaseFragment
@@ -21,6 +26,7 @@ import com.zf.dc.ui.activity.*
 import com.zf.dc.ui.adapter.MyOrderAdapter
 import com.zf.dc.utils.LogUtils
 import com.zf.dc.utils.bus.RxBus
+import com.zf.dc.view.popwindow.OrderPayPopupWindow
 import kotlinx.android.synthetic.main.fragment_myorder.*
 import kotlinx.android.synthetic.main.layout_state_empty_order.*
 
@@ -169,9 +175,7 @@ class MyOrderFragment : NotLazyBaseFragment(), OrderListContract.View, OrderOper
         }
 
         RxBus.getDefault().subscribe<String>(this) {
-            LogUtils.e(">>>>>rxBus:$it")
             if (it == UriConstant.FRESH_ORDER_LIST) {
-                LogUtils.e(">>>>刷新列表")
                 lazyLoad()
             }
         }
@@ -180,46 +184,59 @@ class MyOrderFragment : NotLazyBaseFragment(), OrderListContract.View, OrderOper
 
             //立即付款
             onPayListener = { orderBean ->
-                wxPayPresenter.requestWXPay(orderBean.order_sn)
-                mOrderId = orderBean.order_id
+
+                RxBus.getDefault().post(UriConstant.FRESH_CART, UriConstant.FRESH_CART)
+                val window = object : OrderPayPopupWindow(
+                    activity as Activity, R.layout.pop_order_pay,
+                    LinearLayout.LayoutParams.MATCH_PARENT, DensityUtil.dp2px(320f), orderBean.order_amount
+                ) {}
+                window.showAtLocation(refreshLayout, Gravity.BOTTOM, 0, 0)
+                //取消支付
+                window.onDismissListener = {
+                    lazyLoad()
+                }
+                //确认支付
+                window.onConfirmPayListener = {
+                    wxPayPresenter.requestWXPay(orderBean.order_sn)
+                    mOrderId = orderBean.order_id
+                }
             }
 
             //删除
             deleteListener = {
                 //                DeleteMyOrderDialog.showDialog(childFragmentManager, it)
                 AlertDialog.Builder(context!!)
-                        .setTitle("提示")
-                        .setMessage("删除该订单")
-                        .setNegativeButton("取消", null)
-                        .setPositiveButton("确定") { _, _ ->
+                    .setTitle("提示")
+                    .setMessage("删除该订单")
+                    .setNegativeButton("取消", null)
+                    .setPositiveButton("确定") { _, _ ->
 
-                        }
-                        .show()
+                    }
+                    .show()
             }
 
             //取消订单
             onCancelOrderListener = { orderId ->
-                AlertDialog.Builder(context!!)
-                        .setTitle("提示")
-                        .setMessage("取消该订单")
-                        .setNegativeButton("取消", null)
-                        .setPositiveButton("确定") { _, _ ->
-
-                            orderOperatePresenter.requestCancelOrder(orderId)
-                        }
-                        .show()
+                AlertDialog.Builder(context ?: MyApplication.context)
+                    .setTitle("提示")
+                    .setMessage("取消该订单")
+                    .setNegativeButton("取消", null)
+                    .setPositiveButton("确定") { _, _ ->
+                        orderOperatePresenter.requestCancelOrder(orderId)
+                    }
+                    .show()
             }
 
             //确认收货
             onConfirmReceiveListener = { orderId ->
                 AlertDialog.Builder(context!!)
-                        .setTitle("提示")
-                        .setMessage("确认收货")
-                        .setNegativeButton("取消", null)
-                        .setPositiveButton("确定") { _, _ ->
-                            orderOperatePresenter.requestConfirmReceipt(orderId)
-                        }
-                        .show()
+                    .setTitle("提示")
+                    .setMessage("确认收货")
+                    .setNegativeButton("取消", null)
+                    .setPositiveButton("确定") { _, _ ->
+                        orderOperatePresenter.requestConfirmReceipt(orderId)
+                    }
+                    .show()
             }
 
             //查看物流

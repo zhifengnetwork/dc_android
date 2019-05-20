@@ -11,6 +11,7 @@ import com.zf.dc.R
 import com.zf.dc.api.UriConstant
 import com.zf.dc.mvp.bean.CartCountBean
 import com.zf.dc.mvp.bean.CartGoodsList
+import com.zf.dc.ui.activity.GoodsDetail2Activity
 import com.zf.dc.utils.GlideUtils
 import kotlinx.android.synthetic.main.item_cart_goods.view.*
 
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.item_cart_goods.view.*
  * 购物车商品
  */
 class CartGoodsAdapter1(val context: Context?, private val goodData: List<CartGoodsList>) :
-        RecyclerView.Adapter<CartGoodsAdapter1.ViewHolder>() {
+    RecyclerView.Adapter<CartGoodsAdapter1.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_cart_goods, parent, false)
@@ -39,6 +40,10 @@ class CartGoodsAdapter1(val context: Context?, private val goodData: List<CartGo
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.apply {
 
+            setOnClickListener {
+                GoodsDetail2Activity.actionStart(context, goodData[position].goods.goods_id)
+            }
+
             /** 选中逻辑 */
             checkBox.isChecked = goodData[position].selected == "1"
             checkBox.setOnClickListener {
@@ -50,9 +55,9 @@ class CartGoodsAdapter1(val context: Context?, private val goodData: List<CartGo
             goodsName.text = goodData[position].goods_name
             //商品图片
             GlideUtils.loadUrlImage(
-                    context,
-                    UriConstant.BASE_URL + goodData[position].original_img,
-                    goodsIcon
+                context,
+                UriConstant.BASE_URL + goodData[position].original_img,
+                goodsIcon
             )
             //商品价格
             goodsPrice.text = "¥${goodData[position].goods_price}"
@@ -94,9 +99,9 @@ class CartGoodsAdapter1(val context: Context?, private val goodData: List<CartGo
                 if (numberInput.text.toString().toInt() > 1) {
                     reduce.isSelected = false
                     onCountListener?.invoke(
-                            CartCountBean(
-                                    goodData[position].id, (numberInput.text.toString().toInt() - 1)
-                            )
+                        CartCountBean(
+                            goodData[position].id, (numberInput.text.toString().toInt() - 1)
+                        )
                     )
                     numberInput.text = (numberInput.text.toString().toInt() - 1).toString()
                     goodData[position].goods_num = numberInput.text.toString().toInt()
@@ -106,10 +111,10 @@ class CartGoodsAdapter1(val context: Context?, private val goodData: List<CartGo
             //增加
             increase.setOnClickListener {
                 onCountListener?.invoke(
-                        CartCountBean(
-                                goodData[position].id,
-                                (numberInput.text.toString().toInt() + 1)
-                        )
+                    CartCountBean(
+                        goodData[position].id,
+                        (numberInput.text.toString().toInt() + 1)
+                    )
                 )
                 numberInput.text = (numberInput.text.toString().toInt() + 1).toString()
                 goodData[position].goods_num = numberInput.text.toString().toInt()
@@ -118,11 +123,11 @@ class CartGoodsAdapter1(val context: Context?, private val goodData: List<CartGo
             //输入数量
             numberInput.setOnClickListener {
                 onInputListener?.invoke(
-                        CartCountBean(
-                                goodData[position].id,
-                                numberInput.text.toString().toInt(),
-                                goodsPosition = position
-                        )
+                    CartCountBean(
+                        goodData[position].id,
+                        numberInput.text.toString().toInt(),
+                        goodsPosition = position
+                    )
                 )
             }
         }

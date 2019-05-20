@@ -446,6 +446,12 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+                android:name="com.zf.dc.ui.activity.PlayerActivity"
+                android:launchMode="singleTask"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

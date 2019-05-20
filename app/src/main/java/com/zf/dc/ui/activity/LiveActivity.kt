@@ -51,17 +51,17 @@ class LiveActivity : BaseActivity() {
         mAlivcLivePushConfig = AlivcLivePushConfig()
         mAlivcLivePushConfig?.let {
             if (it.previewOrientation == AlivcPreviewOrientationEnum.ORIENTATION_LANDSCAPE_HOME_RIGHT.orientation ||
-                    it.previewOrientation == AlivcPreviewOrientationEnum.ORIENTATION_LANDSCAPE_HOME_LEFT.orientation
+                it.previewOrientation == AlivcPreviewOrientationEnum.ORIENTATION_LANDSCAPE_HOME_LEFT.orientation
             ) {
                 it.networkPoorPushImage =
-                        Environment.getExternalStorageDirectory().path + File.separator + "alivc_resource/poor_network_land.png"
+                    Environment.getExternalStorageDirectory().path + File.separator + "alivc_resource/poor_network_land.png"
                 it.pausePushImage =
-                        Environment.getExternalStorageDirectory().path + File.separator + "alivc_resource/background_push_land.png"
+                    Environment.getExternalStorageDirectory().path + File.separator + "alivc_resource/background_push_land.png"
             } else {
                 it.networkPoorPushImage =
-                        Environment.getExternalStorageDirectory().path + File.separator + "alivc_resource/poor_network.png"
+                    Environment.getExternalStorageDirectory().path + File.separator + "alivc_resource/poor_network.png"
                 it.pausePushImage =
-                        Environment.getExternalStorageDirectory().path + File.separator + "alivc_resource/background_push.png"
+                    Environment.getExternalStorageDirectory().path + File.separator + "alivc_resource/background_push.png"
             }
             AlivcLivePushConfig.setMediaProjectionPermissionResultData(null)
 
@@ -73,6 +73,10 @@ class LiveActivity : BaseActivity() {
     private var mAlivcLivePusher: AlivcLivePusher? = null
 
     override fun initEvent() {
+
+        playVd.setOnClickListener {
+            PlayerActivity.actionStart(this)
+        }
 
         //切换相机位置
         switchCamera.setOnClickListener {
@@ -101,7 +105,7 @@ class LiveActivity : BaseActivity() {
         start.setOnClickListener {
             //是否暂停状态
             mAlivcLivePusher?.startPushAysnc(
-                    "rtmp://push.zhifengwangluo.com/dc/user123123123?auth_key=1558453484-0-0-90aba8cfc169751ed66538882f5607e6"
+                "rtmp://push.zhifengwangluo.com/dc/user123123123?auth_key=1558453484-0-0-90aba8cfc169751ed66538882f5607e6"
             )
         }
     }
@@ -141,11 +145,11 @@ class LiveActivity : BaseActivity() {
     }
 
     private val permissions = arrayOf(
-            Manifest.permission.READ_PHONE_STATE,
-            Manifest.permission.RECORD_AUDIO,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA
+        Manifest.permission.READ_PHONE_STATE,
+        Manifest.permission.RECORD_AUDIO,
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.CAMERA
     )
 
     private val REQUESTCODE = 34
@@ -198,11 +202,11 @@ class LiveActivity : BaseActivity() {
 
     private fun showSnackBar(contentText: String, buttonText: String, listener: View.OnClickListener) {
         Snackbar.make(
-                findViewById(android.R.id.content),
-                contentText,
-                Snackbar.LENGTH_INDEFINITE
+            findViewById(android.R.id.content),
+            contentText,
+            Snackbar.LENGTH_INDEFINITE
         )
-                .setAction(buttonText, listener).show()
+            .setAction(buttonText, listener).show()
     }
 
     override fun initData() {

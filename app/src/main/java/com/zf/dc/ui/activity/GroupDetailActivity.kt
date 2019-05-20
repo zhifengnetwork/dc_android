@@ -2,6 +2,7 @@ package com.zf.dc.ui.activity
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.CountDownTimer
@@ -31,6 +32,7 @@ import com.zf.dc.ui.adapter.GuideAdapter
 import com.zf.dc.utils.GlideUtils
 import com.zf.dc.utils.StatusBarUtils
 import com.zf.dc.utils.TimeUtils
+import com.zf.dc.utils.WXBmpUtil
 import com.zf.dc.view.dialog.GroupUserDialog
 import com.zf.dc.view.popwindow.ActiveSpecPopupWindow
 import com.zf.dc.view.recyclerview.RecyclerViewDivider
@@ -269,11 +271,14 @@ class GroupDetailActivity : BaseActivity(), GroupDetailContract.View, ActiveSpec
                 /** 发送文字类型 */
                 val webObj = WXWebpageObject()
                 webObj.webpageUrl =
-                    "https://mobile.zhifengwangluo.c3w.cc/shop/Groupbuy/detail?team_id=" + mGroupBean?.info?.team_id + "&goods_id=" + mGroupBean?.info?.goods_id
+                    UriConstant.BASE_URL + "shop/Groupbuy/detail?team_id=" + mGroupBean?.info?.team_id + "&goods_id=" + mGroupBean?.info?.goods_id
                 val msg = WXMediaMessage()
                 msg.mediaObject = webObj //消息对象
                 msg.title = "DC商城" //标题
-                msg.description = "拼团" //描述
+                msg.description = mGroupBean?.info?.goods_name
+                val bitmap = BitmapFactory.decodeResource(resources, R.drawable.icon_dc_logo2)
+                msg.thumbData = WXBmpUtil.getBitmapBytes(bitmap, false)
+
                 val req = SendMessageToWX.Req()
                 req.transaction = buildTransaction("text")
                 req.message = msg

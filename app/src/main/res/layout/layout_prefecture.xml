@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
                     android:singleLine="true"
-                    android:text="签到2天免费领"/>
+                    android:text="2天签到领"/>
 
         </LinearLayout>
 

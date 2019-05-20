@@ -129,4 +129,6 @@ dependencies {
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.3.1'
     //微信sdk要用到junit bitmap
 //    testImplementation 'junit:junit:4.12'
+    //阿里视频基础播放器需要添加oss依赖
+    implementation 'com.aliyun.dpa:oss-android-sdk:2.9.2'
 }

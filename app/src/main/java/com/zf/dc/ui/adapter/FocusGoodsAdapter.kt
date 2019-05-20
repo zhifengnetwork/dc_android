@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.zf.dc.R
+import com.zf.dc.api.UriConstant
 import com.zf.dc.mvp.bean.MyFollowList
 import com.zf.dc.ui.activity.SameGoodsActivity
 import com.zf.dc.utils.GlideUtils
@@ -37,7 +38,7 @@ class FocusGoodsAdapter(val context: Context?, val data: List<MyFollowList>) :
             //商品的图片
             GlideUtils.loadUrlImage(
                 context,
-                "https://mobile.zhifengwangluo.c3w.cc" + mData[position].original_img,
+                UriConstant.BASE_URL + mData[position].original_img,
                 goodsIcon
             )
             //商品的市场价格
