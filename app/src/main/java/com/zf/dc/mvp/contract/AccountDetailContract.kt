@@ -23,7 +23,7 @@ interface AccountDetailContract {
 
     interface Presenter : IPresenter<View> {
 
-        fun requestAccountDetail(type: String, page: Int?, num: Int)
+        fun requestAccountDetail(type: String, page: Int?)
 
     }
 }
