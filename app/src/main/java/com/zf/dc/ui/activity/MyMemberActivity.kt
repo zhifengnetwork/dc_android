@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.zf.dc.MyApplication
 import com.zf.dc.R
 import com.zf.dc.base.BaseActivity
+import com.zf.dc.livedata.UserInfoLiveData
 import com.zf.dc.mvp.bean.MyMemberBean
 import com.zf.dc.mvp.contract.MyMemberContract
 import com.zf.dc.mvp.presenter.MyMemberPresenter
@@ -74,7 +75,7 @@ class MyMemberActivity : BaseActivity(), MyMemberContract.View {
         back.setOnClickListener {
             finish()
         }
-        titleName.text = "我的会员"
+        titleName.text = "团队列表"
         rightLayout.visibility = View.INVISIBLE
     }
 
@@ -92,14 +93,16 @@ class MyMemberActivity : BaseActivity(), MyMemberContract.View {
             if (userSum == 1) {
                 userList.clear()
                 userName.clear()
-                user_name.text = "我的下级"
+                user_name.text = UserInfoLiveData.value?.nickname
+                user_id.text = UserInfoLiveData.value?.user_id
                 refreshLayout.resetNoMoreData()
                 presenter.requestMyMember(1, "")
             }
             if (userSum >= 2) {
                 userList.remove(userList[userSum - 1])
                 userName.remove(userName[userSum - 1])
-                user_name.text = userName[userSum - 2] + "的下级"
+                user_name.text = userName[userSum - 2]
+                user_id.text = userList[userSum - 2]
                 refreshLayout.resetNoMoreData()
                 presenter.requestMyMember(1, userList[userSum - 2])
             }
@@ -119,7 +122,7 @@ class MyMemberActivity : BaseActivity(), MyMemberContract.View {
         RecyclerViewDivider(
             this,
             LinearLayoutManager.VERTICAL,
-            1,
+            2,
             ContextCompat.getColor(this, R.color.colorBackground)
         )
     }
@@ -134,6 +137,10 @@ class MyMemberActivity : BaseActivity(), MyMemberContract.View {
         member_rl.layoutManager = LinearLayoutManager(this)
         member_rl.addItemDecoration(divider)
         member_rl.adapter = mAdapter
+
+        user_name.text = UserInfoLiveData.value?.nickname
+        user_id.text = UserInfoLiveData.value?.user_id
+
     }
 
     override fun initEvent() {
@@ -159,7 +166,8 @@ class MyMemberActivity : BaseActivity(), MyMemberContract.View {
             userList.add(id)
             userName.add(name)
             userSum += 1
-            user_name.text = name + "的下级"
+            user_name.text = name
+            user_id.text = id
             refreshLayout.resetNoMoreData()
             presenter.requestMyMember(1, id)
         }

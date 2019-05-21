@@ -54,7 +54,7 @@ class ColumnAdapter(val context: Context?) : RecyclerView.Adapter<ColumnAdapter.
                 2 -> ActionActivity.actionStart(context, ActionActivity.AUCTION)
                 3 -> ActionActivity.actionStart(context, ActionActivity.GROUP)
                 4 -> TeamActivity.actionStart(context)
-                6 -> SignInGiftActivity.actionStart(context)
+                6 -> SignInSumActivity.actionStart(context)
                 7 -> MessageActivity.actionStart(context)
                 8 -> DistributeActivity.actionStart(context)
             }

@@ -3,6 +3,7 @@ package com.zf.dc.ui.activity
 import android.content.Context
 import android.content.Intent
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zf.dc.MyApplication.Companion.context
 import com.zf.dc.R
@@ -13,6 +14,7 @@ import com.zf.dc.mvp.contract.MemberOrderContract
 import com.zf.dc.mvp.presenter.MemberOrderPresenter
 import com.zf.dc.showToast
 import com.zf.dc.ui.adapter.SeeOrderAdapter
+import com.zf.dc.view.recyclerview.RecyclerViewDivider
 import kotlinx.android.synthetic.main.activity_see_order.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
@@ -78,9 +80,19 @@ class SeeOrderActivity : BaseActivity(), MemberOrderContract.View {
 
     private var mData = ArrayList<MemberOrderList>()
 
-    private val adapter by lazy { SeeOrderAdapter(this,mData) }
+    private val adapter by lazy { SeeOrderAdapter(this, mData) }
 
     private var id = ""
+
+    //分割线
+    private val divider by lazy {
+        RecyclerViewDivider(
+            this,
+            LinearLayoutManager.VERTICAL,
+            2,
+            ContextCompat.getColor(this, R.color.colorBackground)
+        )
+    }
 
     override fun initData() {
         id = intent.getStringExtra("id")
@@ -91,7 +103,7 @@ class SeeOrderActivity : BaseActivity(), MemberOrderContract.View {
 
         order_rl.layoutManager = LinearLayoutManager(context)
         order_rl.adapter = adapter
-
+        order_rl.addItemDecoration(divider)
     }
 
     override fun initEvent() {

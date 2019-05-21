@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:gravity="center_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="35dp">
+              android:gravity="center_vertical"
+              android:layout_width="match_parent"
+              android:layout_height="50dp">
     <TextView
             android:id="@+id/user_id"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/colorBlackText"
+            android:textSize="14sp"
             android:text="用户ID"/>
     <TextView
             android:id="@+id/user_name"
@@ -16,6 +18,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/colorBlackText"
+            android:textSize="14sp"
             android:text="用户"/>
     <TextView
             android:id="@+id/user_phone"
@@ -23,6 +27,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/colorBlackText"
+            android:textSize="14sp"
             android:text="15007622595"/>
     <TextView
             android:id="@+id/look_btn"
@@ -30,6 +36,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="15sp"
+            android:textColor="@color/colorBlackText"
+            android:textSize="14sp"
             android:text="查看"/>
 </LinearLayout>

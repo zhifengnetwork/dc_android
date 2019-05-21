@@ -13,6 +13,6 @@ data class RechargeRecordList(
     val pay_time:String,
     val pay_code:String,
     val pay_name:String,
-    val pay_status:String,
+    val pay_status:Int,
     val buy_vip:String
 )
