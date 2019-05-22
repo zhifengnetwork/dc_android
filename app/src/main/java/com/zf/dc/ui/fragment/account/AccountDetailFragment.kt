@@ -117,6 +117,4 @@ class AccountDetailFragment : BaseFragment(), AccountDetailContract.View {
         presenter.detachView()
     }
 
-
-
 }

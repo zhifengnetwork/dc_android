@@ -23,6 +23,7 @@ import com.zf.dc.ui.fragment.MeFragment
 import com.zf.dc.ui.fragment.ShoppingCartFragment1
 import com.zf.dc.utils.Preference
 import com.zf.dc.utils.StatusBarUtils
+import com.zf.dc.utils.bus.RxBus
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(), UserInfoContract.View {
@@ -96,6 +97,7 @@ class MainActivity : BaseActivity(), UserInfoContract.View {
     }
 
     override fun initEvent() {
+
     }
 
     private val mTitles = listOf("首页", "分类", "购物车", "我的")

@@ -3,6 +3,7 @@ package com.zf.dc.ui.fragment.goodsdetail
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.CountDownTimer
@@ -112,6 +113,7 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
             }
         }
     }
+
 
     //运费
     override fun getGoodsFreight(bean: GoodsFreightBean) {
@@ -530,6 +532,7 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
 
     }
 
+
     /**
      * 为您推荐
      * pageRecyclerView
@@ -671,6 +674,8 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
                                 builder.setMessage("是否去添加收货地址")
                                 builder.setPositiveButton("是") { dialog, which ->
                                     AddressEditActivity.actionStart(context, null)
+
+
                                     dialog.dismiss()
                                 }
                                 builder.setNegativeButton("否") { dialog, which ->

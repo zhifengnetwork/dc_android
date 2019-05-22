@@ -41,7 +41,7 @@ class InfoFragment : NotLazyBaseFragment() {
             //退出登录->清空token、删除用户信息缓存
             Preference.clearPreference(UriConstant.TOKEN)
             UserInfoLiveData.value = null
-            val intent = Intent(context, MainActivity::class.java)
+            val intent = Intent(context, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
             context?.startActivity(intent)
