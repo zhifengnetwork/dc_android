@@ -22,7 +22,9 @@ import com.zf.dc.ui.activity.*
 import com.zf.dc.ui.adapter.ColumnAdapter
 import com.zf.dc.ui.adapter.CommendAdapter
 import com.zf.dc.utils.GlideUtils
+import com.zf.dc.utils.LogUtils
 import com.zf.dc.utils.Preference
+import com.zf.dc.utils.bus.RxBus
 import com.zf.dc.view.RecDecoration
 import com.zf.dc.view.popwindow.RegionPopupWindow
 import kotlinx.android.synthetic.main.fragment_me.*
@@ -50,8 +52,8 @@ class MeFragment : BaseFragment(), CommendContract.View {
     override fun appSignSuccess(bean: AppSignBean) {
         signData = bean
         window = object : RegionPopupWindow(
-                activity as Activity, R.layout.pop_sign_success,
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
+            activity as Activity, R.layout.pop_sign_success,
+            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
         ) {
             @SuppressLint("SetTextI18n")
             override fun initView() {
@@ -146,6 +148,11 @@ class MeFragment : BaseFragment(), CommendContract.View {
     private val commendPresenter by lazy { CommendPresenter() }
 
     override fun initEvent() {
+
+        RxBus.getDefault().subscribe<String>(this,UriConstant.UPDATE_COUNT_INFO){
+            LogUtils.e(">>2")
+            commendPresenter.requestMe()
+        }
 
         UserInfoLiveData.observe(viewLifecycleOwner, Observer { userInfo ->
             userInfo?.apply {
@@ -243,4 +250,6 @@ class MeFragment : BaseFragment(), CommendContract.View {
         super.onDestroy()
         commendPresenter.detachView()
     }
+
+
 }

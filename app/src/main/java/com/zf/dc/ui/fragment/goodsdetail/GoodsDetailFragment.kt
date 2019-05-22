@@ -74,6 +74,8 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
         presenter.requestRecommendGoods(bean.goods.cat_id)
         //请求规格
         presenter.requestGoodsSpec(mGoodsId)
+
+        RxBus.getDefault().post(UriConstant.UPDATE_COUNT_INFO, UriConstant.UPDATE_COUNT_INFO)
     }
 
     //秒杀商品详情
@@ -104,7 +106,7 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
         mAddress.addAll(bean)
         popAdapter.notifyDataSetChanged()
         //默认地址 邮费
-        if (mAddress.isNotEmpty()){
+        if (mAddress.isNotEmpty()) {
             for (i in 0 until mAddress.size) {
                 if (mAddress[i].is_default == "1") {
                     addressId = mAddress[i].address_id
@@ -113,8 +115,8 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
                     presenter.requestGoodsFreight(mGoodsId, mAddress[i].city, "1")
                 }
             }
-        }else{
-            goods_address.text="请选择配送地址"
+        } else {
+            goods_address.text = "请选择配送地址"
         }
 
     }
@@ -148,11 +150,14 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
     //关注商品
     override fun setCollectGoods(msg: String) {
         showToast(msg)
+        LogUtils.e(">>1")
+        RxBus.getDefault().post(UriConstant.UPDATE_COUNT_INFO, UriConstant.UPDATE_COUNT_INFO)
     }
 
     //取消关注
     override fun delCollectGoods(msg: String) {
         showToast(msg)
+        RxBus.getDefault().post(UriConstant.UPDATE_COUNT_INFO, UriConstant.UPDATE_COUNT_INFO)
     }
 
     //加入购物车

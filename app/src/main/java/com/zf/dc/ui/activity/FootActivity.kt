@@ -2,11 +2,13 @@ package com.zf.dc.ui.activity
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zf.dc.R
+import com.zf.dc.api.UriConstant
 import com.zf.dc.base.BaseActivity
 import com.zf.dc.mvp.bean.DateHeadEntity
 import com.zf.dc.mvp.bean.MonthList
@@ -16,6 +18,7 @@ import com.zf.dc.mvp.presenter.MyFootPresenter
 import com.zf.dc.showToast
 import com.zf.dc.ui.adapter.FootAdapter
 import com.zf.dc.utils.StatusBarUtils
+import com.zf.dc.utils.bus.RxBus
 import com.zf.dc.view.recyclerview.FloatingItemDecoration
 import kotlinx.android.synthetic.main.activity_foot.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
@@ -68,6 +71,7 @@ class FootActivity : BaseActivity(), MyFootContract.View {
 
     override fun freshEmpty() {
         refreshLayout.setEnableLoadMore(false)
+        adapter.notifyDataSetChanged()
     }
 
     override fun setLoadMore(bean: List<MyFootBean>) {
@@ -112,12 +116,17 @@ class FootActivity : BaseActivity(), MyFootContract.View {
     override fun setMyFoot() {
         start()
         showToast("删除成功")
+        RxBus.getDefault().post(UriConstant.UPDATE_COUNT_INFO, UriConstant.UPDATE_COUNT_INFO)
     }
 
     //清空足迹
     override fun clearMyFoot() {
         start()
+        days.clear()
+        adapter.notifyDataSetChanged()
+        RxBus.getDefault().post(UriConstant.UPDATE_COUNT_INFO, UriConstant.UPDATE_COUNT_INFO)
         showToast("清空成功")
+
     }
 
     override fun showLoading() {
@@ -243,15 +252,20 @@ class FootActivity : BaseActivity(), MyFootContract.View {
 //                days.removeAt(adapter.checkList[it])
 //            }
             //如果全选按钮被选中 则清空足迹
-            if (allChoose.isChecked) {
-                presenter.requestclearMyFoot()
+            if (allChoose.isChecked ) {
+                if (days.isNotEmpty()){
+                    presenter.requestclearMyFoot()
+                }
             } else {
                 var mId = ""
-                for (i in adapter.checkList.indices) {
-                    mId = if (i == 0) adapter.checkList[i] else mId + "," + adapter.checkList[i]
+                if (adapter.checkList.isNotEmpty()) {
+                    for (i in adapter.checkList.indices) {
+                        mId = if (i == 0) adapter.checkList[i] else mId + "," + adapter.checkList[i]
+                    }
+                    adapter.checkList.clear()
+                    presenter.requestsetMyFoot(mId)
                 }
-                adapter.checkList.clear()
-                presenter.requestsetMyFoot(mId)
+
             }
         }
 

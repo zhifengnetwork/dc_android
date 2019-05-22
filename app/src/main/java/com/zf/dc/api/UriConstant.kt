@@ -9,13 +9,14 @@ object UriConstant {
 
     //mobile.zhifengwangluo.c3w.cc
 
+    const val UPDATE_COUNT_INFO = "updateCount"
+
     const val LANGUAGE = "language"
 
     const val TOKEN = "token"
 
     const val PER_PAGE = 20
 
-    const val UPDATE_USER_INFO = "updateUserInfo"
 
     const val FRESH_ORDER_LIST = "freshOrderList"
 
