@@ -31,6 +31,7 @@ class DistributeActivity : BaseActivity(), DistributeContract.View {
         superId.text = bean.leader.user_id
         superName.text = bean.leader.nickname
         myId.text = bean.user_id
+        countTime.text = "统计时间:" + bean.statistical_time
     }
 
     override fun showLoading() {

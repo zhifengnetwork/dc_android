@@ -4,6 +4,7 @@ import android.app.Activity
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -283,6 +284,7 @@ class ShoppingCartFragment1 : BaseFragment(), CartListContract.View, CartOperate
         refreshLayout.setNoMoreData(false)
         refreshLayout.setEnableLoadMore(false)
         cartListPresenter.requestCartList(1)
+
     }
 
     override fun initView() {

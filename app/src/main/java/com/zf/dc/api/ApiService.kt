@@ -896,7 +896,7 @@ interface ApiService {
     /**
      *  分销订单
      */
-    @POST("api/user/distribut_order\n")
+    @POST("api/user/distribut_order")
     @FormUrlEncoded
     fun getDistributeOrder(
         @Field("page") page: Int,
