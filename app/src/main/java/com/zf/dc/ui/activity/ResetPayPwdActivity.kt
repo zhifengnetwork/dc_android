@@ -22,9 +22,10 @@ class ResetPayPwdActivity : BaseActivity(), ForgetPwdContract.View {
     override fun showError(msg: String, errorCode: Int) {
         showToast(msg)
     }
+
     //第一步身份验证通过
     override fun setContract() {
-        InputPwdActivity.actionStart(this, user_phone.text.toString(),InputPwdActivity.BUY)
+        InputPwdActivity.actionStart(this, user_phone.text.toString(), InputPwdActivity.BUY)
     }
 
     override fun setChangePwd() {
@@ -85,6 +86,9 @@ class ResetPayPwdActivity : BaseActivity(), ForgetPwdContract.View {
     override fun initEvent() {
         //获得验证码
         sendCode.setOnClickListener {
+            if (sendCode.isSelected) {
+                return@setOnClickListener
+            }
             presenter.requestCode(6, user_phone.text.toString())
         }
         //下一步
