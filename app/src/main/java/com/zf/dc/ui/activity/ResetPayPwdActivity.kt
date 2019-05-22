@@ -28,7 +28,7 @@ class ResetPayPwdActivity : BaseActivity(), ForgetPwdContract.View {
         InputPwdActivity.actionStart(this, user_phone.text.toString(), InputPwdActivity.BUY)
     }
 
-    override fun setChangePwd() {
+    override fun setChangePwd(msg: String) {
 
     }
 
@@ -94,7 +94,7 @@ class ResetPayPwdActivity : BaseActivity(), ForgetPwdContract.View {
         //下一步
         confirm.setOnClickListener {
             if (code.text.isNotEmpty()) {
-                presenter.requestContract(user_phone.text.toString(), code.text.toString())
+                presenter.requestContract(user_phone.text.toString(), code.text.toString(), 6)
             } else {
                 codeHint.visibility = View.VISIBLE
             }

@@ -790,7 +790,11 @@ interface ApiService {
      */
     @POST("api/user/FindPwdCheckSms")
     @FormUrlEncoded
-    fun requestContrast(@Field("mobile") mobile: String, @Field("code") code: String): Observable<BaseBean<Unit>>
+    fun requestContrast(
+        @Field("mobile") mobile: String,
+        @Field("code") code: String,
+        @Field("scene") scene: Int
+    ): Observable<BaseBean<Unit>>
 
     /**
      * 找回密码

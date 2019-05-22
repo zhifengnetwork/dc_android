@@ -11,13 +11,13 @@ interface ForgetPwdContract {
 
         fun setContract()
 
-        fun setChangePwd()
+        fun setChangePwd(msg: String)
 
         fun setCode(msg: String)
     }
 
     interface Presenter : IPresenter<View> {
-        fun requestContract(mobile: String, code: String)
+        fun requestContract(mobile: String, code: String, scene: Int)
 
         fun requestChangePwd(mobile: String, password: String, password2: String, scene: Int)
 

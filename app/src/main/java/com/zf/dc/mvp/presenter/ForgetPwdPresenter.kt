@@ -33,10 +33,10 @@ class ForgetPwdPresenter : BasePresenter<ForgetPwdContract.View>(), ForgetPwdCon
     }
 
     //第一步对比验证码
-    override fun requestContract(mobile: String, code: String) {
+    override fun requestContract(mobile: String, code: String, scene: Int) {
         checkViewAttached()
         mRootView?.showLoading()
-        val disposable = model.requestContract(mobile, code)
+        val disposable = model.requestContract(mobile, code, scene)
             .subscribe({
                 mRootView?.apply {
                     dismissLoading()
@@ -62,7 +62,7 @@ class ForgetPwdPresenter : BasePresenter<ForgetPwdContract.View>(), ForgetPwdCon
                 mRootView?.apply {
                     dismissLoading()
                     when (it.status) {
-                        0 -> setChangePwd()
+                        0 -> setChangePwd(it.msg)
                         else -> showError(it.msg, it.status)
                     }
                 }
