@@ -266,6 +266,10 @@ class HomeFragment : BaseFragment(), HomeContract.View, CommendContract.View {
 
     override fun initEvent() {
 
+        secKillLayout.setOnClickListener {
+            ActionActivity.actionStart(context, ActionActivity.SEC_KILL)
+        }
+
         groupLayout.setOnClickListener {
             GroupBuyActivity.actionStart(context)
         }

@@ -22,8 +22,8 @@
                 android:orientation="vertical">
 
             <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/icon_auction"/>
 
             <TextView
@@ -45,8 +45,8 @@
                 android:orientation="vertical">
 
             <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/groupbuy"/>
 
             <TextView
@@ -67,8 +67,8 @@
                 android:orientation="vertical">
 
             <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/signin2"/>
 
             <TextView
@@ -89,8 +89,8 @@
                 android:orientation="vertical">
 
             <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/ic_signin"/>
 
             <TextView
@@ -120,8 +120,8 @@
                 android:orientation="vertical">
 
             <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/dingdan"/>
 
             <TextView
@@ -142,8 +142,8 @@
                 android:orientation="vertical">
 
             <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/ic_sc"/>
 
             <TextView
@@ -164,8 +164,8 @@
                 android:orientation="vertical">
 
             <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/shoppingcart2"/>
 
             <TextView
@@ -178,6 +178,7 @@
 
 
         <LinearLayout
+                android:id="@+id/secKillLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -185,15 +186,15 @@
                 android:orientation="vertical">
 
             <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/activity"/>
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/icon_sec"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:text="优惠活动"/>
+                    android:text="秒杀"/>
 
         </LinearLayout>
 

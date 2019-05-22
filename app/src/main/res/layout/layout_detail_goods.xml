@@ -216,11 +216,12 @@
                 android:id="@+id/goods_address"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="15sp"
-                android:text="广州市白云区嘉禾望岗"
+                android:text=""
                 android:drawableRight="@drawable/back2"
                 android:layout_marginLeft="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
     <LinearLayout
