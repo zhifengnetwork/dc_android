@@ -7,7 +7,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
@@ -74,6 +73,8 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
         presenter.requestRecommendGoods(bean.goods.cat_id)
         //请求规格
         presenter.requestGoodsSpec(mGoodsId)
+
+        RxBus.getDefault().post(UriConstant.UPDATE_COUNT_INFO, UriConstant.UPDATE_COUNT_INFO)
     }
 
     //秒杀商品详情
@@ -104,14 +105,19 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
         mAddress.addAll(bean)
         popAdapter.notifyDataSetChanged()
         //默认地址 邮费
-        for (i in 0 until mAddress.size) {
-            if (mAddress[i].is_default == "1") {
-                addressId = mAddress[i].address_id
-                goods_address.text = mAddress[i].province_name + mAddress[i].city_name + mAddress[i].district_name
-                //邮费请求
-                presenter.requestGoodsFreight(mGoodsId, mAddress[i].city, "1")
+        if (mAddress.isNotEmpty()) {
+            for (i in 0 until mAddress.size) {
+                if (mAddress[i].is_default == "1") {
+                    addressId = mAddress[i].address_id
+                    goods_address.text = mAddress[i].province_name + mAddress[i].city_name + mAddress[i].district_name
+                    //邮费请求
+                    presenter.requestGoodsFreight(mGoodsId, mAddress[i].city, "1")
+                }
             }
+        } else {
+            goods_address.text = "请选择配送地址"
         }
+
     }
 
 
@@ -144,11 +150,14 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
     //关注商品
     override fun setCollectGoods(msg: String) {
         showToast(msg)
+        LogUtils.e(">>1")
+        RxBus.getDefault().post(UriConstant.UPDATE_COUNT_INFO, UriConstant.UPDATE_COUNT_INFO)
     }
 
     //取消关注
     override fun delCollectGoods(msg: String) {
         showToast(msg)
+        RxBus.getDefault().post(UriConstant.UPDATE_COUNT_INFO, UriConstant.UPDATE_COUNT_INFO)
     }
 
     //加入购物车
@@ -277,6 +286,7 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
 
     }
 
+
     override fun initEvent() {
         scrollView.setOnScrollChangeListener { v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
 
@@ -374,6 +384,13 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
         presenter.detachView()
         countDownTimer?.cancel()
         countDownTimer = null
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1) {
+            presenter.requestAddress()
+        }
     }
 
     /**Banner轮播图*/
@@ -673,9 +690,7 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
                                 builder.setTitle("你还没有选择收货地址")
                                 builder.setMessage("是否去添加收货地址")
                                 builder.setPositiveButton("是") { dialog, which ->
-                                    AddressEditActivity.actionStart(context, null)
-
-
+                                    startActivityForResult(Intent(context, AddressEditActivity::class.java), 1)
                                     dialog.dismiss()
                                 }
                                 builder.setNegativeButton("否") { dialog, which ->

@@ -14,6 +14,7 @@ import com.zf.dc.showToast
 import com.zf.dc.utils.FormUtil
 import com.zf.dc.utils.StatusBarUtils
 import kotlinx.android.synthetic.main.activity_setpwd.*
+import kotlinx.android.synthetic.main.layout_toolbar.*
 
 /**
  * 重设密码先验证手机号
@@ -85,6 +86,11 @@ class ResetPwdActivity : BaseActivity(), ForgetPwdContract.View {
 
     override fun initToolBar() {
         StatusBarUtils.darkMode(this, ContextCompat.getColor(this, R.color.colorSecondText), 0.3f)
+        rightLayout.visibility = View.GONE
+        titleName.text = ""
+        back.setOnClickListener {
+            finish()
+        }
     }
 
     override fun layoutId(): Int = R.layout.activity_setpwd

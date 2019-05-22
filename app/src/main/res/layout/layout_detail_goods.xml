@@ -280,8 +280,7 @@
             <TextView
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="15sp"
-                    android:text="由商品自营发货并提供售后服务"
-                    android:drawableRight="@drawable/back2"
+                    android:text="由商城自营发货并提供售后服务"
                     android:layout_marginLeft="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>

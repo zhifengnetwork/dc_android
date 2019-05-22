@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.scwang.smartrefresh.layout.util.DensityUtil
 import com.zf.dc.R
+import com.zf.dc.api.UriConstant
 import com.zf.dc.base.BaseFragment
 import com.zf.dc.mvp.bean.CommendList
 import com.zf.dc.mvp.bean.MyFollowBean
@@ -15,6 +16,7 @@ import com.zf.dc.showToast
 import com.zf.dc.ui.activity.GoodsDetail2Activity
 import com.zf.dc.ui.adapter.FocusGoodsAdapter
 import com.zf.dc.ui.adapter.FocusLoveGoodsAdapter
+import com.zf.dc.utils.bus.RxBus
 import com.zf.dc.view.RecDecoration
 import com.zf.dc.view.recyclerview.SwipeItemLayout
 import kotlinx.android.synthetic.main.fragment_focus_goods.*
@@ -91,7 +93,7 @@ class FocusGoodsFragment : BaseFragment(), MyFollowContract.View {
         refreshLayout.setNoMoreData(false)
         lazyLoad()
         love_goods_ly.visibility = View.GONE
-
+        RxBus.getDefault().post(UriConstant.UPDATE_COUNT_INFO, UriConstant.UPDATE_COUNT_INFO)
     }
 
     override fun showLoading() {
