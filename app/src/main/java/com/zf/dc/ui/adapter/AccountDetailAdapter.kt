@@ -1,5 +1,6 @@
 package com.zf.dc.ui.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -18,16 +19,17 @@ class AccountDetailAdapter(val context: Context?, val data: List<AccountDetailLi
 
     override fun getItemCount(): Int = data.size
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.apply {
             //订单编号
-            order_sn.text = data[position].order_sn
+            order_sn.text = "订单编号：" + data[position].order_sn
             //金额
-            user_money.text = data[position].user_money
+            user_money.text = "变动金额：" + data[position].user_money
             //日期
-            change_time.text = data[position].change_data
+            change_time.text = "变动时间：" + data[position].change_data
             //描述
-            desc.text = data[position].desc
+            desc.text = "描述：" + data[position].desc
 
         }
     }

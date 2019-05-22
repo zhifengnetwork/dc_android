@@ -23,6 +23,7 @@ class InputPwdActivity : BaseActivity(), ForgetPwdContract.View {
     }
 
     override fun setChangePwd() {
+
     }
 
     override fun setCode(msg: String) {

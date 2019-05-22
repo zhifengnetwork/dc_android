@@ -1,6 +1,7 @@
 package com.zf.dc.ui.adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,11 +25,27 @@ class RechargeRecordAdapter(val context: Context, val data: List<RechargeRecordL
             //支付方式
             pay_name.text = data[position].pay_name
             //时间
-            ctime.text = TimeUtils.auctionTime(data[position].ctime)
+            ctime.text = TimeUtils.myOrderTime(data[position].ctime)
             //金额
             account.text = data[position].account
             //状态
-            pay_status.text = data[position].pay_status
+
+            when (data[position].pay_status) {
+                0 -> {
+                    pay_status.text = "待支付"
+                    pay_status.setTextColor(Color.rgb(0, 0, 0))
+                }
+                1 -> {
+                    pay_status.text = "充值成功"
+                    pay_status.setTextColor(Color.rgb(246, 5, 5))
+
+                }
+                2->{
+                    pay_status.text = "交易关闭"
+                    pay_status.setTextColor(Color.rgb(30, 198, 26))
+                }
+            }
+
         }
     }
 

@@ -5,9 +5,30 @@ import android.content.Intent
 import android.view.View
 import com.zf.dc.R
 import com.zf.dc.base.BaseActivity
+import com.zf.dc.mvp.contract.ChangePwdContract
+import com.zf.dc.mvp.presenter.ChangePwdPresenter
+import com.zf.dc.showToast
+import kotlinx.android.synthetic.main.activity_change_password.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
-class ChangePasswordActivity : BaseActivity() {
+class ChangePasswordActivity : BaseActivity(), ChangePwdContract.View {
+    override fun showError(msg: String, errorCode: Int) {
+        showToast(msg)
+    }
+
+    override fun changePwdSuccess(msg: String) {
+        showToast(msg)
+        finish()
+    }
+
+    override fun showLoading() {
+
+    }
+
+    override fun dismissLoading() {
+
+    }
+
     companion object {
         fun actionStart(context: Context?) {
             context?.startActivity(Intent(context, ChangePasswordActivity::class.java))
@@ -20,6 +41,8 @@ class ChangePasswordActivity : BaseActivity() {
         rightLayout.visibility = View.INVISIBLE
     }
 
+    private val presenter by lazy { ChangePwdPresenter() }
+
     override fun layoutId(): Int = R.layout.activity_change_password
 
     override fun initData() {
@@ -27,15 +50,29 @@ class ChangePasswordActivity : BaseActivity() {
     }
 
     override fun initView() {
-
+        presenter.attachView(this)
     }
 
     override fun initEvent() {
+        change_btn.setOnClickListener {
+            if (pwd.text.toString() != "" && new_pwd.text.toString() != "" && new_pwd2.text.toString() != ""){
+                presenter.requestChangePwd(pwd.text.toString(), new_pwd.text.toString(), new_pwd2.text.toString())
+            }else{
+                showToast("请正确的输入密码")
+            }
+
+        }
 
     }
 
-    override fun start() {
 
-    }
+override fun onDestroy() {
+    super.onDestroy()
+    presenter.detachView()
+}
+
+override fun start() {
+
+}
 
 }

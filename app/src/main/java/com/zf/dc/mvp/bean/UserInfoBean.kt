@@ -16,5 +16,6 @@ data class UserInfoBean(
 //        val birthyear: String,
 //        val birthmonth: String,
 //        val birthday: String,
-        val date_birth: String
+        val date_birth: String,
+        val user_id:String
 )
