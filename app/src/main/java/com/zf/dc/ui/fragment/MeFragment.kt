@@ -2,6 +2,7 @@ package com.zf.dc.ui.fragment
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.util.Log
 import android.view.Gravity
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
@@ -155,7 +156,8 @@ class MeFragment : BaseFragment(), CommendContract.View {
 
     override fun initEvent() {
 
-        RxBus.getDefault().subscribe<String>(this, UriConstant.UPDATE_COUNT_INFO) {
+
+        RxBus.getDefault().subscribe<String>(this,UriConstant.UPDATE_COUNT_INFO){
             commendPresenter.requestMe()
         }
 

@@ -21,10 +21,9 @@ class MemberOrderPresenter : BasePresenter<MemberOrderContract.View>(), MemberOr
                         0 -> {
                             if (it.data != null) {
                                 if (mPage == 1) {
-
-                                    getMenberOrder(it.data)
-
                                     if (it.data.list.isNotEmpty()) {
+                                        getMenberOrder(it.data)
+                                    }else{
                                         freshEmpty()
                                     }
                                 } else {

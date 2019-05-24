@@ -1,6 +1,8 @@
 package com.zf.dc.ui.adapter
 
 import android.content.Context
+import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.zf.dc.R
 import com.zf.dc.mvp.bean.AppSignDayBean
+import com.zf.dc.view.gridview.SpecialCalendar
 import com.zf.dc.view.gridview.SquareRelativeLayout
 
 class RegistrationAdapter(
@@ -21,12 +24,9 @@ class RegistrationAdapter(
     val data: AppSignDayBean?
 ) : BaseAdapter() {
 
-
-    private var dayNumber: IntArray? = null
-
+    private val dayNumber = Array(42) { 0 }
     private var viewHolder: ViewHolder? = null
     private var tab: Int = 0//记录日期下标
-
 
     //接收日期处理方法
     fun Date() {
@@ -39,14 +39,34 @@ class RegistrationAdapter(
                 //截取日
                 val dd: Int = e.split("/")[2].toInt()
                 //判断截取数据并在日历设置签到样式
-                if (yy == year && mm == (month + 1) && dd == dayNumber!![tab]) {
-                    viewHolder?.day?.setBackgroundResource(R.drawable.rili)
-                    viewHolder?.sqly?.setPadding(30, 30, 30, 30)
-                    viewHolder?.day?.text = ""
-                    viewHolder?.back?.setBackgroundResource(R.drawable.shape_calendar_bg)
+
+                //上月
+                if (tab < week) {
+                    if (yy == year && mm == month && dd == dayNumber[tab]) {
+                        viewHolder?.day?.setBackgroundResource(R.drawable.rili)
+                        viewHolder?.sqly?.setPadding(30, 30, 30, 30)
+                        viewHolder?.day?.text = ""
+                        viewHolder?.back?.setBackgroundResource(R.drawable.shape_calendar_bg)
+                    }
                 }
-
-
+                //本月
+                if (tab < days + week && tab >= week) {
+                    if (yy == year && mm == (month + 1) && dd == dayNumber[tab]) {
+                        viewHolder?.day?.setBackgroundResource(R.drawable.rili)
+                        viewHolder?.sqly?.setPadding(30, 30, 30, 30)
+                        viewHolder?.day?.text = ""
+                        viewHolder?.back?.setBackgroundResource(R.drawable.shape_calendar_bg)
+                    }
+                }
+                //下月
+                if (tab >= days + week) {
+                    if (yy == year && mm == (month + 2) && dd == dayNumber[tab]) {
+                        viewHolder?.day?.setBackgroundResource(R.drawable.rili)
+                        viewHolder?.sqly?.setPadding(30, 30, 30, 30)
+                        viewHolder?.day?.text = ""
+                        viewHolder?.back?.setBackgroundResource(R.drawable.shape_calendar_bg)
+                    }
+                }
             }
         }
 
@@ -59,65 +79,79 @@ class RegistrationAdapter(
 
 
     override fun getCount(): Int {
-        var i = 0
-        i = if ((week > 4 && days > 30) || (week > 5 && days > 29)) {
+        return if ((week > 4 && days > 30) || (week > 5 && days > 29)) {
             42
         } else {
             35
         }
-        return i
     }
 
     override fun getItem(i: Int): String? {
-
         return null
     }
 
     override fun getItemId(i: Int): Long {
-        return dayNumber!![i].toLong()
+        return dayNumber[i].toLong()
     }//点击时
 
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup): View {
-        var view = view
-        if (null == view) {
-            view = LayoutInflater.from(context).inflate(R.layout.item_registrationadatper, null)
-            viewHolder = ViewHolder(view!!)
-            view.tag = viewHolder
+        var mView = view
+        if (null == mView) {
+            mView = LayoutInflater.from(context).inflate(R.layout.item_registrationadatper, null)
+            viewHolder = ViewHolder(mView!!)
+            mView.tag = viewHolder
         } else {
-            viewHolder = view.tag as ViewHolder
+            viewHolder = mView.tag as ViewHolder
         }
-        viewHolder?.day?.text = if (dayNumber!![i] == 0) "" else dayNumber!![i].toString() + ""
+
+        when {
+            //上个月日期
+            i < week -> {
+                viewHolder?.day?.text = dayNumber[week - 1 - i].toString()
+                viewHolder?.day?.setTextColor(Color.rgb(214, 214, 214))
+            }
+            //下个月日期
+            i >= days + week -> {
+                viewHolder?.day?.text = dayNumber[i].toString()
+                viewHolder?.day?.setTextColor(Color.rgb(214, 214, 214))
+            }
+            //本月日期
+            else -> viewHolder?.day?.text = dayNumber[i].toString()
+        }
+
 
         //判断签到了的日子并显示样式
         tab = i//记录日期下标
         Date()
 
-        return view
+        return mView
     }
 
     private inner class ViewHolder(view: View) {
-        val day: TextView
-        val back: LinearLayout
-        val sqly: SquareRelativeLayout
+        val day: TextView = view.findViewById(R.id.day) as TextView
+        val back: LinearLayout = view.findViewById(R.id.calendar_bg) as LinearLayout
+        val sqly: SquareRelativeLayout = view.findViewById(R.id.squarerly) as SquareRelativeLayout
 
-        init {
-            this.day = view.findViewById(R.id.day) as TextView
-            this.sqly = view.findViewById(R.id.squarerly) as SquareRelativeLayout
-            this.back = view.findViewById(R.id.calendar_bg) as LinearLayout
-        }
     }
 
     /**
      * 得到42格子 每一格子的值
      */
     private fun getEveryDay() {
-        dayNumber = IntArray(42)
-
+        val mCalendar = SpecialCalendar()
+        val isLeapYear = mCalendar.isLeapYear(year)
+        val mUpDays = mCalendar.getDaysOfMonth(isLeapYear, month)//得到上月一共几天
+        var a = 1
         for (i in 0..41) {
             if (i < days + week && i >= week) {
-                dayNumber!![i] = i - week + 1
-            } else {
-                dayNumber!![i] = 0
+                dayNumber[i] = i - week + 1
+            } else if (i < week) {
+                //上一个月日期
+                dayNumber[i] = mUpDays - i
+            } else if (i >= days + week) {
+                //下个月日期
+                dayNumber[i] = a
+                a += 1
             }
         }
     }

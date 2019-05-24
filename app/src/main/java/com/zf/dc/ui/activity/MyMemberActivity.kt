@@ -13,6 +13,7 @@ import com.zf.dc.livedata.UserInfoLiveData
 import com.zf.dc.mvp.bean.MyMemberBean
 import com.zf.dc.mvp.contract.MyMemberContract
 import com.zf.dc.mvp.presenter.MyMemberPresenter
+import com.zf.dc.net.exception.ErrorStatus
 import com.zf.dc.showToast
 import com.zf.dc.ui.adapter.MyMemberAdapter
 import com.zf.dc.view.recyclerview.RecyclerViewDivider
@@ -25,11 +26,18 @@ import kotlinx.android.synthetic.main.layout_toolbar.*
 class MyMemberActivity : BaseActivity(), MyMemberContract.View {
     override fun showError(msg: String, errorCode: Int) {
         refreshLayout.setEnableLoadMore(false)
-        showToast(msg)
+        if (errorCode == ErrorStatus.NETWORK_ERROR) {
+            mLayoutStatusView?.showNoNetwork()
+        } else {
+            mLayoutStatusView?.showError()
+            showToast(msg)
+        }
+
     }
 
     override fun getMyMember(bean: List<MyMemberBean>) {
         refreshLayout.setEnableLoadMore(true)
+        mLayoutStatusView?.showContent()
         mData.clear()
         mData.addAll(bean)
         mAdapter.notifyDataSetChanged()
@@ -39,6 +47,7 @@ class MyMemberActivity : BaseActivity(), MyMemberContract.View {
     override fun freshEmpty() {
         mData.clear()
         mAdapter.notifyDataSetChanged()
+        mLayoutStatusView?.showEmpty()
         refreshLayout.setEnableLoadMore(false)
     }
 
@@ -133,6 +142,7 @@ class MyMemberActivity : BaseActivity(), MyMemberContract.View {
 
     override fun initView() {
         presenter.attachView(this)
+        mLayoutStatusView = multipleStatusView
 
         member_rl.layoutManager = LinearLayoutManager(this)
         member_rl.addItemDecoration(divider)

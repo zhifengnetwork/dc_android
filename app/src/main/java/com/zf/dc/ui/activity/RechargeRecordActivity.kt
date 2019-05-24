@@ -10,6 +10,7 @@ import com.zf.dc.base.BaseActivity
 import com.zf.dc.mvp.bean.RechargeRecordList
 import com.zf.dc.mvp.contract.RechargeContract
 import com.zf.dc.mvp.presenter.RechargePresenter
+import com.zf.dc.net.exception.ErrorStatus
 import com.zf.dc.showToast
 import com.zf.dc.ui.adapter.RechargeRecordAdapter
 import com.zf.dc.view.recyclerview.RecyclerViewDivider
@@ -21,18 +22,25 @@ import kotlinx.android.synthetic.main.layout_toolbar.*
  * */
 class RechargeRecordActivity : BaseActivity(), RechargeContract.View {
     override fun showError(msg: String, errorCode: Int) {
-        showToast(msg)
+        if (errorCode== ErrorStatus.NETWORK_ERROR){
+            mLayoutStatusView?.showNoNetwork()
+        }else{
+            mLayoutStatusView?.showError()
+            showToast(msg)
+        }
         refreshLayout.setEnableLoadMore(false)
     }
 
     override fun getRechargeList(bean: List<RechargeRecordList>) {
         refreshLayout.setEnableLoadMore(true)
+        mLayoutStatusView?.showContent()
         mData.clear()
         mData.addAll(bean)
         mAdapter.notifyDataSetChanged()
     }
 
     override fun freshEmpty() {
+        mLayoutStatusView?.showEmpty()
         refreshLayout.setEnableLoadMore(false)
     }
 
@@ -95,7 +103,7 @@ class RechargeRecordActivity : BaseActivity(), RechargeContract.View {
 
     override fun initView() {
         presenter.attachView(this)
-
+        mLayoutStatusView = multipleStatusView
         recharge_rl.layoutManager = LinearLayoutManager(this)
         recharge_rl.addItemDecoration(divider)
         recharge_rl.adapter = mAdapter

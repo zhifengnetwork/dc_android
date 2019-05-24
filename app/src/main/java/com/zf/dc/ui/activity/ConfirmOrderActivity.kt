@@ -93,7 +93,6 @@ class ConfirmOrderActivity : BaseActivity(), PostOrderContract.View, WXPayContra
         //支付宝支付
         window.onAliPayListener = {
             LogUtils.e(">>>zfb:" + bean.order_sn)
-
         }
         //微信支付
         window.onWXPayListener = {

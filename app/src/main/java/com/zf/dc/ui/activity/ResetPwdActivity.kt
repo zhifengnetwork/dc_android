@@ -66,8 +66,9 @@ class ResetPwdActivity : BaseActivity(), ForgetPwdContract.View {
     }
 
     //修改成功
-    override fun setChangePwd() {
-        showToast("密码修改成功")
+    override fun setChangePwd(msg: String) {
+        showToast(msg)
+        finish()
     }
 
     override fun showLoading() {
@@ -119,7 +120,7 @@ class ResetPwdActivity : BaseActivity(), ForgetPwdContract.View {
                     phoneError.visibility = View.GONE
                     codeHint.visibility = View.GONE
                     //第一步验证手机号和验证码
-                    presenter.requestContract(phone.text.toString(), code.text.toString())
+                    presenter.requestContract(phone.text.toString(), code.text.toString(), 2)
                 }
             }
         }

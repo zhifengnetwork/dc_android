@@ -132,5 +132,5 @@ dependencies {
     //阿里视频基础播放器需要添加oss依赖
     implementation 'com.aliyun.dpa:oss-android-sdk:2.9.2'
     //支付宝支付
-    implementation (name: 'alipaySdk-15.6.2-20190416165036', ext: 'aar')
+//    implementation (name: 'alipaySdk-15.6.2-20190416165036', ext: 'aar')
 }

@@ -63,13 +63,16 @@
                 app:srlEnableLastTime="false"
                 app:srlDrawableProgress="@drawable/ic_progress_puzzle"
                 android:layout_height="wrap_content"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/record_rl"
-                android:paddingTop="5dp"
+        <com.classic.common.MultipleStatusView
+                android:id="@+id/multipleStatusView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
+                android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/record_rl"
+                    android:paddingTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+        </com.classic.common.MultipleStatusView>
         <com.scwang.smartrefresh.layout.footer.ClassicsFooter
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

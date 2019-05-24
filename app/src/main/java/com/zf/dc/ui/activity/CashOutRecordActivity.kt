@@ -10,6 +10,7 @@ import com.zf.dc.base.BaseActivity
 import com.zf.dc.mvp.bean.CashOutList
 import com.zf.dc.mvp.contract.CashOutRecordContract
 import com.zf.dc.mvp.presenter.CashOutRecordPresenter
+import com.zf.dc.net.exception.ErrorStatus
 import com.zf.dc.showToast
 import com.zf.dc.ui.adapter.CashOutAdapter
 import kotlinx.android.synthetic.main.activity_cash_out_record.*
@@ -17,12 +18,18 @@ import kotlinx.android.synthetic.main.layout_toolbar.*
 
 class CashOutRecordActivity : BaseActivity(), CashOutRecordContract.View {
     override fun showError(msg: String, errorCode: Int) {
-        showToast(msg)
         refreshLayout.setEnableLoadMore(false)
+        if (errorCode== ErrorStatus.NETWORK_ERROR){
+            mLayoutStatusView?.showNoNetwork()
+        }else{
+            mLayoutStatusView?.showError()
+            showToast(msg)
+        }
     }
 
     override fun getCashOutList(bean: List<CashOutList>) {
         refreshLayout.setEnableLoadMore(true)
+        mLayoutStatusView?.showContent()
         mData.clear()
         mData.addAll(bean)
         adapter.notifyDataSetChanged()
@@ -30,6 +37,7 @@ class CashOutRecordActivity : BaseActivity(), CashOutRecordContract.View {
 
     override fun freshEmpty() {
         refreshLayout.setEnableLoadMore(false)
+        mLayoutStatusView?.showEmpty()
     }
 
     override fun setLoadMore(bean: List<CashOutList>) {
@@ -83,7 +91,7 @@ class CashOutRecordActivity : BaseActivity(), CashOutRecordContract.View {
 
     override fun initView() {
         presenter.attachView(this)
-
+        mLayoutStatusView = multipleStatusView
         record_rl.layoutManager = LinearLayoutManager(this)
         record_rl.adapter = adapter
 

@@ -12,6 +12,7 @@ import com.zf.dc.mvp.bean.MemberOrderList
 import com.zf.dc.mvp.bean.MyMemberOrderBean
 import com.zf.dc.mvp.contract.MemberOrderContract
 import com.zf.dc.mvp.presenter.MemberOrderPresenter
+import com.zf.dc.net.exception.ErrorStatus
 import com.zf.dc.showToast
 import com.zf.dc.ui.adapter.SeeOrderAdapter
 import com.zf.dc.view.recyclerview.RecyclerViewDivider
@@ -21,11 +22,18 @@ import kotlinx.android.synthetic.main.layout_toolbar.*
 class SeeOrderActivity : BaseActivity(), MemberOrderContract.View {
     override fun showError(msg: String, errorCode: Int) {
         refreshLayout.setEnableLoadMore(false)
-        showToast(msg)
+        if (errorCode == ErrorStatus.NETWORK_ERROR) {
+            mLayoutStatusView?.showNoNetwork()
+        } else {
+            mLayoutStatusView?.showError()
+            showToast(msg)
+        }
+
     }
 
     override fun getMenberOrder(bean: MyMemberOrderBean) {
         refreshLayout.setEnableLoadMore(true)
+        mLayoutStatusView?.showContent()
         mData.clear()
         mData.addAll(bean.list)
         adapter.notifyDataSetChanged()
@@ -34,6 +42,7 @@ class SeeOrderActivity : BaseActivity(), MemberOrderContract.View {
 
     override fun freshEmpty() {
         refreshLayout.setEnableLoadMore(false)
+        mLayoutStatusView?.showEmpty()
     }
 
     override fun setLoadMore(bean: List<MemberOrderList>) {
@@ -100,6 +109,7 @@ class SeeOrderActivity : BaseActivity(), MemberOrderContract.View {
 
     override fun initView() {
         presenter.attachView(this)
+        mLayoutStatusView = multipleStatusView
 
         order_rl.layoutManager = LinearLayoutManager(context)
         order_rl.adapter = adapter

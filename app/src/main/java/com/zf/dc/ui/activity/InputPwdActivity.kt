@@ -8,6 +8,7 @@ import com.zf.dc.R
 import com.zf.dc.base.BaseActivity
 import com.zf.dc.mvp.contract.ForgetPwdContract
 import com.zf.dc.mvp.presenter.ForgetPwdPresenter
+import com.zf.dc.showToast
 import com.zf.dc.utils.StatusBarUtils
 import kotlinx.android.synthetic.main.activity_input_setpwd.*
 
@@ -22,8 +23,9 @@ class InputPwdActivity : BaseActivity(), ForgetPwdContract.View {
     override fun setContract() {
     }
 
-    override fun setChangePwd() {
-
+    override fun setChangePwd(msg: String) {
+        showToast(msg)
+        finish()
     }
 
     override fun setCode(msg: String) {

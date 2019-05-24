@@ -7,13 +7,13 @@ import io.reactivex.Observable
 
 class ForgetPwdModel {
 
-    fun requestContract(mobile: String, code: String): Observable<BaseBean<Unit>> {
-        return RetrofitManager.service.requestContrast(mobile, code)
+    fun requestContract(mobile: String, code: String, scene: Int): Observable<BaseBean<Unit>> {
+        return RetrofitManager.service.requestContrast(mobile, code, scene)
             .compose(SchedulerUtils.ioToMain())
     }
 
     fun requestChangePwd(mobile: String, password: String, password2: String, scene: Int): Observable<BaseBean<Unit>> {
-        return RetrofitManager.service.requestChangePwd(mobile, password, password2,scene)
+        return RetrofitManager.service.requestChangePwd(mobile, password, password2, scene)
             .compose(SchedulerUtils.ioToMain())
     }
 
