@@ -145,10 +145,17 @@ class MeFragment : BaseFragment(), CommendContract.View {
         commendPresenter.requestMe()
     }
 
+    override fun onResume() {
+        LogUtils.e(">>>>resume")
+        commendPresenter.requestMe()
+        super.onResume()
+    }
+
     private val token by Preference(UriConstant.TOKEN, "")
     private val commendPresenter by lazy { CommendPresenter() }
 
     override fun initEvent() {
+
 
         RxBus.getDefault().subscribe<String>(this,UriConstant.UPDATE_COUNT_INFO){
             commendPresenter.requestMe()

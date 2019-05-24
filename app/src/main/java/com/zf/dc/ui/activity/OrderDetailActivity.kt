@@ -27,6 +27,7 @@ import com.zf.dc.mvp.presenter.OrderOperatePresenter
 import com.zf.dc.mvp.presenter.WXPayPresenter
 import com.zf.dc.showToast
 import com.zf.dc.ui.adapter.OrderGoodsAdapter
+import com.zf.dc.utils.LogUtils
 import com.zf.dc.utils.StatusBarUtils
 import com.zf.dc.utils.TimeUtils
 import com.zf.dc.utils.bus.RxBus
@@ -86,7 +87,8 @@ class OrderDetailActivity : BaseActivity(), OrderDetailContract.View, OrderOpera
 
         userName.text = bean.consignee
         userPhone.text = bean.mobile
-        userAddress.text = "${bean.province}${bean.city}${bean.district}${bean.twon}${bean.address}"
+        userAddress.text = "${bean.province_name ?: ""}${bean.city_name ?: ""}${bean.district_name
+            ?: ""}${bean.twon_name ?: ""}${bean.address}"
 
 //        shopName.text = bean.store_name
 
@@ -165,10 +167,16 @@ class OrderDetailActivity : BaseActivity(), OrderDetailContract.View, OrderOpera
             window.onDismissListener = {
                 start()
             }
-            //确认支付
-            window.onConfirmPayListener = {
+            //支付宝支付
+            window.onAliPayListener = {
+                LogUtils.e(">>>zfb:" + bean.order_sn)
+            }
+            //微信支付
+            window.onWXPayListener = {
+                LogUtils.e(">>>>wx:" + bean.order_sn)
                 wxPayPresenter.requestWXPay(mOrderBean?.order_sn ?: "")
             }
+
 
         }
 

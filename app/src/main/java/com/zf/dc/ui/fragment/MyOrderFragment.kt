@@ -195,11 +195,19 @@ class MyOrderFragment : NotLazyBaseFragment(), OrderListContract.View, OrderOper
                 window.onDismissListener = {
                     lazyLoad()
                 }
-                //确认支付
-                window.onConfirmPayListener = {
+
+                //支付宝支付
+                window.onAliPayListener = {
+                    LogUtils.e(">>>>:" + orderBean.order_sn)
+                }
+                //微信支付
+                window.onWXPayListener = {
+                    LogUtils.e(">>>>:" + orderBean.order_sn)
                     wxPayPresenter.requestWXPay(orderBean.order_sn)
                     mOrderId = orderBean.order_id
                 }
+
+
             }
 
             //删除

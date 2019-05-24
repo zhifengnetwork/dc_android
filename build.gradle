@@ -22,8 +22,9 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
-        maven { url 'http://mvnrepo.alibaba-inc.com/mvn/repository'}
+        maven { url 'http://mvnrepo.alibaba-inc.com/mvn/repository' }
         flatDir {
+            dirs 'libs'
             dirs 'src/main/aarLibs'
             dirs '../alivc-player-lib'
         }
