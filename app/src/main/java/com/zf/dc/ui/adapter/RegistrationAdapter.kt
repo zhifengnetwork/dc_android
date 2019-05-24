@@ -140,7 +140,14 @@ class RegistrationAdapter(
     private fun getEveryDay() {
         val mCalendar = SpecialCalendar()
         val isLeapYear = mCalendar.isLeapYear(year)
-        val mUpDays = mCalendar.getDaysOfMonth(isLeapYear, month)//得到上月一共几天
+        //当前月为1月时 上一个月为上一年的12月
+        val mUpDays = if (month == 0) {
+            val isLeapYear = mCalendar.isLeapYear(year - 1)
+            mCalendar.getDaysOfMonth(isLeapYear, 12)
+        } else {
+            mCalendar.getDaysOfMonth(isLeapYear, month)//得到上月一共几天
+        }
+
         var a = 1
         for (i in 0..41) {
             if (i < days + week && i >= week) {
