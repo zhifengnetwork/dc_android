@@ -13,7 +13,13 @@ import kotlinx.android.synthetic.main.pop_order_pay.view.*
 /**
  * 支付方式
  */
-abstract class OrderPayPopupWindow(var context: Activity, layoutRes: Int, w: Int, h: Int, private val totalPrice: String) {
+abstract class OrderPayPopupWindow(
+    var context: Activity,
+    layoutRes: Int,
+    w: Int,
+    h: Int,
+    private val totalPrice: String
+) {
     val contentView: View
     val popupWindow: PopupWindow
     private var isShowing = false
@@ -25,8 +31,10 @@ abstract class OrderPayPopupWindow(var context: Activity, layoutRes: Int, w: Int
         initWindow()
     }
 
-    var onConfirmPayListener: (() -> Unit)? = null
+    //    var onConfirmPayListener: (() -> Unit)? = null
     var onDismissListener: (() -> Unit)? = null
+    var onAliPayListener: (() -> Unit)? = null
+    var onWXPayListener: (() -> Unit)? = null
 
     private fun initView() {
         contentView.apply {
@@ -34,7 +42,11 @@ abstract class OrderPayPopupWindow(var context: Activity, layoutRes: Int, w: Int
             price.text = "¥${totalPrice}元"
 
             confirmPay.setOnClickListener {
-                onConfirmPayListener?.invoke()
+                if (weChatPay.isChecked) {
+                    onWXPayListener?.invoke()
+                } else if (aliPay.isChecked) {
+                    onAliPayListener?.invoke()
+                }
             }
 
             close.setOnClickListener {

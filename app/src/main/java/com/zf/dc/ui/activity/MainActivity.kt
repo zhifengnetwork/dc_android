@@ -1,9 +1,13 @@
 package com.zf.dc.ui.activity
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.KeyEvent
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentTransaction
 import com.flyco.tablayout.listener.CustomTabEntity
@@ -23,7 +27,6 @@ import com.zf.dc.ui.fragment.MeFragment
 import com.zf.dc.ui.fragment.ShoppingCartFragment1
 import com.zf.dc.utils.Preference
 import com.zf.dc.utils.StatusBarUtils
-import com.zf.dc.utils.bus.RxBus
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(), UserInfoContract.View {
@@ -60,6 +63,7 @@ class MainActivity : BaseActivity(), UserInfoContract.View {
 
 //        LiveActivity.actionStart(this)
 
+        initPermission()
     }
 
     //退出登录->登录->再次进主页->同样要获取用户信息
@@ -134,6 +138,49 @@ class MainActivity : BaseActivity(), UserInfoContract.View {
         initTab()
         tabLayout.currentTab = mIndex
         switchFragment(mIndex)
+    }
+
+    private val permissions = arrayOf(
+        Manifest.permission.READ_PHONE_STATE,
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE
+    )
+
+    private val REQUESTCODE = 34
+
+    private fun initPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //没有权限则申请权限
+            for (permission in permissions) {
+                if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this, permissions, REQUESTCODE)
+                }
+            }
+        } else {
+            //权限申请成功
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            REQUESTCODE -> {
+                for (grantResult in grantResults) {
+                    if (grantResult == PackageManager.PERMISSION_GRANTED) {
+                        //权限申请成功
+                    } else {
+                        for (permission in permissions) {
+                            if (!ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
+                                //权限被永远拒绝
+                            } else {
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
     }
 
     private fun switchFragment(index: Int) {

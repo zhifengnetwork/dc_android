@@ -17,6 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_gravity="center_horizontal"
-            android:text="外套" />
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:text=""/>
 
 </LinearLayout>

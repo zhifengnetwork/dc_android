@@ -3,9 +3,14 @@ package com.zf.dc.utils
 import android.app.Activity
 import android.net.Uri
 import android.provider.MediaStore
+import java.nio.file.Files.exists
+
+
 
 
 object FileUtils {
+
+
 
     fun pathToUri(context: Activity, picPath: String): Uri? {
         /**

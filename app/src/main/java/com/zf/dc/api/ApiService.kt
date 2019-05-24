@@ -913,4 +913,10 @@ interface ApiService {
         @Field("password") password: String,
         @Field("password2") password2: String
     ): Observable<BaseBean<Unit>>
+
+    /**
+     *  我的分享
+     */
+    @GET("api/user/GetSharePic")
+    fun requestShare(): Observable<BaseBean<ShareBean>>
 }

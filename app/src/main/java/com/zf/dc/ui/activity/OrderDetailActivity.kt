@@ -86,7 +86,8 @@ class OrderDetailActivity : BaseActivity(), OrderDetailContract.View, OrderOpera
 
         userName.text = bean.consignee
         userPhone.text = bean.mobile
-        userAddress.text = "${bean.province}${bean.city}${bean.district}${bean.twon}${bean.address}"
+        userAddress.text = "${bean.province_name ?: ""}${bean.city_name ?: ""}${bean.district_name
+            ?: ""}${bean.twon_name ?: ""}${bean.address}"
 
 //        shopName.text = bean.store_name
 

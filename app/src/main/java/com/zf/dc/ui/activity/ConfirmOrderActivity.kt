@@ -81,8 +81,8 @@ class ConfirmOrderActivity : BaseActivity(), PostOrderContract.View, WXPayContra
         RxBus.getDefault().post(UriConstant.FRESH_CART, UriConstant.FRESH_CART)
         LogUtils.e(">>>>>:" + bean.order_sn + "   " + bean)
         val window = object : OrderPayPopupWindow(
-                this, R.layout.pop_order_pay,
-                LinearLayout.LayoutParams.MATCH_PARENT, DensityUtil.dp2px(320f), mOrderPrice
+            this, R.layout.pop_order_pay,
+            LinearLayout.LayoutParams.MATCH_PARENT, DensityUtil.dp2px(320f), mOrderPrice
         ) {}
         window.showAtLocation(parentLayout, Gravity.BOTTOM, 0, 0)
         //取消支付
@@ -90,9 +90,14 @@ class ConfirmOrderActivity : BaseActivity(), PostOrderContract.View, WXPayContra
             MyOrderActivity.actionStart(this, "")
             finish()
         }
-        //确认支付
-        window.onConfirmPayListener = {
-            LogUtils.e(">>>>:" + bean.order_sn)
+        //支付宝支付
+        window.onAliPayListener = {
+            LogUtils.e(">>>zfb:" + bean.order_sn)
+
+        }
+        //微信支付
+        window.onWXPayListener = {
+            LogUtils.e(">>>>wx:" + bean.order_sn)
             wxPayPresenter.requestWXPay(bean.order_sn)
         }
     }
@@ -142,15 +147,15 @@ class ConfirmOrderActivity : BaseActivity(), PostOrderContract.View, WXPayContra
         const val mInvoiceCode = 11
         const val FROM_ORDER = "fromOrder" //选择送货地址标记
         fun actionStart(
-                context: Context?,
-                promType: Int,
-                action: String,
-                goods_id: String,
-                goods_num: String,
-                item_id: String,
-                promId: String,
-                foundId: String? = "",
-                addressId: String? = ""
+            context: Context?,
+            promType: Int,
+            action: String,
+            goods_id: String,
+            goods_num: String,
+            item_id: String,
+            promId: String,
+            foundId: String? = "",
+            addressId: String? = ""
         ) {
             val intent = Intent(context, ConfirmOrderActivity::class.java)
             intent.putExtra("prom", promType) //prom: 0默认,1秒杀,2团购,3优惠促销,4预售,5虚拟(5其实没用),6拼团,7搭配购,8竞拍
@@ -186,18 +191,18 @@ class ConfirmOrderActivity : BaseActivity(), PostOrderContract.View, WXPayContra
         if (mPromType == 6) {
             /** 拼单结算 */
             presenter.requestGroupOrder(
-                    "2", mPromId, mGoodNum, "", "",
-                    "", "", "", "",
-                    "", mFoundId, 0, ""
+                "2", mPromId, mGoodNum, "", "",
+                "", "", "", "",
+                "", mFoundId, 0, ""
             )
         } else {
             /** 普通结算 */
             presenter.requestPostOrder(
-                    0, mPromType, mAddressId, "", "",
-                    "", "", "", "",
-                    "", "", mGoodId, mGoodNum,
-                    mGoodItemId, mAction, "",
-                    "", "", "", mPromId
+                0, mPromType, mAddressId, "", "",
+                "", "", "", "",
+                "", "", mGoodId, mGoodNum,
+                mGoodItemId, mAction, "",
+                "", "", "", mPromId
             )
         }
 
@@ -272,27 +277,27 @@ class ConfirmOrderActivity : BaseActivity(), PostOrderContract.View, WXPayContra
             if (mPromType == 6) {
                 //拼团 提交订单
                 presenter.requestGroupOrder(
-                        "2",
-                        mPromId,
-                        mGoodNum, mAddressId,
-                        if (ifUseMoney.isChecked) mOrderPrice else "0",
-                        "",
-                        "",
-                        head,
-                        num,
-                        remark.text.toString(),
-                        mFoundId,
-                        1,
-                        payPwd.text.toString()
+                    "2",
+                    mPromId,
+                    mGoodNum, mAddressId,
+                    if (ifUseMoney.isChecked) mOrderPrice else "0",
+                    "",
+                    "",
+                    head,
+                    num,
+                    remark.text.toString(),
+                    mFoundId,
+                    1,
+                    payPwd.text.toString()
                 )
             } else {
                 //单独购买 提交订单
                 presenter.requestPostOrder(
-                        1, mPromType, mAddressId, head,
-                        num, content, "", "",
-                        if (ifUseMoney.isChecked) mOrderPrice else "0", remark.text.toString(), payPwd.text.toString(),
-                        mGoodId, mGoodNum, mGoodItemId, mAction, "",
-                        "", "", "", mPromId
+                    1, mPromType, mAddressId, head,
+                    num, content, "", "",
+                    if (ifUseMoney.isChecked) mOrderPrice else "0", remark.text.toString(), payPwd.text.toString(),
+                    mGoodId, mGoodNum, mGoodItemId, mAction, "",
+                    "", "", "", mPromId
                 )
             }
 
@@ -334,17 +339,17 @@ class ConfirmOrderActivity : BaseActivity(), PostOrderContract.View, WXPayContra
             userName.text = addressBean.consignee
             userPhone.text = addressBean.mobile
             userAddress.text =
-                    "${addressBean.province_name}${addressBean.city_name}${addressBean.district_name}${addressBean.address}"
+                "${addressBean.province_name}${addressBean.city_name}${addressBean.district_name}${addressBean.address}"
             mAddressId = addressBean.address_id
         }
     }
 
     private val rvDivider by lazy {
         RecyclerViewDivider(
-                this,
-                LinearLayoutManager.VERTICAL,
-                DensityUtil.dp2px(1f),
-                ContextCompat.getColor(this, R.color.colorBackground)
+            this,
+            LinearLayoutManager.VERTICAL,
+            DensityUtil.dp2px(1f),
+            ContextCompat.getColor(this, R.color.colorBackground)
         )
     }
 

@@ -169,23 +169,29 @@
 
             </LinearLayout>
 
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:gravity="center_vertical"
+                          android:orientation="horizontal">
 
-            <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="1px"-->
-            <!--android:background="@color/colorLine" />-->
+                <ImageView android:layout_width="25dp"
+                           android:layout_height="25dp"
+                           android:layout_marginRight="10dp"
+                           android:src="@drawable/alipay_logo"/>
 
-            <!--<RadioButton-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@null"-->
-            <!--android:button="@null"-->
-            <!--android:drawableRight="@drawable/selector_pop_check"-->
-            <!--android:paddingTop="12dp"-->
-            <!--android:paddingBottom="12dp"-->
-            <!--android:text="余额"-->
-            <!--android:textColor="@color/colorBlackText"-->
-            <!--android:textSize="14sp" />-->
+                <RadioButton
+                        android:id="@+id/aliPay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:button="@null"
+                        android:drawableRight="@drawable/selector_pop_check"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
+                        android:text="支付宝"
+                        android:textColor="@color/colorBlackText"
+                        android:textSize="14sp"/>
+
+            </LinearLayout>
 
             <View
                     android:layout_width="match_parent"

@@ -1,6 +1,7 @@
 package com.zf.dc.ui.adapter
 
 import android.content.Context
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,10 +30,10 @@ class ClassifyRightAdapter(val context: Context?, val mData: ArrayList<ClassifyP
 
         holder.itemView.apply {
             GlideUtils.loadUrlImage(context, data[position].original_img, goods_img)
-            goods_name.text = data[position].goods_name
-        }
-        holder.itemView.setOnClickListener {
-            GoodsDetail2Activity.actionStart(context, data[position].goods_id)
+            goods_name.text = Html.fromHtml(data[position].goods_name)
+            setOnClickListener {
+                GoodsDetail2Activity.actionStart(context, data[position].goods_id)
+            }
         }
 
     }

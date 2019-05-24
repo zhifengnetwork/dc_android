@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.item_myorder.view.*
 import kotlinx.android.synthetic.main.layout_order_operation.view.*
 
 class MyOrderAdapter(val context: Context?, val data: List<OrderListBean>) :
-        RecyclerView.Adapter<MyOrderAdapter.ViewHolder>() {
+    RecyclerView.Adapter<MyOrderAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_myorder, parent, false)
@@ -41,7 +41,7 @@ class MyOrderAdapter(val context: Context?, val data: List<OrderListBean>) :
 
             addTime.text = TimeUtils.myOrderTime(data[position].add_time)
 //            shopName.text = data[position].store_name
-            shouldPay.text = "¥${data[position].order_amount}"
+            shouldPay.text = "¥${data[position].total_amount}"
             totalNum.text = "共${data[position].num}件"
 
             recyclerView.layoutManager = LinearLayoutManager(context)

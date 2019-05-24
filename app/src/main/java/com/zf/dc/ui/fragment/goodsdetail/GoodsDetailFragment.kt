@@ -30,10 +30,7 @@ import com.zf.dc.mvp.bean.*
 import com.zf.dc.mvp.contract.GoodsDetailContract
 import com.zf.dc.mvp.presenter.GoodsDetailPresenter
 import com.zf.dc.showToast
-import com.zf.dc.ui.activity.AddressEditActivity
-import com.zf.dc.ui.activity.ConfirmOrderActivity
-import com.zf.dc.ui.activity.GoodsDetail2Activity
-import com.zf.dc.ui.activity.MainActivity
+import com.zf.dc.ui.activity.*
 import com.zf.dc.ui.adapter.GoodsDetailAdapter
 import com.zf.dc.ui.adapter.GoodsSpecsAdapter
 import com.zf.dc.ui.adapter.GuideAdapter
@@ -288,6 +285,11 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
 
 
     override fun initEvent() {
+
+        service.setOnClickListener {
+            ServiceActivity.actionStart(context)
+        }
+
         scrollView.setOnScrollChangeListener { v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
 
             //回到顶部按钮
