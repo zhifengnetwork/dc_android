@@ -1,7 +1,6 @@
 package com.zf.dc.ui.activity
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.Gravity
@@ -169,7 +168,7 @@ class OrderDetailActivity : BaseActivity(), OrderDetailContract.View, OrderOpera
             }
             //支付宝支付
             window.onAliPayListener = {
-                LogUtils.e(">>>zfb:" + bean.order_sn)
+                showToast("支付宝未接入")
             }
             //微信支付
             window.onWXPayListener = {

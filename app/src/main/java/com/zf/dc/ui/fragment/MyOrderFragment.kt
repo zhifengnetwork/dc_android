@@ -198,7 +198,7 @@ class MyOrderFragment : NotLazyBaseFragment(), OrderListContract.View, OrderOper
 
                 //支付宝支付
                 window.onAliPayListener = {
-                    LogUtils.e(">>>>:" + orderBean.order_sn)
+                    showToast("支付宝未接入")
                 }
                 //微信支付
                 window.onWXPayListener = {

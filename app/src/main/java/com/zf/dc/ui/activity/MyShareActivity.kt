@@ -1,9 +1,11 @@
 package com.zf.dc.ui.activity
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Environment
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.zf.dc.R
@@ -38,7 +40,19 @@ class MyShareActivity : BaseActivity(), ShareContract.View {
 
     override fun setShare(bean: ShareBean) {
         GlideUtils.loadUrlImage(this, UriConstant.BASE_URL + bean.pic, share)
-        downImg(UriConstant.BASE_URL + bean.pic)
+
+        share.setOnLongClickListener {
+            AlertDialog.Builder(this)
+                .setTitle("提示")
+                .setMessage("保存图片到本地")
+                .setPositiveButton("确定") { _, _ ->
+                    downImg(UriConstant.BASE_URL + bean.pic)
+                }
+                .setNegativeButton("取消", null)
+                .show()
+            true
+        }
+
     }
 
     private fun copy(source: File, target: File) {
