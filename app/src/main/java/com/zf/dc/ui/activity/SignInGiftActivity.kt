@@ -14,6 +14,7 @@ import com.zf.dc.mvp.bean.AppSignBean
 import com.zf.dc.mvp.bean.AppSignDayBean
 import com.zf.dc.mvp.contract.AppSignDayContract
 import com.zf.dc.mvp.presenter.AppSignDayPresenter
+import com.zf.dc.showToast
 import com.zf.dc.ui.adapter.RegistrationAdapter
 import com.zf.dc.view.gridview.SpecialCalendar
 import com.zf.dc.view.popwindow.RegionPopupWindow
@@ -25,7 +26,7 @@ import java.util.*
 class SignInGiftActivity : BaseActivity(), AppSignDayContract.View {
 
     override fun showError(msg: String, errorCode: Int) {
-
+        showToast(msg)
     }
 
     //签到成功
@@ -173,9 +174,13 @@ class SignInGiftActivity : BaseActivity(), AppSignDayContract.View {
     override fun initEvent() {
         //签到点击事件
         sign_tv.setOnClickListener {
-            //请求签到接口
-            presenter.requestAppSign()
-
+            //判断是否有权限签到
+            if (mData?.auth == 1) {
+                //请求签到接口
+                presenter.requestAppSign()
+            } else {
+                showToast("您没有签到权限")
+            }
         }
         //点击事件
         //上一个月
@@ -208,6 +213,7 @@ class SignInGiftActivity : BaseActivity(), AppSignDayContract.View {
         super.onResume()
         presenter.requestAppSignDay()
     }
+
     override fun start() {
         presenter.requestAppSignDay()
     }

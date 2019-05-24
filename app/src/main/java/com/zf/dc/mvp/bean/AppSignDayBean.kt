@@ -8,5 +8,5 @@ data class AppSignDayBean(
     val continue_sign:String,
     val accumulate_day:String,
     val note:String,
-    val auth:String
+    val auth:Int
 )
