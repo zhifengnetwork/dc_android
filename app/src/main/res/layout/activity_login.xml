@@ -200,6 +200,7 @@
                     android:layout_height="wrap_content"
                     android:text="注册"
                     android:textColor="#0051d8"
+                    android:visibility="invisible"
                     android:textSize="18sp"/>
 
         </LinearLayout>

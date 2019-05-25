@@ -1,6 +1,19 @@
 package com.zf.dc.api;
 
+import com.google.gson.Gson;
+import com.zf.dc.mvp.bean.AddressBean;
+
+import java.util.Collections;
+import java.util.List;
+
 public class TestJava {
+
+
+
+
+
+
+
 
 
     String a = "java test";
@@ -29,6 +42,9 @@ public class TestJava {
 
 
     public static String htmlReplace(String str){
+
+
+
         str = str.replace("&ldquo;", "“");
         str = str.replace("&rdquo;", "”");
         str = str.replace("&nbsp;", " ");

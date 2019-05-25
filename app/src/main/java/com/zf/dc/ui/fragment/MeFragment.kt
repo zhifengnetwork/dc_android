@@ -157,13 +157,13 @@ class MeFragment : BaseFragment(), CommendContract.View {
     override fun initEvent() {
 
 
-        RxBus.getDefault().subscribe<String>(this,UriConstant.UPDATE_COUNT_INFO){
+        RxBus.getDefault().subscribe<String>(this, UriConstant.UPDATE_COUNT_INFO) {
             commendPresenter.requestMe()
         }
 
         UserInfoLiveData.observe(viewLifecycleOwner, Observer { userInfo ->
             userInfo?.apply {
-                userName.text = nickname
+                userName.text = "$nickname [ID: $user_id]"
                 vipLevel.text = level_name
                 GlideUtils.loadUrlImage(context, head_pic, avatar)
             }
