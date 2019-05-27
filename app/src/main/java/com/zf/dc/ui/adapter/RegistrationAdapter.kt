@@ -27,9 +27,8 @@ class RegistrationAdapter(
     private val dayNumber = Array(42) { 0 }
     private var viewHolder: ViewHolder? = null
     private var tab: Int = 0//记录日期下标
-
     //接收日期处理方法
-    fun Date() {
+    private fun setDate() {
         if (data?.date != null) {
             for (e in data.date) {
                 //截取年份
@@ -122,7 +121,7 @@ class RegistrationAdapter(
 
         //判断签到了的日子并显示样式
         tab = i//记录日期下标
-        Date()
+        setDate()
 
         return mView
     }

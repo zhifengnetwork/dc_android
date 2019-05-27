@@ -498,29 +498,35 @@ class AddressEditActivity : BaseActivity(), AddressEditContract.View {
     }
 
     /**判断手机号码格式是否正确*/
-    fun isMobileNO(mobiles: String): Boolean {
+    private fun isMobileNO(mobiles: String): Boolean {
 
         val telRegex = "[1][34578]\\d{9}"//"[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
-        if (TextUtils.isEmpty(mobiles)) {
-            return false
-        } else return mobiles.matches(telRegex.toRegex())
+        return if (TextUtils.isEmpty(mobiles)) {
+            false
+        } else mobiles.matches(telRegex.toRegex())
     }
 
     /**判断用户输入信息是否规范*/
     private fun judge(a: Int, b: Boolean, c: Boolean, d: Int): Boolean {
-        if (a < 2) {
-            Toast.makeText(context, "请输入姓名2-25个字符", Toast.LENGTH_SHORT).show()
-            return false
-        } else if (b) {
-            Toast.makeText(context, "请正确输入11位手机号码", Toast.LENGTH_SHORT).show()
-            return false
-        } else if (c) {
-            Toast.makeText(context, "请选择地区", Toast.LENGTH_SHORT).show()
-            return false
-        } else if (d < 5) {
-            Toast.makeText(context, "请输入详细地址5-120个字符", Toast.LENGTH_SHORT).show()
-            return false
-        } else return true
+        return when {
+            a < 2 -> {
+                Toast.makeText(context, "请输入姓名2-25个字符", Toast.LENGTH_SHORT).show()
+                false
+            }
+            b -> {
+                Toast.makeText(context, "请正确输入11位手机号码", Toast.LENGTH_SHORT).show()
+                false
+            }
+            c -> {
+                Toast.makeText(context, "请选择地区", Toast.LENGTH_SHORT).show()
+                false
+            }
+            d < 5 -> {
+                Toast.makeText(context, "请输入详细地址5-120个字符", Toast.LENGTH_SHORT).show()
+                false
+            }
+            else -> true
+        }
 
     }
 

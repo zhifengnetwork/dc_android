@@ -26,6 +26,7 @@ import com.zf.dc.MyApplication
 import com.zf.dc.R
 import com.zf.dc.api.UriConstant
 import com.zf.dc.base.BaseFragment
+import com.zf.dc.livedata.UserInfoLiveData
 import com.zf.dc.mvp.bean.*
 import com.zf.dc.mvp.contract.GoodsDetailContract
 import com.zf.dc.mvp.presenter.GoodsDetailPresenter
@@ -700,16 +701,20 @@ class GoodsDetailFragment : BaseFragment(), GoodsDetailContract.View {
                                 }
                                 builder.show()
                             } else {
-                                ConfirmOrderActivity.actionStart(
-                                    context,
-                                    0,
-                                    "1",
-                                    mData?.goods?.goods_id.toString(),
-                                    sum.toString(),
-                                    itemId,
-                                    "",
-                                    addressId = addressId
-                                )
+                                if (UserInfoLiveData.value?.is_distribut == "0" && mData?.goods?.sign_free_receive == 1) {
+                                     showToast("成为分销商才能领取")
+                                } else {
+                                    ConfirmOrderActivity.actionStart(
+                                        context,
+                                        0,
+                                        "1",
+                                        mData?.goods?.goods_id.toString(),
+                                        sum.toString(),
+                                        itemId,
+                                        "",
+                                        addressId = addressId
+                                    )
+                                }
                             }
                             specsPopWindow.onDismiss()
                         }

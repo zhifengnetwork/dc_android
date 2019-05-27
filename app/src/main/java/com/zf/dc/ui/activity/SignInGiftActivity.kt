@@ -144,7 +144,7 @@ class SignInGiftActivity : BaseActivity(), AppSignDayContract.View {
 
         year = mYear//记录当前年
 
-        mMonth = calendar.get(Calendar.MONTH)//获取当前月份以（0开头
+        mMonth = calendar.get(Calendar.MONTH)//获取当前月份以0开头
 
         month = mMonth//记录当前月
 

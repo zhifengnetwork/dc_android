@@ -21,7 +21,7 @@ class ClassifyTitleAdapter(val context: Context?, val data: ArrayList<ClassifyBe
     private var selectedPos = 0
     private var mListener: OnItemClickListener? = null
 
-    fun getthisPosition(): Int {
+    private fun getThisPosition(): Int {
         return thisPosition
     }
 
@@ -57,7 +57,7 @@ class ClassifyTitleAdapter(val context: Context?, val data: ArrayList<ClassifyBe
         }
 
         //判断当前的item是否为选中的item
-        if(position == getthisPosition()){
+        if(position == getThisPosition()){
             holder.itemView.classify_item_tv.setTextColor(Color.rgb(38,38,38)    )//R.color.colorifyitemText
             holder.itemView.classify_item_tv.typeface = Typeface.defaultFromStyle(Typeface.BOLD)//加粗
         }else{
