@@ -32,9 +32,9 @@ class LoginActivity : BaseActivity(), LoginContract.View {
 
     override fun initToolBar() {
         StatusBarUtils.darkMode(
-                this,
-                ContextCompat.getColor(this, R.color.colorSecondText),
-                0.3f
+            this,
+            ContextCompat.getColor(this, R.color.colorSecondText),
+            0.3f
         )
     }
 
@@ -110,8 +110,6 @@ class LoginActivity : BaseActivity(), LoginContract.View {
     private fun initCode() {
         val bmp = CodeUtils.getInstance().createBitmap()
         code.setImageBitmap(bmp)
-        /**  下面的代码要删除 */
-        codeInput.setText(CodeUtils.getInstance().code)
     }
 
     override fun initEvent() {
