@@ -27,9 +27,8 @@ class RegistrationAdapter(
     private val dayNumber = Array(42) { 0 }
     private var viewHolder: ViewHolder? = null
     private var tab: Int = 0//记录日期下标
-
     //接收日期处理方法
-    fun Date() {
+    private fun setDate() {
         if (data?.date != null) {
             for (e in data.date) {
                 //截取年份
@@ -122,7 +121,7 @@ class RegistrationAdapter(
 
         //判断签到了的日子并显示样式
         tab = i//记录日期下标
-        Date()
+        setDate()
 
         return mView
     }
@@ -140,7 +139,14 @@ class RegistrationAdapter(
     private fun getEveryDay() {
         val mCalendar = SpecialCalendar()
         val isLeapYear = mCalendar.isLeapYear(year)
-        val mUpDays = mCalendar.getDaysOfMonth(isLeapYear, month)//得到上月一共几天
+        //当前月为1月时 上一个月为上一年的12月
+        val mUpDays = if (month == 0) {
+            val isLeapYear = mCalendar.isLeapYear(year - 1)
+            mCalendar.getDaysOfMonth(isLeapYear, 12)
+        } else {
+            mCalendar.getDaysOfMonth(isLeapYear, month)//得到上月一共几天
+        }
+
         var a = 1
         for (i in 0..41) {
             if (i < days + week && i >= week) {
