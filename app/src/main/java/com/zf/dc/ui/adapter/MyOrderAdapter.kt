@@ -99,6 +99,11 @@ class MyOrderAdapter(val context: Context?, val data: List<OrderListBean>) :
                     status.text = "交易成功"
 //                    afterSale.visibility = View.VISIBLE
                 }
+                //作废订单
+                "5" -> {
+                    hintOperation(holder)
+                    status.text = "已作废"
+                }
             }
 
             //立即支付

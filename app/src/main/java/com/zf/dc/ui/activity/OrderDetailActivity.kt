@@ -152,6 +152,10 @@ class OrderDetailActivity : BaseActivity(), OrderDetailContract.View, OrderOpera
 //                status.text = "交易成功"
 //                afterSale.visibility = View.VISIBLE
             }
+            //已作废
+            "5" -> {
+                hideOperation()
+            }
         }
 
         //立即付款
