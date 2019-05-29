@@ -19,17 +19,17 @@ fun main(args: Array<String>) {
      */
 
 
-    initWhen()
+//    initWhen()
 
 }
 
-private fun initWhen(){
+private fun initWhen() {
     val a = "c"
-    when(a){
-        "c"->{
+    when (a) {
+        "c" -> {
             println(">>>a")
         }
-        "b"->{
+        "b" -> {
             println(">>>b")
         }
     }

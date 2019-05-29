@@ -176,7 +176,6 @@ class OrderDetailActivity : BaseActivity(), OrderDetailContract.View, OrderOpera
             }
             //微信支付
             window.onWXPayListener = {
-                LogUtils.e(">>>>wx:" + bean.order_sn)
                 wxPayPresenter.requestWXPay(mOrderBean?.order_sn ?: "")
             }
 

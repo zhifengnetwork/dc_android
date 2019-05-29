@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alipay.sdk.app.PayTask
 import com.scwang.smartrefresh.layout.util.DensityUtil
 import com.tencent.mm.opensdk.modelpay.PayReq
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
@@ -22,6 +23,7 @@ import com.zf.dc.mvp.contract.PostOrderContract
 import com.zf.dc.mvp.contract.WXPayContract
 import com.zf.dc.mvp.presenter.PostOrderPresenter
 import com.zf.dc.mvp.presenter.WXPayPresenter
+import com.zf.dc.scheduler.SchedulerUtils
 import com.zf.dc.showToast
 import com.zf.dc.ui.adapter.EnGoodsAdapter
 import com.zf.dc.utils.LogUtils
@@ -29,6 +31,7 @@ import com.zf.dc.utils.StatusBarUtils
 import com.zf.dc.utils.bus.RxBus
 import com.zf.dc.view.popwindow.OrderPayPopupWindow
 import com.zf.dc.view.recyclerview.RecyclerViewDivider
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_confirm_order.*
 import kotlinx.android.synthetic.main.layout_en_order_address.*
 import kotlinx.android.synthetic.main.layout_order_other.*
@@ -79,7 +82,7 @@ class ConfirmOrderActivity : BaseActivity(), PostOrderContract.View, WXPayContra
     /** 提交订单成功*/
     override fun setConfirmOrder(bean: PostOrderBean) {
         RxBus.getDefault().post(UriConstant.FRESH_CART, UriConstant.FRESH_CART)
-        LogUtils.e(">>>>>:" + bean.order_sn + "   " + bean)
+
         val window = object : OrderPayPopupWindow(
             this, R.layout.pop_order_pay,
             LinearLayout.LayoutParams.MATCH_PARENT, DensityUtil.dp2px(320f), mOrderPrice
@@ -92,11 +95,28 @@ class ConfirmOrderActivity : BaseActivity(), PostOrderContract.View, WXPayContra
         }
         //支付宝支付
         window.onAliPayListener = {
-            showToast("支付宝未接入")
+            //这里应该是请求后台获取订单信息
+
+            //orderInfo 后台返回的订单信息
+            val orderInfo = "from server"
+            Observable.create<Map<String, String>> {
+                val aliPay = PayTask(this)
+                val result = aliPay.payV2(orderInfo, true)
+                it.onNext(result)
+            }.compose(SchedulerUtils.ioToMain())
+                .subscribe {
+                    val resultInfo = it["memo"]
+                    val resultStatus = it["resultStatus"]
+                    //code为9000表示支付成功
+                    if (resultStatus == "9000") {
+                        showToast("支付成功")
+                    } else {
+                        showToast("支付失败:$resultInfo")
+                    }
+                }
         }
         //微信支付
         window.onWXPayListener = {
-            LogUtils.e(">>>>wx:" + bean.order_sn)
             wxPayPresenter.requestWXPay(bean.order_sn)
         }
     }

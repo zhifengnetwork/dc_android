@@ -81,9 +81,10 @@ class MainActivity : BaseActivity(), UserInfoContract.View {
         }
     }
 
+
     companion object {
 
-        private var mIndex = 0
+        var mIndex = 0
 
         fun actionStart(context: Context?, index: Int? = mIndex) {
             val intent = Intent(context, MainActivity::class.java)
@@ -131,10 +132,8 @@ class MainActivity : BaseActivity(), UserInfoContract.View {
     override fun layoutId(): Int = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (savedInstanceState != null) {
-            mIndex = savedInstanceState.getInt("currTabIndex")
-        }
         super.onCreate(savedInstanceState)
+        mIndex = 0
         initTab()
         tabLayout.currentTab = mIndex
         switchFragment(mIndex)

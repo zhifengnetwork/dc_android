@@ -95,7 +95,6 @@ class MeFragment : BaseFragment(), CommendContract.View {
     }
 
     override fun showError(msg: String, errorCode: Int) {
-        showToast(msg)
     }
 
 
@@ -146,7 +145,6 @@ class MeFragment : BaseFragment(), CommendContract.View {
     }
 
     override fun onResume() {
-        LogUtils.e(">>>>resume")
         commendPresenter.requestMe()
         super.onResume()
     }
@@ -155,7 +153,6 @@ class MeFragment : BaseFragment(), CommendContract.View {
     private val commendPresenter by lazy { CommendPresenter() }
 
     override fun initEvent() {
-
 
         RxBus.getDefault().subscribe<String>(this, UriConstant.UPDATE_COUNT_INFO) {
             commendPresenter.requestMe()
