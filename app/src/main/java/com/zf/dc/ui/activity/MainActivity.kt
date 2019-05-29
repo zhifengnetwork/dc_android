@@ -39,6 +39,7 @@ class MainActivity : BaseActivity(), UserInfoContract.View {
 
     override fun showError(msg: String, errorCode: Int) {
         showToast(msg)
+
     }
 
     override fun showLoading() {

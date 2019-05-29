@@ -95,7 +95,7 @@ class MeFragment : BaseFragment(), CommendContract.View {
     }
 
     override fun showError(msg: String, errorCode: Int) {
-        showToast(msg)
+        showToast(msg+"meFragment")
     }
 
 
@@ -116,6 +116,8 @@ class MeFragment : BaseFragment(), CommendContract.View {
     override fun getLayoutId(): Int = R.layout.fragment_me
 
     private val columnAdapter by lazy { ColumnAdapter(context) }
+
+    private val token1 by Preference(UriConstant.TOKEN, "")
 
     private val commendData = ArrayList<CommendList>()
     private var signData: AppSignBean? = null
@@ -146,7 +148,6 @@ class MeFragment : BaseFragment(), CommendContract.View {
     }
 
     override fun onResume() {
-        LogUtils.e(">>>>resume")
         commendPresenter.requestMe()
         super.onResume()
     }
