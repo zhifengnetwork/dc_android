@@ -202,11 +202,9 @@ class MyOrderFragment : NotLazyBaseFragment(), OrderListContract.View, OrderOper
                 }
                 //微信支付
                 window.onWXPayListener = {
-                    LogUtils.e(">>>>:" + orderBean.order_sn)
                     wxPayPresenter.requestWXPay(orderBean.order_sn)
                     mOrderId = orderBean.order_id
                 }
-
 
             }
 

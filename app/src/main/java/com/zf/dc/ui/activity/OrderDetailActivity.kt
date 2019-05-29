@@ -152,6 +152,10 @@ class OrderDetailActivity : BaseActivity(), OrderDetailContract.View, OrderOpera
 //                status.text = "交易成功"
 //                afterSale.visibility = View.VISIBLE
             }
+            //已作废
+            "5" -> {
+                hideOperation()
+            }
         }
 
         //立即付款
@@ -172,7 +176,6 @@ class OrderDetailActivity : BaseActivity(), OrderDetailContract.View, OrderOpera
             }
             //微信支付
             window.onWXPayListener = {
-                LogUtils.e(">>>>wx:" + bean.order_sn)
                 wxPayPresenter.requestWXPay(mOrderBean?.order_sn ?: "")
             }
 

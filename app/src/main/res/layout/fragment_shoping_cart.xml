@@ -161,7 +161,7 @@
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="￥0"
+                android:text="￥"
                 android:textColor="@color/colorBlackText"
                 android:textSize="15sp"/>
 

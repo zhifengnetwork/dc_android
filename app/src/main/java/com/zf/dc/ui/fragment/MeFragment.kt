@@ -95,7 +95,7 @@ class MeFragment : BaseFragment(), CommendContract.View {
     }
 
     override fun showError(msg: String, errorCode: Int) {
-        showToast(msg+"meFragment")
+        showToast(msg)
     }
 
 
@@ -116,9 +116,6 @@ class MeFragment : BaseFragment(), CommendContract.View {
     override fun getLayoutId(): Int = R.layout.fragment_me
 
     private val columnAdapter by lazy { ColumnAdapter(context) }
-
-    private val token1 by Preference(UriConstant.TOKEN, "")
-
     private val commendData = ArrayList<CommendList>()
     private var signData: AppSignBean? = null
     private val commendAdapter by lazy { CommendAdapter(context, commendData) }
@@ -156,7 +153,6 @@ class MeFragment : BaseFragment(), CommendContract.View {
     private val commendPresenter by lazy { CommendPresenter() }
 
     override fun initEvent() {
-
 
         RxBus.getDefault().subscribe<String>(this, UriConstant.UPDATE_COUNT_INFO) {
             commendPresenter.requestMe()

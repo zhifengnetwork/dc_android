@@ -13,24 +13,24 @@ class WXPayPresenter : BasePresenter<WXPayContract.View>(), WXPayContract.Presen
         checkViewAttached()
         mRootView?.showLoading()
         val disposable = model.requestWXPay(order_sn)
-            .subscribe({
-                mRootView?.apply {
-                    dismissLoading()
-                    when (it.status) {
-                        0 -> if (it.data != null) {
-                            setWXPay(it.data)
+                .subscribe({
+                    mRootView?.apply {
+                        dismissLoading()
+
+                        when (it.status) {
+                            0 -> if (it.data != null) {
+                                setWXPay(it.data)
+                            }
+                            else -> showError(it.msg, it.status)
                         }
-                        else -> showError(it.msg, it.status)
                     }
-                }
-            }, {
-                mRootView?.apply {
-                    dismissLoading()
-                    showError(ExceptionHandle.handleException(it), ExceptionHandle.errorCode)
-                }
-            })
+                }, {
+                    mRootView?.apply {
+                        dismissLoading()
+                        showError(ExceptionHandle.handleException(it), ExceptionHandle.errorCode)
+                    }
+                })
         addSubscription(disposable)
     }
-
 
 }

@@ -31,7 +31,6 @@ abstract class OrderPayPopupWindow(
         initWindow()
     }
 
-    //    var onConfirmPayListener: (() -> Unit)? = null
     var onDismissListener: (() -> Unit)? = null
     var onAliPayListener: (() -> Unit)? = null
     var onWXPayListener: (() -> Unit)? = null
