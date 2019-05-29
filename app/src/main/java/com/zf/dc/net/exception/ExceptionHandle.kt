@@ -1,7 +1,7 @@
 package com.zf.dc.net.exception
 
-import com.zf.dc.utils.LogUtils
 import com.google.gson.JsonParseException
+import com.zf.dc.utils.LogUtils
 import org.json.JSONException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
@@ -27,8 +27,9 @@ class ExceptionHandle {
                 errorMsg = "网络连接异常"
                 errorCode = ErrorStatus.NETWORK_ERROR
             } else if (e is JsonParseException
-                    || e is JSONException
-                    || e is ParseException) {   //均视为解析错误
+                || e is JSONException
+                || e is ParseException
+            ) {   //均视为解析错误
                 LogUtils.e("TAG", "数据解析异常: " + e.message)
                 errorMsg = "数据解析异常"
                 errorCode = ErrorStatus.SERVER_ERROR

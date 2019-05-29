@@ -2,7 +2,6 @@ package com.zf.dc.ui.fragment
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.util.Log
 import android.view.Gravity
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
@@ -23,7 +22,6 @@ import com.zf.dc.ui.activity.*
 import com.zf.dc.ui.adapter.ColumnAdapter
 import com.zf.dc.ui.adapter.CommendAdapter
 import com.zf.dc.utils.GlideUtils
-import com.zf.dc.utils.LogUtils
 import com.zf.dc.utils.Preference
 import com.zf.dc.utils.bus.RxBus
 import com.zf.dc.view.RecDecoration
@@ -95,7 +93,7 @@ class MeFragment : BaseFragment(), CommendContract.View {
     }
 
     override fun showError(msg: String, errorCode: Int) {
-        showToast(msg)
+
     }
 
 
